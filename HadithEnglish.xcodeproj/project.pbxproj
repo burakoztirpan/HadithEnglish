@@ -7,15 +7,29 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		634FF436204AD52C004E893A /* HadithsTable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 634FF435204AD52C004E893A /* HadithsTable.swift */; };
+		634FF438204AE99F004E893A /* hadithDetailCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 634FF437204AE99F004E893A /* hadithDetailCell.swift */; };
+		635343CE204EBBF6004AB35D /* newHadithJson.json in Resources */ = {isa = PBXBuildFile; fileRef = 635343CD204EBBF6004AB35D /* newHadithJson.json */; };
+		637A0AA3204B2D7400675217 /* hadithJson.json in Resources */ = {isa = PBXBuildFile; fileRef = 637A0AA2204B2D7400675217 /* hadithJson.json */; };
+		637A0AA5204C197200675217 /* FavoritesTable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 637A0AA4204C197200675217 /* FavoritesTable.swift */; };
+		637A0AA7204C1EFA00675217 /* FavoriteCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 637A0AA6204C1EFA00675217 /* FavoriteCell.swift */; };
 		63B2E4CD2049A9AD001513AD /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63B2E4CC2049A9AD001513AD /* AppDelegate.swift */; };
 		63B2E4CF2049A9AD001513AD /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63B2E4CE2049A9AD001513AD /* ViewController.swift */; };
 		63B2E4D22049A9AD001513AD /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 63B2E4D02049A9AD001513AD /* Main.storyboard */; };
 		63B2E4D52049A9AD001513AD /* HadithEnglish.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 63B2E4D32049A9AD001513AD /* HadithEnglish.xcdatamodeld */; };
 		63B2E4D72049A9AD001513AD /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 63B2E4D62049A9AD001513AD /* Assets.xcassets */; };
 		63B2E4DA2049A9AD001513AD /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 63B2E4D82049A9AD001513AD /* LaunchScreen.storyboard */; };
+		63B2E4E52049AF23001513AD /* hadithSubject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63B2E4E42049AF23001513AD /* hadithSubject.swift */; };
+		63B2E4E72049B649001513AD /* HadithCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63B2E4E62049B649001513AD /* HadithCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		634FF435204AD52C004E893A /* HadithsTable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HadithsTable.swift; sourceTree = "<group>"; };
+		634FF437204AE99F004E893A /* hadithDetailCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = hadithDetailCell.swift; sourceTree = "<group>"; };
+		635343CD204EBBF6004AB35D /* newHadithJson.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = newHadithJson.json; sourceTree = "<group>"; };
+		637A0AA2204B2D7400675217 /* hadithJson.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = hadithJson.json; sourceTree = "<group>"; };
+		637A0AA4204C197200675217 /* FavoritesTable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesTable.swift; sourceTree = "<group>"; };
+		637A0AA6204C1EFA00675217 /* FavoriteCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteCell.swift; sourceTree = "<group>"; };
 		63B2E4C92049A9AD001513AD /* HadithEnglish.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HadithEnglish.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		63B2E4CC2049A9AD001513AD /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		63B2E4CE2049A9AD001513AD /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -24,6 +38,8 @@
 		63B2E4D62049A9AD001513AD /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		63B2E4D92049A9AD001513AD /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		63B2E4DB2049A9AD001513AD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		63B2E4E42049AF23001513AD /* hadithSubject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = hadithSubject.swift; sourceTree = "<group>"; };
+		63B2E4E62049B649001513AD /* HadithCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HadithCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -56,15 +72,47 @@
 		63B2E4CB2049A9AD001513AD /* HadithEnglish */ = {
 			isa = PBXGroup;
 			children = (
-				63B2E4CC2049A9AD001513AD /* AppDelegate.swift */,
-				63B2E4CE2049A9AD001513AD /* ViewController.swift */,
-				63B2E4D02049A9AD001513AD /* Main.storyboard */,
-				63B2E4D62049A9AD001513AD /* Assets.xcassets */,
-				63B2E4D82049A9AD001513AD /* LaunchScreen.storyboard */,
+				63B2E4E22049AED0001513AD /* View */,
+				63B2E4E12049AEC3001513AD /* Model */,
+				63B2E4E32049AEDB001513AD /* Controller */,
 				63B2E4DB2049A9AD001513AD /* Info.plist */,
+				637A0AA2204B2D7400675217 /* hadithJson.json */,
+				635343CD204EBBF6004AB35D /* newHadithJson.json */,
+				63B2E4CC2049A9AD001513AD /* AppDelegate.swift */,
+				63B2E4D62049A9AD001513AD /* Assets.xcassets */,
 				63B2E4D32049A9AD001513AD /* HadithEnglish.xcdatamodeld */,
+				63B2E4D82049A9AD001513AD /* LaunchScreen.storyboard */,
+				63B2E4D02049A9AD001513AD /* Main.storyboard */,
 			);
 			path = HadithEnglish;
+			sourceTree = "<group>";
+		};
+		63B2E4E12049AEC3001513AD /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				63B2E4E42049AF23001513AD /* hadithSubject.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		63B2E4E22049AED0001513AD /* View */ = {
+			isa = PBXGroup;
+			children = (
+				63B2E4E62049B649001513AD /* HadithCell.swift */,
+				634FF437204AE99F004E893A /* hadithDetailCell.swift */,
+				637A0AA6204C1EFA00675217 /* FavoriteCell.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		63B2E4E32049AEDB001513AD /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				63B2E4CE2049A9AD001513AD /* ViewController.swift */,
+				634FF435204AD52C004E893A /* HadithsTable.swift */,
+				637A0AA4204C197200675217 /* FavoritesTable.swift */,
+			);
+			path = Controller;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -129,6 +177,8 @@
 				63B2E4DA2049A9AD001513AD /* LaunchScreen.storyboard in Resources */,
 				63B2E4D72049A9AD001513AD /* Assets.xcassets in Resources */,
 				63B2E4D22049A9AD001513AD /* Main.storyboard in Resources */,
+				637A0AA3204B2D7400675217 /* hadithJson.json in Resources */,
+				635343CE204EBBF6004AB35D /* newHadithJson.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -140,7 +190,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				63B2E4D52049A9AD001513AD /* HadithEnglish.xcdatamodeld in Sources */,
+				63B2E4E52049AF23001513AD /* hadithSubject.swift in Sources */,
+				637A0AA5204C197200675217 /* FavoritesTable.swift in Sources */,
 				63B2E4CF2049A9AD001513AD /* ViewController.swift in Sources */,
+				63B2E4E72049B649001513AD /* HadithCell.swift in Sources */,
+				634FF438204AE99F004E893A /* hadithDetailCell.swift in Sources */,
+				637A0AA7204C1EFA00675217 /* FavoriteCell.swift in Sources */,
+				634FF436204AD52C004E893A /* HadithsTable.swift in Sources */,
 				63B2E4CD2049A9AD001513AD /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -279,6 +335,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = R83CBV3LY4;
 				INFOPLIST_FILE = HadithEnglish/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = nelibula.HadithEnglish;
@@ -293,6 +350,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = R83CBV3LY4;
 				INFOPLIST_FILE = HadithEnglish/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = nelibula.HadithEnglish;
