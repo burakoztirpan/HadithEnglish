@@ -24,18 +24,88 @@ OUTPUT_MAP = {
 # where the English does the same).
 book_titles = json.load(open("scripts/book_titles.json"))
 
-# The Turkish source appends scholarly cross-reference apparatus after a
-# "Tekrar:" ("Repeat:") marker - hadith numbers / other-book citations, not
-# part of the actual narration. In 743 of 981 cases (source data issue, not
-# introduced by this script) whatever was supposed to follow the colon is
-# missing entirely, so the text visibly cuts off mid-thought: "...dedim. Tekrar:"
-# Only trim the bare dangling case (nothing after the colon) - it's safe
-# because the narration is already a complete sentence before "Tekrar:"
-# starts. Cases with real citation content after are left alone: some embed
-# a genuine continuation (e.g. "Tekrar: 3315 [-1827-] İbn Ömer r.a. ..."),
-# so blindly stripping everything after the marker would occasionally cut
-# real content, not just apparatus.
-DANGLING_TEKRAR_SUFFIX = " Tekrar:"
+# The Turkish source appends scholarly cross-reference apparatus after
+# "Tekrar:" ("Repeat:") and several equivalent phrasings - hadith numbers /
+# other-book citations, not part of the actual narration. In most cases
+# (source data issue, not introduced by this script) whatever was supposed
+# to follow is missing entirely, so the text visibly cuts off mid-thought:
+# "...dedim. Tekrar:". Only the bare dangling case (nothing real after the
+# marker) is trimmed - it's safe because the narration is already a
+# complete sentence before the marker starts. Cases with real citation
+# content after are left alone: some embed a genuine continuation (e.g.
+# "Tekrar: 3315 [-1827-] İbn Ömer r.a. ..."), so blindly stripping
+# everything after the marker would occasionally cut real content, not
+# just apparatus.
+#
+# First pass only matched the exact string "Tekrar:", catching 743 of 981
+# occurrences. Spot-checking wider (user-reported example, unrelated hadith)
+# turned up typos and phrasing variants the exact match missed: "Tekrarı:",
+# "Tektar:", "Tekra:", "Tekrar yerler:", "Hadisin geçtiği diğer yer(ler):",
+# "N nolu Hadisin geçtiği diğer yer(ler):", "Diğer tahric(edenler):" - all
+# the same underlying pattern (a citation-list intro with nothing after),
+# just worded differently. NUMBER_TAIL strips trailing citation number
+# lists first (e.g. "2539, 2607, 3131") so a trailing phrase can be found
+# underneath them; the loop repeats since these markers can nest/repeat
+# ("1543 nolu Hadisin geçtiği diğer yerler: 1686; 1544 nolu ...").
+NUMBER_TAIL = re.compile(r"[\s,;.]*\d+[\s,;.]*\Z")
+# "1544 nolu" ("numbered 1544") - a repeated reference-block prefix left
+# dangling when the whole block it introduces got stripped (e.g. two
+# apparatus blocks back to back: "...yerler: 1686; 1544 nolu Hadisin
+# geçtiği diğer yerler:" - stripping the second phrase leaves "1544 nolu").
+NUMBERED_TAIL = re.compile(r"[\s,;.]*\d+\s+nolu\s*\Z", re.IGNORECASE)
+DANGLING_APPARATUS_PHRASES = [
+    "hadisin geçtiği diğer yerler",
+    "hadisin geçtiği diğer yer",
+    "nolu hadisin geçtiği diğer yerler",
+    "nolu hadisin geçtiği diğer yer",
+    "in geçtiği diğer yerler",
+    "in geçtiği diğer yer",
+    "nun geçtiği diğer yerler",
+    "nun geçtiği diğer yer",
+    "hadisin tekrarı",
+    "diğer tahric edenler",
+    "diğer tahric",
+    "tekrar yerler",
+    "tekrarı",
+    "tekrar",
+    "tektar",
+    "tekra",
+]
+
+
+def strip_dangling_apparatus(text: str) -> str:
+    original = text.rstrip()
+    if not original.endswith(":"):
+        return text  # only ever touch text that dangles on a bare colon
+    t = original
+    found_phrase = False
+    changed = True
+    while changed:
+        changed = False
+        if t.endswith(":"):
+            t = t[:-1].rstrip()
+            changed = True
+        number_match = NUMBER_TAIL.search(t)
+        if number_match:
+            t = t[: number_match.start()].rstrip(" ,;.")
+            changed = True
+        numbered_match = NUMBERED_TAIL.search(t)
+        if numbered_match:
+            t = t[: numbered_match.start()].rstrip(" ,;.")
+            changed = True
+        lowered = t.lower()
+        for phrase in DANGLING_APPARATUS_PHRASES:
+            if lowered.endswith(phrase):
+                t = t[: len(t) - len(phrase)].rstrip(" ,;.")
+                changed = True
+                found_phrase = True
+                break
+    # Only commit the change if a real apparatus phrase was matched - a bare
+    # trailing colon with no recognizable apparatus marker (e.g. a genuine
+    # narrative gap like "...ve şöyle de:" where a quote is simply missing
+    # from the source) is left untouched rather than silently hiding the
+    # colon, which wouldn't actually fix anything.
+    return t if found_phrase else text
 
 # The Turkish source was clearly scraped from a paginated website: 69
 # hadiths (manually reviewed all of them, plus 981 more caught by the
@@ -66,15 +136,24 @@ DANGLING_TEKRAR_SUFFIX = " Tekrar:"
 UI_TRIGGER = re.compile(
     r"TIKLA\w*|\bSAYFA\b|\bCİLT\b|BÖLÜM\w*|GÖREBİLİRSİNİZ|BAB VE HAD|HADİS(?:LER)? VAR"
 )
+# Catch-all for anything not in the specific trigger list above: a run of 3+
+# ALL-CAPS words that continues all the way to the end of the string (e.g.
+# a stray trailing "SALLALLAHU ALEYHİ VE SELLEM" honorific fragment found
+# during spot-checking, not matched by any named trigger). Anchored to the
+# end specifically so it can't misfire on a legitimate caps word appearing
+# mid-sentence.
+CAPS_WORD = r"[A-ZİŞĞÜÖÇ][A-ZİŞĞÜÖÇ']*"
+TRAILING_CAPS_RUN = re.compile(rf"(?:{CAPS_WORD}\s+){{2,}}{CAPS_WORD}\Z")
 SENTENCE_END = re.compile(r"[.!?][\"'”]?\s")
 WORD_BEFORE_END = re.compile(r"(\w+)[.!?][\"'”]?\s*\Z")
 
 
 def strip_scraped_ui_text(text: str) -> str:
-    trigger = UI_TRIGGER.search(text)
-    if not trigger:
+    candidates = [m.start() for m in [UI_TRIGGER.search(text), TRAILING_CAPS_RUN.search(text)] if m]
+    if not candidates:
         return text
-    before = text[: trigger.start()]
+    cut_start = min(candidates)
+    before = text[:cut_start]
     for end in reversed(list(SENTENCE_END.finditer(before))):
         candidate = before[: end.end()]
         word_match = WORD_BEFORE_END.search(candidate)
@@ -95,8 +174,7 @@ for source_lang, (title_lang, out_path) in OUTPUT_MAP.items():
         text = h["text"]
         if title_lang == "tr":
             text = strip_scraped_ui_text(text)
-            if text.rstrip().endswith(DANGLING_TEKRAR_SUFFIX.strip()):
-                text = text.rstrip()[: -len(DANGLING_TEKRAR_SUFFIX.strip())].rstrip()
+            text = strip_dangling_apparatus(text)
         books.setdefault(book_num, []).append(
             {"id": h["hadithnumber"], "hadith": text}
         )
