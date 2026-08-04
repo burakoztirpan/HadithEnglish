@@ -2,16 +2,55 @@ import SwiftUI
 
 struct HadithDetailView: View {
     let subject: HadithSubject
+    var favoritesOnly: Bool = false
     @EnvironmentObject private var lastRead: LastReadStore
+    @EnvironmentObject private var favorites: FavoritesStore
+    @EnvironmentObject private var languageStore: LanguageStore
+
+    /// Live-filtered (not a snapshot) so swiping to remove a favorite here
+    /// updates the list immediately, same as the old flat Favorites screen did.
+    private var displayedHadiths: [HadithEntry] {
+        guard favoritesOnly else { return subject.hadiths }
+        return subject.hadiths.filter { favorites.isFavorite($0.id) }
+    }
 
     var body: some View {
-        List(subject.hadiths) { entry in
-            HadithCardView(entry: entry)
-                .listRowBackground(Color("CardBackground"))
+        List(displayedHadiths) { entry in
+            if favoritesOnly {
+                HadithCardView(entry: entry)
+                    .padding(12)
+                    .background(Color("CardBackground"))
+                    .cornerRadius(12)
+                    .listRowInsets(EdgeInsets(top: 6, leading: 16, bottom: 6, trailing: 16))
+                    .listRowSeparator(.hidden)
+                    .swipeActions {
+                        Button(role: .destructive) {
+                            favorites.remove(entry.id)
+                        } label: {
+                            Label(languageStore.strings.removeAction, systemImage: "star.slash")
+                        }
+                    }
+            } else {
+                HadithCardView(entry: entry)
+                    .listRowBackground(Color("CardBackground"))
+            }
         }
         .listStyle(.plain)
         .navigationTitle(subject.trimmedName)
         .navigationBarTitleDisplayMode(.inline)
-        .onAppear { lastRead.recordVisit(to: subject) }
+        .onAppear {
+            if !favoritesOnly { lastRead.recordVisit(to: subject) }
+        }
+        .overlay {
+            if favoritesOnly && displayedHadiths.isEmpty {
+                VStack(spacing: 8) {
+                    Image(systemName: "star")
+                        .font(.largeTitle)
+                        .foregroundColor(.secondary)
+                    Text(languageStore.strings.noFavoritesYet)
+                        .foregroundColor(.secondary)
+                }
+            }
+        }
     }
 }
