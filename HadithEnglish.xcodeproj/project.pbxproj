@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		56DF4884958CEF7605851911 /* ThemeStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69CF4B84B97839655797EBC1 /* ThemeStore.swift */; };
+		63C1E1AC6FBE40DDBED4DCBD /* TypographyStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = F814F1F3A130424F98CC2C88 /* TypographyStore.swift */; };
 		03544FAAB82DAEF1E2BB32DF /* hadith_ar.json.zlib in Resources */ = {isa = PBXBuildFile; fileRef = D6874971805FB3A33EEE79D7 /* hadith_ar.json.zlib */; };
 		04D247619DF6AD57D2E003AC /* HadithEnglishApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92894C06972F9D5781D1B009 /* HadithEnglishApp.swift */; };
 		084A49238E21465D88182072 /* HadithDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D48B4C6C90D77A3250975149 /* HadithDetailView.swift */; };
@@ -39,6 +40,7 @@
 
 /* Begin PBXFileReference section */
 		69CF4B84B97839655797EBC1 /* ThemeStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ThemeStore.swift; path = HadithEnglish/Stores/ThemeStore.swift; sourceTree = SOURCE_ROOT; };
+		F814F1F3A130424F98CC2C88 /* TypographyStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = TypographyStore.swift; path = HadithEnglish/Stores/TypographyStore.swift; sourceTree = SOURCE_ROOT; };
 		064342C5A1701BC6CC28CD52 /* NotificationStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = NotificationStore.swift; path = HadithEnglish/Stores/NotificationStore.swift; sourceTree = SOURCE_ROOT; };
 		1AE64D878BD16DC86F0051E3 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = HomeView.swift; path = HadithEnglish/Views/HomeView.swift; sourceTree = SOURCE_ROOT; };
 		30914AE7B87B28F22DB562D0 /* hadith_tr.json.zlib */ = {isa = PBXFileReference; lastKnownFileType = None; name = hadith_tr.json.zlib; path = HadithEnglish/hadith_tr.json.zlib; sourceTree = SOURCE_ROOT; };
@@ -98,6 +100,7 @@
 				69CF4B84B97839655797EBC1,
 				E3944F83AE8B3CC4667D33EC,
 				064342C5A1701BC6CC28CD52,
+				F814F1F3A130424F98CC2C88,
 			);
 			sourceTree = "<group>";
 		};
@@ -215,6 +218,7 @@
 				56DF4884958CEF7605851911,
 				C5B843858C89E884AB751AF5,
 				340D42A8A32486AC68AB30A8,
+				63C1E1AC6FBE40DDBED4DCBD,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

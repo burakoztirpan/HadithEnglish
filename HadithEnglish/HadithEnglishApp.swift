@@ -10,6 +10,7 @@ struct HadithEnglishApp: App {
     @StateObject private var tabRouter = TabRouter()
     @StateObject private var themeStore = ThemeStore()
     @StateObject private var notificationStore = NotificationStore()
+    @StateObject private var typographyStore = TypographyStore()
     @Environment(\.scenePhase) private var scenePhase
 
     var body: some Scene {
@@ -36,6 +37,7 @@ struct HadithEnglishApp: App {
             .environmentObject(tabRouter)
             .environmentObject(themeStore)
             .environmentObject(notificationStore)
+            .environmentObject(typographyStore)
             .environment(\.layoutDirection, languageStore.language.isRightToLeft ? .rightToLeft : .leftToRight)
             .preferredColorScheme(themeStore.theme.colorScheme)
             .accentColor(Color("AccentColor"))

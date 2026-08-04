@@ -45,6 +45,14 @@ struct Strings {
     let appearanceDark: String
     let dailyNotificationLabel: String
     let notificationTimeLabel: String
+    let typographyLabel: String
+    let fontLabel: String
+    let fontSizeLabel: String
+    let fontSerif: String
+    let fontSans: String
+    let fontRounded: String
+    let fontMonospaced: String
+    let typographyPreviewText: String
     let goodMorning: String
     let goodAfternoon: String
     let goodEvening: String
@@ -89,6 +97,14 @@ extension AppLanguage {
                 appearanceDark: "Dark",
                 dailyNotificationLabel: "Daily Hadith Notification",
                 notificationTimeLabel: "Notification Time",
+                typographyLabel: "Typography",
+                fontLabel: "Font",
+                fontSizeLabel: "Font Size",
+                fontSerif: "Serif",
+                fontSans: "Sans",
+                fontRounded: "Rounded",
+                fontMonospaced: "Monospaced",
+                typographyPreviewText: "Actions are judged by intentions.",
                 goodMorning: "Good Morning",
                 goodAfternoon: "Good Afternoon",
                 goodEvening: "Good Evening",
@@ -129,6 +145,14 @@ extension AppLanguage {
                 appearanceDark: "داكن",
                 dailyNotificationLabel: "إشعار الحديث اليومي",
                 notificationTimeLabel: "وقت الإشعار",
+                typographyLabel: "الطباعة",
+                fontLabel: "الخط",
+                fontSizeLabel: "حجم الخط",
+                fontSerif: "سيريف",
+                fontSans: "سانس",
+                fontRounded: "مدور",
+                fontMonospaced: "أحادي المسافة",
+                typographyPreviewText: "إنما الأعمال بالنيات.",
                 goodMorning: "صباح الخير",
                 goodAfternoon: "طاب يومك",
                 goodEvening: "مساء الخير",
@@ -169,6 +193,14 @@ extension AppLanguage {
                 appearanceDark: "Koyu",
                 dailyNotificationLabel: "Günlük Hadis Bildirimi",
                 notificationTimeLabel: "Bildirim Saati",
+                typographyLabel: "Tipografi",
+                fontLabel: "Yazı Tipi",
+                fontSizeLabel: "Yazı Boyutu",
+                fontSerif: "Serif",
+                fontSans: "Sans",
+                fontRounded: "Yuvarlak",
+                fontMonospaced: "Eş Aralıklı",
+                typographyPreviewText: "Ameller niyetlere göredir.",
                 goodMorning: "Günaydın",
                 goodAfternoon: "İyi Günler",
                 goodEvening: "İyi Akşamlar",

@@ -5,6 +5,7 @@ struct HadithCardView: View {
     var subtitle: String? = nil
     @EnvironmentObject private var favorites: FavoritesStore
     @EnvironmentObject private var languageStore: LanguageStore
+    @EnvironmentObject private var typography: TypographyStore
     @State private var isSharePresented = false
     @State private var isExpanded = false
 
@@ -45,7 +46,7 @@ struct HadithCardView: View {
                 }
             }
             Text(displayText)
-                .font(.system(.body, design: .serif))
+                .font(.system(size: typography.fontSize, design: typography.fontDesign.design))
             if isLong {
                 Button {
                     withAnimation { isExpanded.toggle() }

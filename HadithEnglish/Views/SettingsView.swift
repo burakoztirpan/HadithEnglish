@@ -4,12 +4,22 @@ struct SettingsView: View {
     @EnvironmentObject private var languageStore: LanguageStore
     @EnvironmentObject private var themeStore: ThemeStore
     @EnvironmentObject private var notificationStore: NotificationStore
+    @EnvironmentObject private var typographyStore: TypographyStore
 
     private func appearanceName(_ theme: AppTheme) -> String {
         switch theme {
         case .system: return languageStore.strings.appearanceSystem
         case .light: return languageStore.strings.appearanceLight
         case .dark: return languageStore.strings.appearanceDark
+        }
+    }
+
+    private func fontDesignName(_ design: HadithFontDesign) -> String {
+        switch design {
+        case .serif: return languageStore.strings.fontSerif
+        case .sans: return languageStore.strings.fontSans
+        case .rounded: return languageStore.strings.fontRounded
+        case .monospaced: return languageStore.strings.fontMonospaced
         }
     }
 
@@ -52,6 +62,28 @@ struct SettingsView: View {
                             selection: $notificationStore.time,
                             displayedComponents: .hourAndMinute
                         )
+                    }
+                }
+                Section(languageStore.strings.typographyLabel) {
+                    Text(languageStore.strings.typographyPreviewText)
+                        .font(.system(size: typographyStore.fontSize, design: typographyStore.fontDesign.design))
+                        .padding(.vertical, 4)
+                    Picker(languageStore.strings.fontLabel, selection: $typographyStore.fontDesign) {
+                        ForEach(HadithFontDesign.allCases) { design in
+                            Text(fontDesignName(design)).tag(design)
+                        }
+                    }
+                    HStack {
+                        Text(languageStore.strings.fontSizeLabel)
+                        Slider(
+                            value: $typographyStore.fontSize,
+                            in: TypographyStore.minFontSize...TypographyStore.maxFontSize,
+                            step: 1
+                        )
+                        Text(verbatim: "\(Int(typographyStore.fontSize))")
+                            .font(.caption)
+                            .foregroundColor(.secondary)
+                            .frame(width: 24)
                     }
                 }
                 Section {
