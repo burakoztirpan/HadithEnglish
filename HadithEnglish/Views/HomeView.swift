@@ -212,20 +212,32 @@ struct HomeView: View {
             Text(languageStore.strings.todaysSelection.uppercased())
                 .font(.caption).bold()
                 .foregroundColor(.secondary)
-            VStack(spacing: 0) {
+            VStack(spacing: 10) {
                 ForEach(Array(todaysSelection.enumerated()), id: \.offset) { _, item in
                     NavigationLink(destination: HadithDetailView(subject: item.subject)) {
-                        HStack(alignment: .top, spacing: 8) {
-                            Text(verbatim: "#\(item.entry.id)")
+                        HStack(alignment: .top, spacing: 10) {
+                            Image(systemName: item.subject.icon)
+                                .foregroundColor(Color("AccentColor"))
+                                .frame(width: 20)
+                            VStack(alignment: .leading, spacing: 4) {
+                                Text(verbatim: "\(item.subject.trimmedName) · #\(item.entry.id)")
+                                    .font(.caption)
+                                    .foregroundColor(.secondary)
+                                Text(item.entry.trimmedText)
+                                    .font(.subheadline)
+                                    .foregroundColor(.primary)
+                                    .lineLimit(2)
+                            }
+                            Spacer(minLength: 0)
+                            Image(systemName: "chevron.right")
                                 .font(.caption)
                                 .foregroundColor(.secondary)
-                            Text(item.entry.trimmedText)
-                                .font(.subheadline)
-                                .foregroundColor(.primary)
-                                .lineLimit(2)
                         }
-                        .padding(.vertical, 8)
+                        .padding(12)
+                        .background(Color("CardBackground"))
+                        .cornerRadius(12)
                     }
+                    .buttonStyle(.plain)
                 }
             }
         }

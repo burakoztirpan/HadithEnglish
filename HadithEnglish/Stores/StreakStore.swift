@@ -4,13 +4,21 @@ final class StreakStore: ObservableObject {
     private static let countKey = "StreakCount"
     private static let lastOpenDateKey = "StreakLastOpenDate"
 
-    @Published private(set) var count: Int
+    @Published private(set) var count: Int = 1
 
     private let defaults: UserDefaults
     private let calendar = Calendar(identifier: .gregorian)
 
-    init(defaults: UserDefaults = .standard, today: Date = Date()) {
+    init(defaults: UserDefaults = .standard) {
         self.defaults = defaults
+        evaluate()
+    }
+
+    /// Re-checks the day boundary. Called at init (cold launch) and whenever
+    /// the app becomes active again (the app can sit backgrounded-but-alive
+    /// overnight without a cold relaunch, and init() won't re-run for that -
+    /// only a fresh evaluate() on foreground catches the day change).
+    func evaluate(today: Date = Date()) {
         let storedCount = defaults.integer(forKey: Self.countKey)
 
         guard let lastOpenDate = defaults.object(forKey: Self.lastOpenDateKey) as? Date else {
@@ -26,7 +34,7 @@ final class StreakStore: ObservableObject {
         ).day ?? 0
 
         switch daysBetween {
-        case 0:
+        case ...0:
             count = max(storedCount, 1)
         case 1:
             count = storedCount + 1

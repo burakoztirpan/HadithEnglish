@@ -16,10 +16,11 @@ struct SubjectsListView: View {
         NavigationView {
             List(filteredSubjects) { subject in
                 NavigationLink(destination: HadithDetailView(subject: subject)) {
-                    HStack(spacing: 12) {
+                    HStack(spacing: 10) {
                         Image(systemName: subject.icon)
                             .foregroundColor(Color("AccentColor"))
-                        VStack(alignment: .leading, spacing: 2) {
+                            .frame(width: 20)
+                        VStack(alignment: .leading, spacing: 1) {
                             Text(subject.trimmedName)
                                 .font(.body)
                             Text(verbatim: "\(subject.hadiths.count) \(languageStore.strings.hadithsSuffix)")
@@ -27,8 +28,8 @@ struct SubjectsListView: View {
                                 .foregroundColor(.secondary)
                         }
                     }
-                    .padding(.vertical, 6)
                 }
+                .listRowInsets(EdgeInsets(top: 8, leading: 16, bottom: 8, trailing: 16))
             }
             .listStyle(.plain)
             .navigationTitle(languageStore.strings.hadithSubjectsTitle)

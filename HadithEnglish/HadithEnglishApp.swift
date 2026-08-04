@@ -8,6 +8,7 @@ struct HadithEnglishApp: App {
     @StateObject private var streak = StreakStore()
     @StateObject private var lastRead = LastReadStore()
     @StateObject private var tabRouter = TabRouter()
+    @Environment(\.scenePhase) private var scenePhase
 
     var body: some Scene {
         WindowGroup {
@@ -36,6 +37,11 @@ struct HadithEnglishApp: App {
             .onAppear { content.load(languageStore.language) }
             .onChange(of: languageStore.language) { newValue in
                 content.load(newValue)
+            }
+            .onChange(of: scenePhase) { newPhase in
+                if newPhase == .active {
+                    streak.evaluate()
+                }
             }
         }
     }
