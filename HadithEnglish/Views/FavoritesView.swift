@@ -23,7 +23,11 @@ struct FavoritesView: View {
                     Section {
                         ForEach(group.entries) { entry in
                             HadithCardView(entry: entry)
-                                .listRowBackground(Color("CardBackground"))
+                                .padding(12)
+                                .background(Color("CardBackground"))
+                                .cornerRadius(12)
+                                .listRowInsets(EdgeInsets(top: 6, leading: 16, bottom: 6, trailing: 16))
+                                .listRowSeparator(.hidden)
                                 .swipeActions {
                                     Button(role: .destructive) {
                                         favorites.remove(entry.id)
@@ -33,7 +37,16 @@ struct FavoritesView: View {
                                 }
                         }
                     } header: {
-                        Label(group.subject.trimmedName, systemImage: group.subject.icon)
+                        HStack(spacing: 6) {
+                            Image(systemName: group.subject.icon)
+                            Text(group.subject.trimmedName)
+                        }
+                        .font(.subheadline.bold())
+                        .foregroundColor(Color("AccentColor"))
+                        .textCase(nil)
+                        .padding(.horizontal, 4)
+                        .padding(.top, 8)
+                        .padding(.bottom, 2)
                     }
                 }
             }
