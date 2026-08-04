@@ -46,7 +46,7 @@ struct HadithCardView: View {
                 }
             }
             Text(displayText)
-                .font(.system(size: typography.fontSize, design: typography.fontDesign.design))
+                .font(typography.fontDesign.font(size: typography.fontSize))
             if isLong {
                 Button {
                     withAnimation { isExpanded.toggle() }

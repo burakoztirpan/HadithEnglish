@@ -49,7 +49,11 @@ struct Strings {
     let fontLabel: String
     let fontSizeLabel: String
     let fontSerif: String
+    let fontNewYork: String
+    let fontPalatino: String
+    let fontBaskerville: String
     let fontSans: String
+    let fontAvenirNext: String
     let fontRounded: String
     let fontMonospaced: String
     let typographyPreviewText: String
@@ -101,7 +105,11 @@ extension AppLanguage {
                 fontLabel: "Font",
                 fontSizeLabel: "Font Size",
                 fontSerif: "Serif",
+                fontNewYork: "New York",
+                fontPalatino: "Palatino",
+                fontBaskerville: "Baskerville",
                 fontSans: "Sans",
+                fontAvenirNext: "Avenir Next",
                 fontRounded: "Rounded",
                 fontMonospaced: "Monospaced",
                 typographyPreviewText: "Actions are judged by intentions.",
@@ -149,7 +157,11 @@ extension AppLanguage {
                 fontLabel: "الخط",
                 fontSizeLabel: "حجم الخط",
                 fontSerif: "سيريف",
+                fontNewYork: "New York",
+                fontPalatino: "Palatino",
+                fontBaskerville: "Baskerville",
                 fontSans: "سانس",
+                fontAvenirNext: "Avenir Next",
                 fontRounded: "مدور",
                 fontMonospaced: "أحادي المسافة",
                 typographyPreviewText: "إنما الأعمال بالنيات.",
@@ -197,7 +209,11 @@ extension AppLanguage {
                 fontLabel: "Yazı Tipi",
                 fontSizeLabel: "Yazı Boyutu",
                 fontSerif: "Serif",
+                fontNewYork: "New York",
+                fontPalatino: "Palatino",
+                fontBaskerville: "Baskerville",
                 fontSans: "Sans",
+                fontAvenirNext: "Avenir Next",
                 fontRounded: "Yuvarlak",
                 fontMonospaced: "Eş Aralıklı",
                 typographyPreviewText: "Ameller niyetlere göredir.",

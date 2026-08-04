@@ -17,7 +17,11 @@ struct SettingsView: View {
     private func fontDesignName(_ design: HadithFontDesign) -> String {
         switch design {
         case .serif: return languageStore.strings.fontSerif
+        case .newYork: return languageStore.strings.fontNewYork
+        case .palatino: return languageStore.strings.fontPalatino
+        case .baskerville: return languageStore.strings.fontBaskerville
         case .sans: return languageStore.strings.fontSans
+        case .avenirNext: return languageStore.strings.fontAvenirNext
         case .rounded: return languageStore.strings.fontRounded
         case .monospaced: return languageStore.strings.fontMonospaced
         }
@@ -66,7 +70,7 @@ struct SettingsView: View {
                 }
                 Section(languageStore.strings.typographyLabel) {
                     Text(languageStore.strings.typographyPreviewText)
-                        .font(.system(size: typographyStore.fontSize, design: typographyStore.fontDesign.design))
+                        .font(typographyStore.fontDesign.font(size: typographyStore.fontSize))
                         .padding(.vertical, 4)
                     Picker(languageStore.strings.fontLabel, selection: $typographyStore.fontDesign) {
                         ForEach(HadithFontDesign.allCases) { design in

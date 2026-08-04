@@ -1,17 +1,25 @@
 import Foundation
 import SwiftUI
 
+/// Named font PostScript names verified against the actual installed iOS
+/// runtime font list (UIFont.familyNames / UIFont.fontNames(forFamilyName:))
+/// before use - a wrong PostScript name silently falls back to a generic
+/// font instead of erroring, so guessing isn't safe here.
 enum HadithFontDesign: String, CaseIterable, Identifiable {
-    case serif, sans, rounded, monospaced
+    case serif, newYork, palatino, baskerville, sans, avenirNext, rounded, monospaced
 
     var id: String { rawValue }
 
-    var design: Font.Design {
+    func font(size: CGFloat) -> Font {
         switch self {
-        case .serif: return .serif
-        case .sans: return .default
-        case .rounded: return .rounded
-        case .monospaced: return .monospaced
+        case .serif: return .custom("Georgia", size: size)
+        case .newYork: return .system(size: size, design: .serif)
+        case .palatino: return .custom("Palatino-Roman", size: size)
+        case .baskerville: return .custom("Baskerville", size: size)
+        case .sans: return .system(size: size, design: .default)
+        case .avenirNext: return .custom("AvenirNext-Regular", size: size)
+        case .rounded: return .system(size: size, design: .rounded)
+        case .monospaced: return .system(size: size, design: .monospaced)
         }
     }
 }
