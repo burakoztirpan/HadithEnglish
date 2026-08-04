@@ -2,6 +2,8 @@ import Foundation
 
 enum AppLanguage: String, CaseIterable, Identifiable {
     case en, ar, tr
+    case ind = "id"
+    case urd = "ur"
 
     var id: String { rawValue }
 
@@ -10,6 +12,8 @@ enum AppLanguage: String, CaseIterable, Identifiable {
         case .en: return "English"
         case .ar: return "العربية"
         case .tr: return "Türkçe"
+        case .ind: return "Bahasa Indonesia"
+        case .urd: return "اردو"
         }
     }
 
@@ -18,7 +22,7 @@ enum AppLanguage: String, CaseIterable, Identifiable {
     }
 
     var isRightToLeft: Bool {
-        self == .ar
+        self == .ar || self == .urd
     }
 }
 
@@ -232,6 +236,110 @@ extension AppLanguage {
                 hadithsSuffix: "hadis",
                 showMore: "Devamını göster",
                 showLess: "Daha az göster"
+            )
+        case .ind:
+            return Strings(
+                hadithSubjectsTitle: "Topik Hadis",
+                searchSubjectsPrompt: "Cari topik",
+                tabHadiths: "Hadis",
+                tabFavorites: "Favorit",
+                tabSetup: "Pengaturan",
+                tabHome: "Beranda",
+                favoritesTitle: "Favorit",
+                noFavoritesYet: "Belum ada favorit",
+                removeAction: "Hapus",
+                rateOnAppStore: "Beri Nilai di App Store",
+                shareThisApp: "Bagikan Aplikasi Ini",
+                privacyPolicy: "Kebijakan Privasi",
+                aboutSection: "Tentang",
+                versionLabel: "Versi",
+                setupTitle: "Pengaturan",
+                languageLabel: "Bahasa",
+                appearanceLabel: "Tampilan",
+                appearanceSystem: "Sistem",
+                appearanceLight: "Terang",
+                appearanceDark: "Gelap",
+                dailyNotificationLabel: "Notifikasi Hadis Harian",
+                notificationTimeLabel: "Waktu Notifikasi",
+                typographyLabel: "Tipografi",
+                fontLabel: "Jenis Huruf",
+                fontSizeLabel: "Ukuran Huruf",
+                fontSerif: "Serif",
+                fontNewYork: "New York",
+                fontPalatino: "Palatino",
+                fontBaskerville: "Baskerville",
+                fontSans: "Sans",
+                fontAvenirNext: "Avenir Next",
+                fontRounded: "Rounded",
+                fontMonospaced: "Monospace",
+                typographyPreviewText: "Segala amal tergantung niatnya.",
+                goodMorning: "Selamat Pagi",
+                goodAfternoon: "Selamat Siang",
+                goodEvening: "Selamat Malam",
+                dayStreak: "Hari Beruntun",
+                hadithOfTheDay: "Hadis Hari Ini",
+                quickAccess: "Akses Cepat",
+                randomHadith: "Hadis Acak",
+                myFavorites: "Favorit Saya",
+                continueReading: "Lanjutkan Membaca",
+                searchHadith: "Cari Hadis",
+                featuredTopics: "Topik Pilihan",
+                todaysSelection: "Pilihan Hari Ini",
+                hadithsSuffix: "hadis",
+                showMore: "Tampilkan lebih banyak",
+                showLess: "Tampilkan lebih sedikit"
+            )
+        case .urd:
+            return Strings(
+                hadithSubjectsTitle: "احادیث کے موضوعات",
+                searchSubjectsPrompt: "موضوعات تلاش کریں",
+                tabHadiths: "احادیث",
+                tabFavorites: "پسندیدہ",
+                tabSetup: "ترتیبات",
+                tabHome: "ہوم",
+                favoritesTitle: "پسندیدہ",
+                noFavoritesYet: "ابھی تک کوئی پسندیدہ نہیں",
+                removeAction: "ہٹائیں",
+                rateOnAppStore: "App Store پر درجہ دیں",
+                shareThisApp: "ایپ شیئر کریں",
+                privacyPolicy: "پرائیویسی پالیسی",
+                aboutSection: "کے بارے میں",
+                versionLabel: "ورژن",
+                setupTitle: "ترتیبات",
+                languageLabel: "زبان",
+                appearanceLabel: "ظاہری شکل",
+                appearanceSystem: "سسٹم",
+                appearanceLight: "ہلکا",
+                appearanceDark: "گہرا",
+                dailyNotificationLabel: "روزانہ حدیث اطلاع",
+                notificationTimeLabel: "اطلاع کا وقت",
+                typographyLabel: "ٹائپوگرافی",
+                fontLabel: "فونٹ",
+                fontSizeLabel: "فونٹ سائز",
+                fontSerif: "سیرف",
+                fontNewYork: "New York",
+                fontPalatino: "Palatino",
+                fontBaskerville: "Baskerville",
+                fontSans: "سانس",
+                fontAvenirNext: "Avenir Next",
+                fontRounded: "گول",
+                fontMonospaced: "یکساں فاصلہ",
+                typographyPreviewText: "اعمال کا دارومدار نیتوں پر ہے۔",
+                goodMorning: "صبح بخیر",
+                goodAfternoon: "دن بخیر",
+                goodEvening: "شام بخیر",
+                dayStreak: "دن کا تسلسل",
+                hadithOfTheDay: "آج کی حدیث",
+                quickAccess: "فوری رسائی",
+                randomHadith: "بے ترتیب حدیث",
+                myFavorites: "میری پسندیدہ",
+                continueReading: "پڑھنا جاری رکھیں",
+                searchHadith: "حدیث تلاش کریں",
+                featuredTopics: "نمایاں موضوعات",
+                todaysSelection: "آج کا انتخاب",
+                hadithsSuffix: "احادیث",
+                showMore: "مزید دکھائیں",
+                showLess: "کم دکھائیں"
             )
         }
     }

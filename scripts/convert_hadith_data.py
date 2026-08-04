@@ -14,14 +14,19 @@ OUTPUT_MAP = {
     "eng": ("en", "HadithEnglish/hadith_en.json.zlib"),
     "ara": ("ar", "HadithEnglish/hadith_ar.json.zlib"),
     "tur": ("tr", "HadithEnglish/hadith_tr.json.zlib"),
+    "ind": ("id", "HadithEnglish/hadith_id.json.zlib"),
+    "urd": ("ur", "HadithEnglish/hadith_ur.json.zlib"),
 }
 
 # Per-language book titles, verified against both fawazahmed0/hadith-api's own
 # English section names (exact match, all 97) and Ikhan/sahih-bukhari-english
-# for Arabic (exact match, all 97). Turkish titles are original translations
-# using standard Turkish Islamic terminology, following the same style as the
-# English titles (short term, with a parenthetical Arabic/Turkish loanword
-# where the English does the same).
+# for Arabic (exact match, all 97). Turkish, Indonesian and Urdu titles are
+# original translations using standard Islamic terminology in each language,
+# following the same style as the English titles (short term, with a
+# parenthetical Arabic/local-language loanword where the English does the
+# same) - the source only translates hadith body text, never book/chapter
+# section names (confirmed: ind-bukhari.json and urd-bukhari.json's
+# metadata.sections are still in English, same situation as Turkish).
 book_titles = json.load(open("scripts/book_titles.json"))
 
 # The Turkish source appends scholarly cross-reference apparatus after
