@@ -39,6 +39,7 @@ struct FavoritesView: View {
             }
             .listStyle(.plain)
             .navigationTitle(languageStore.strings.favoritesTitle)
+            .navigationBarTitleDisplayMode(.inline)
             .overlay {
                 if isEmpty {
                     VStack(spacing: 8) {

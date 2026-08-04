@@ -49,6 +49,7 @@ struct SettingsView: View {
                 }
             }
             .navigationTitle(languageStore.strings.setupTitle)
+            .navigationBarTitleDisplayMode(.inline)
         }
         .navigationViewStyle(.stack)
     }

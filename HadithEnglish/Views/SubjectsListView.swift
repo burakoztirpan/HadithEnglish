@@ -33,6 +33,7 @@ struct SubjectsListView: View {
             }
             .listStyle(.plain)
             .navigationTitle(languageStore.strings.hadithSubjectsTitle)
+            .navigationBarTitleDisplayMode(.inline)
             .searchable(text: $searchText, prompt: languageStore.strings.searchSubjectsPrompt)
         }
         .navigationViewStyle(.stack)
