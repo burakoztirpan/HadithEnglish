@@ -7,12 +7,7 @@ struct HomeView: View {
     @EnvironmentObject private var lastRead: LastReadStore
     @EnvironmentObject private var tabRouter: TabRouter
 
-    private static let featuredBookNumbers: [(number: Int, icon: String)] = [
-        (2, "heart.fill"),          // Belief
-        (3, "book.fill"),           // Knowledge
-        (78, "hands.sparkles.fill"), // Good Manners and Form (Al-Adab)
-        (80, "hand.raised.fill"),   // Invocations
-    ]
+    private static let featuredBookNumbers: [Int] = [2, 3, 78, 80] // Belief, Knowledge, Good Manners, Invocations
 
     private var allEntries: [(subject: HadithSubject, entry: HadithEntry)] {
         subjects.flatMap { subject in subject.hadiths.map { (subject, $0) } }
@@ -36,10 +31,9 @@ struct HomeView: View {
         return [all[first], all[second]]
     }
 
-    private var featuredTopics: [(subject: HadithSubject, icon: String)] {
-        Self.featuredBookNumbers.compactMap { entry in
-            guard entry.number - 1 < subjects.count else { return nil }
-            return (subjects[entry.number - 1], entry.icon)
+    private var featuredTopics: [HadithSubject] {
+        Self.featuredBookNumbers.compactMap { number in
+            subjects.first { $0.bookNumber == number }
         }
     }
 
@@ -194,11 +188,11 @@ struct HomeView: View {
                 .foregroundColor(.secondary)
             ScrollView(.horizontal, showsIndicators: false) {
                 HStack(spacing: 10) {
-                    ForEach(featuredTopics, id: \.subject.id) { topic in
-                        NavigationLink(destination: HadithDetailView(subject: topic.subject)) {
+                    ForEach(featuredTopics) { topic in
+                        NavigationLink(destination: HadithDetailView(subject: topic)) {
                             HStack(spacing: 6) {
                                 Image(systemName: topic.icon)
-                                Text(topic.subject.trimmedName)
+                                Text(topic.trimmedName)
                             }
                             .font(.subheadline)
                             .foregroundColor(.primary)

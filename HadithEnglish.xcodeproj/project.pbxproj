@@ -25,6 +25,7 @@
 		A2504BC4967E6B90BCE99827 /* ActivityShareSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73A54BD1A91FE5DE664A55AE /* ActivityShareSheet.swift */; };
 		A2584A97B9E5EBFB880A6393 /* SubjectsListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 697942B99F68CD7E35E9CF42 /* SubjectsListView.swift */; };
 		A4054982BAD377401FF2259D /* hadith_tr.json in Resources */ = {isa = PBXBuildFile; fileRef = 609649A4AE077FA97FE11A2F /* hadith_tr.json */; };
+		B3054C1D950C07BEC45C5072 /* BookIcons.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6D649A0A55D72648C3FFB8C /* BookIcons.swift */; };
 		B5E24AA3972808BA078D7F21 /* hadith_en.json in Resources */ = {isa = PBXBuildFile; fileRef = CE554F92936782E14ED8EFD6 /* hadith_en.json */; };
 		CF9C4F01885CBF6D198323FD /* HadithContentStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0C94875B3C0108E609A7A7C /* HadithContentStore.swift */; };
 		EFEF44C691469E217CD5AC23 /* PrivacyInfo.xcprivacy in Resources */ = {isa = PBXBuildFile; fileRef = B4DD4830AF0C832A76D4BA37 /* PrivacyInfo.xcprivacy */; };
@@ -58,6 +59,7 @@
 		D5A24BACBBD931BF0F1D2930 /* HadithCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = HadithCardView.swift; path = HadithEnglish/Views/HadithCardView.swift; sourceTree = SOURCE_ROOT; };
 		DE714BFA8B5ABD49D30148E3 /* LanguageStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = LanguageStore.swift; path = HadithEnglish/Stores/LanguageStore.swift; sourceTree = SOURCE_ROOT; };
 		F0C94875B3C0108E609A7A7C /* HadithContentStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = HadithContentStore.swift; path = HadithEnglish/Stores/HadithContentStore.swift; sourceTree = SOURCE_ROOT; };
+		F6D649A0A55D72648C3FFB8C /* BookIcons.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = BookIcons.swift; path = HadithEnglish/Models/BookIcons.swift; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXGroup section */
@@ -86,6 +88,7 @@
 				5C6A4D00868509D91F3D6CFD /* LastReadStore.swift */,
 				73B046FE8CF90E3628204AC6 /* TabRouter.swift */,
 				1AE64D878BD16DC86F0051E3 /* HomeView.swift */,
+				F6D649A0A55D72648C3FFB8C /* BookIcons.swift */,
 			);
 			sourceTree = "<group>";
 		};
@@ -199,6 +202,7 @@
 				928E4C2CAA5955270909544C /* LastReadStore.swift in Sources */,
 				6D4F4BF691AE227F571E98D7 /* TabRouter.swift in Sources */,
 				459044CAA231236E9BD29CFA /* HomeView.swift in Sources */,
+				B3054C1D950C07BEC45C5072 /* BookIcons.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -10,6 +10,7 @@ struct HadithEntry: Codable, Identifiable {
 }
 
 struct HadithSubject: Codable, Identifiable {
+    let bookNumber: Int
     let name: String
     let hadiths: [HadithEntry]
 
@@ -17,5 +18,9 @@ struct HadithSubject: Codable, Identifiable {
 
     var trimmedName: String {
         name.trimmingCharacters(in: .whitespaces)
+    }
+
+    var icon: String {
+        BookIcons.icons[bookNumber] ?? "book.closed"
     }
 }

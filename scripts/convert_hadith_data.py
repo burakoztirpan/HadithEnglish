@@ -30,7 +30,7 @@ for source_lang, (title_lang, out_path) in OUTPUT_MAP.items():
         )
 
     subjects = [
-        {"name": book_titles[str(book_num)][title_lang], "hadiths": entries}
+        {"bookNumber": book_num, "name": book_titles[str(book_num)][title_lang], "hadiths": entries}
         for book_num, entries in sorted(books.items())
     ]
 

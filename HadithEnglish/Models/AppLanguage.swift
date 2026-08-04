@@ -51,6 +51,9 @@ struct Strings {
     let searchHadith: String
     let featuredTopics: String
     let todaysSelection: String
+    let hadithsSuffix: String
+    let showMore: String
+    let showLess: String
 }
 
 extension AppLanguage {
@@ -85,7 +88,10 @@ extension AppLanguage {
                 continueReading: "Continue Reading",
                 searchHadith: "Search Hadith",
                 featuredTopics: "Featured Topics",
-                todaysSelection: "Today's Selection"
+                todaysSelection: "Today's Selection",
+                hadithsSuffix: "hadiths",
+                showMore: "Show more",
+                showLess: "Show less"
             )
         case .ar:
             return Strings(
@@ -116,7 +122,10 @@ extension AppLanguage {
                 continueReading: "متابعة القراءة",
                 searchHadith: "البحث عن حديث",
                 featuredTopics: "مواضيع مميزة",
-                todaysSelection: "مختارات اليوم"
+                todaysSelection: "مختارات اليوم",
+                hadithsSuffix: "حديثًا",
+                showMore: "عرض المزيد",
+                showLess: "عرض أقل"
             )
         case .tr:
             return Strings(
@@ -147,7 +156,10 @@ extension AppLanguage {
                 continueReading: "Kaldığım Yer",
                 searchHadith: "Hadis Ara",
                 featuredTopics: "Öne Çıkan Konular",
-                todaysSelection: "Günün Seçkisi"
+                todaysSelection: "Günün Seçkisi",
+                hadithsSuffix: "hadis",
+                showMore: "Devamını göster",
+                showLess: "Daha az göster"
             )
         }
     }

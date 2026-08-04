@@ -4,7 +4,20 @@ struct HadithCardView: View {
     let entry: HadithEntry
     var subtitle: String? = nil
     @EnvironmentObject private var favorites: FavoritesStore
+    @EnvironmentObject private var languageStore: LanguageStore
     @State private var isSharePresented = false
+    @State private var isExpanded = false
+
+    private static let previewCharacterLimit = 280
+
+    private var isLong: Bool {
+        entry.trimmedText.count > Self.previewCharacterLimit
+    }
+
+    private var displayText: String {
+        guard isLong, !isExpanded else { return entry.trimmedText }
+        return entry.trimmedText.prefix(Self.previewCharacterLimit) + "…"
+    }
 
     var body: some View {
         VStack(alignment: .leading, spacing: 8) {
@@ -31,8 +44,18 @@ struct HadithCardView: View {
                     ActivityShareSheet(items: [entry.trimmedText])
                 }
             }
-            Text(entry.trimmedText)
+            Text(displayText)
                 .font(.system(.body, design: .serif))
+            if isLong {
+                Button {
+                    withAnimation { isExpanded.toggle() }
+                } label: {
+                    Text(isExpanded ? languageStore.strings.showLess : languageStore.strings.showMore)
+                        .font(.caption).bold()
+                        .foregroundColor(Color("AccentColor"))
+                }
+                .buttonStyle(.plain)
+            }
         }
         .padding(.vertical, 8)
     }
