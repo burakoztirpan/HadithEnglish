@@ -23,6 +23,19 @@ OUTPUT_MAP = {
 # where the English does the same).
 book_titles = json.load(open("scripts/book_titles.json"))
 
+# The Turkish source appends scholarly cross-reference apparatus after a
+# "Tekrar:" ("Repeat:") marker - hadith numbers / other-book citations, not
+# part of the actual narration. In 743 of 981 cases (source data issue, not
+# introduced by this script) whatever was supposed to follow the colon is
+# missing entirely, so the text visibly cuts off mid-thought: "...dedim. Tekrar:"
+# Only trim the bare dangling case (nothing after the colon) - it's safe
+# because the narration is already a complete sentence before "Tekrar:"
+# starts. Cases with real citation content after are left alone: some embed
+# a genuine continuation (e.g. "Tekrar: 3315 [-1827-] İbn Ömer r.a. ..."),
+# so blindly stripping everything after the marker would occasionally cut
+# real content, not just apparatus.
+DANGLING_TEKRAR_SUFFIX = " Tekrar:"
+
 for source_lang, (title_lang, out_path) in OUTPUT_MAP.items():
     data = json.load(open(f"{SOURCE_DIR}/{source_lang}-bukhari.json"))
 
@@ -33,8 +46,11 @@ for source_lang, (title_lang, out_path) in OUTPUT_MAP.items():
             continue  # scattered variant-chain hadiths, no coherent chapter
         if not isinstance(h["hadithnumber"], int):
             continue  # inserted sub-narrations like "402.2", not a whole id
+        text = h["text"]
+        if title_lang == "tr" and text.rstrip().endswith(DANGLING_TEKRAR_SUFFIX.strip()):
+            text = text.rstrip()[: -len(DANGLING_TEKRAR_SUFFIX.strip())].rstrip()
         books.setdefault(book_num, []).append(
-            {"id": h["hadithnumber"], "hadith": h["text"]}
+            {"id": h["hadithnumber"], "hadith": text}
         )
 
     subjects = [
