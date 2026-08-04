@@ -2,13 +2,14 @@ import SwiftUI
 
 struct HadithCardView: View {
     let entry: HadithEntry
+    var subtitle: String? = nil
     @EnvironmentObject private var favorites: FavoritesStore
     @State private var isSharePresented = false
 
     var body: some View {
         VStack(alignment: .leading, spacing: 8) {
             HStack {
-                Text("#\(entry.id)")
+                Text(verbatim: subtitle ?? "#\(entry.id)")
                     .font(.caption)
                     .foregroundColor(.secondary)
                 Spacer()
@@ -34,6 +35,5 @@ struct HadithCardView: View {
                 .font(.system(.body, design: .serif))
         }
         .padding(.vertical, 8)
-        .listRowBackground(Color("CardBackground"))
     }
 }

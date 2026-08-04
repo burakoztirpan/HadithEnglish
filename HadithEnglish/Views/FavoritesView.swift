@@ -16,6 +16,7 @@ struct FavoritesView: View {
             List {
                 ForEach(favoriteEntries) { entry in
                     HadithCardView(entry: entry)
+                        .listRowBackground(Color("CardBackground"))
                         .swipeActions {
                             Button(role: .destructive) {
                                 favorites.remove(entry.id)
