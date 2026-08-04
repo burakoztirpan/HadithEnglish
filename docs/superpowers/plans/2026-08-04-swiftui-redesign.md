@@ -1110,6 +1110,14 @@ git commit -m "Bump deployment target to iOS 15.0 and Swift version to 5.0"
 
 ### Task 9: Privacy manifest
 
+> **Execution note (discovered during implementation):** `pbxproj file <project> <path>
+> --target ... [--ignore-unknown-types]` failed with `argument of type 'NoneType' is not
+> iterable` for `.xcprivacy` — this CLI version doesn't recognize the extension. Used the Python
+> API instead: `XcodeProject.load(...)`, then
+> `p.add_file('HadithEnglish/PrivacyInfo.xcprivacy', tree='SOURCE_ROOT', target_name='HadithEnglish')`,
+> then `p.save()`. Worked on the first try, no ID lookups needed (unlike Task 6's deletions,
+> this is a genuinely new file so there's no `sourceTree` mismatch).
+
 **Files:**
 - Create: `HadithEnglish/PrivacyInfo.xcprivacy`
 
