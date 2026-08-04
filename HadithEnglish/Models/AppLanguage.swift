@@ -76,6 +76,8 @@ struct Strings {
     let hadithsSuffix: String
     let showMore: String
     let showLess: String
+    let shareCardTitle: String
+    let shareAsTextOption: String
 }
 
 extension AppLanguage {
@@ -131,7 +133,9 @@ extension AppLanguage {
                 todaysSelection: "Today's Selection",
                 hadithsSuffix: "hadiths",
                 showMore: "Show more",
-                showLess: "Show less"
+                showLess: "Show less",
+                shareCardTitle: "Share as Image",
+                shareAsTextOption: "Share as Text"
             )
         case .ar:
             return Strings(
@@ -183,7 +187,9 @@ extension AppLanguage {
                 todaysSelection: "مختارات اليوم",
                 hadithsSuffix: "حديثًا",
                 showMore: "عرض المزيد",
-                showLess: "عرض أقل"
+                showLess: "عرض أقل",
+                shareCardTitle: "مشاركة كصورة",
+                shareAsTextOption: "مشاركة كنص"
             )
         case .tr:
             return Strings(
@@ -235,7 +241,9 @@ extension AppLanguage {
                 todaysSelection: "Günün Seçkisi",
                 hadithsSuffix: "hadis",
                 showMore: "Devamını göster",
-                showLess: "Daha az göster"
+                showLess: "Daha az göster",
+                shareCardTitle: "Görsel Olarak Paylaş",
+                shareAsTextOption: "Metin Olarak Paylaş"
             )
         case .ind:
             return Strings(
@@ -287,7 +295,9 @@ extension AppLanguage {
                 todaysSelection: "Pilihan Hari Ini",
                 hadithsSuffix: "hadis",
                 showMore: "Tampilkan lebih banyak",
-                showLess: "Tampilkan lebih sedikit"
+                showLess: "Tampilkan lebih sedikit",
+                shareCardTitle: "Bagikan sebagai Gambar",
+                shareAsTextOption: "Bagikan sebagai Teks"
             )
         case .urd:
             return Strings(
@@ -339,7 +349,9 @@ extension AppLanguage {
                 todaysSelection: "آج کا انتخاب",
                 hadithsSuffix: "احادیث",
                 showMore: "مزید دکھائیں",
-                showLess: "کم دکھائیں"
+                showLess: "کم دکھائیں",
+                shareCardTitle: "تصویر کے طور پر شیئر کریں",
+                shareAsTextOption: "متن کے طور پر شیئر کریں"
             )
         }
     }

@@ -7,6 +7,19 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		9F3B761D38314976B291FC22 /* ShareCardBackground.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1598FD94C60461AADFCB6A9 /* ShareCardBackground.swift */; };
+		9BDC21C2BF9944EC94B39B76 /* ShareCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E29B4CC09D684E2195AD79C6 /* ShareCardView.swift */; };
+		B7CC96DBF91F4FB8BF952362 /* ShareOptionsSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CE0CF90B2204928913B3FC8 /* ShareOptionsSheet.swift */; };
+		3DA9418454F346AAB6197C12 /* share_bg_01_emerald.png in Resources */ = {isa = PBXBuildFile; fileRef = BDDDAEFD97D04E8EB4651EA5 /* share_bg_01_emerald.png */; };
+		EE51B933DB5D42D0BF019F19 /* share_bg_02_navy_gold.png in Resources */ = {isa = PBXBuildFile; fileRef = 6A3CA475C5F24C2B83D25DE5 /* share_bg_02_navy_gold.png */; };
+		80EC3BCBA2B542BD914B020A /* share_bg_03_charcoal_crescent.png in Resources */ = {isa = PBXBuildFile; fileRef = DBB53CAAE0C244A28E29D6D9 /* share_bg_03_charcoal_crescent.png */; };
+		8B2002AF52DC4766812532EE /* share_bg_04_sand_dome.png in Resources */ = {isa = PBXBuildFile; fileRef = 1C712F13960C402986EBAF93 /* share_bg_04_sand_dome.png */; };
+		9D7FB1DC24D3474093707AEB /* share_bg_05_rose_rosette.png in Resources */ = {isa = PBXBuildFile; fileRef = D6910BD43D824C0AAB6B26EF /* share_bg_05_rose_rosette.png */; };
+		C18F11E9B6934633BB8695BF /* share_bg_06_teal_crescent.png in Resources */ = {isa = PBXBuildFile; fileRef = 4AD0C949D35E4BEB964B3155 /* share_bg_06_teal_crescent.png */; };
+		94024F03F6464E9188C64084 /* share_bg_07_burgundy_geometric.png in Resources */ = {isa = PBXBuildFile; fileRef = 5BB4AA0BDCC5452ABBC9E434 /* share_bg_07_burgundy_geometric.png */; };
+		50EB40B3CDF2432C9469B740 /* share_bg_08_sage_dome.png in Resources */ = {isa = PBXBuildFile; fileRef = 52A71CA9B5EE42D3ABE5E371 /* share_bg_08_sage_dome.png */; };
+		1F1942B0C7EE46BF9C41EBD5 /* share_bg_09_plum_geometric.png in Resources */ = {isa = PBXBuildFile; fileRef = F3EC4FC2B21F417A8A98E347 /* share_bg_09_plum_geometric.png */; };
+		3E4350E54CE648CA946129E8 /* share_bg_10_gold_rosette.png in Resources */ = {isa = PBXBuildFile; fileRef = 97B9D14417EC48BAB4F53065 /* share_bg_10_gold_rosette.png */; };
 		56DF4884958CEF7605851911 /* ThemeStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69CF4B84B97839655797EBC1 /* ThemeStore.swift */; };
 		63C1E1AC6FBE40DDBED4DCBD /* TypographyStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = F814F1F3A130424F98CC2C88 /* TypographyStore.swift */; };
 		03544FAAB82DAEF1E2BB32DF /* hadith_ar.json.zlib in Resources */ = {isa = PBXBuildFile; fileRef = D6874971805FB3A33EEE79D7 /* hadith_ar.json.zlib */; };
@@ -41,6 +54,19 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		D1598FD94C60461AADFCB6A9 /* ShareCardBackground.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ShareCardBackground.swift; path = HadithEnglish/Models/ShareCardBackground.swift; sourceTree = SOURCE_ROOT; };
+		E29B4CC09D684E2195AD79C6 /* ShareCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ShareCardView.swift; path = HadithEnglish/Views/ShareCardView.swift; sourceTree = SOURCE_ROOT; };
+		6CE0CF90B2204928913B3FC8 /* ShareOptionsSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ShareOptionsSheet.swift; path = HadithEnglish/Views/ShareOptionsSheet.swift; sourceTree = SOURCE_ROOT; };
+		BDDDAEFD97D04E8EB4651EA5 /* share_bg_01_emerald.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = share_bg_01_emerald.png; path = HadithEnglish/ShareBackgrounds/share_bg_01_emerald.png; sourceTree = SOURCE_ROOT; };
+		6A3CA475C5F24C2B83D25DE5 /* share_bg_02_navy_gold.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = share_bg_02_navy_gold.png; path = HadithEnglish/ShareBackgrounds/share_bg_02_navy_gold.png; sourceTree = SOURCE_ROOT; };
+		DBB53CAAE0C244A28E29D6D9 /* share_bg_03_charcoal_crescent.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = share_bg_03_charcoal_crescent.png; path = HadithEnglish/ShareBackgrounds/share_bg_03_charcoal_crescent.png; sourceTree = SOURCE_ROOT; };
+		1C712F13960C402986EBAF93 /* share_bg_04_sand_dome.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = share_bg_04_sand_dome.png; path = HadithEnglish/ShareBackgrounds/share_bg_04_sand_dome.png; sourceTree = SOURCE_ROOT; };
+		D6910BD43D824C0AAB6B26EF /* share_bg_05_rose_rosette.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = share_bg_05_rose_rosette.png; path = HadithEnglish/ShareBackgrounds/share_bg_05_rose_rosette.png; sourceTree = SOURCE_ROOT; };
+		4AD0C949D35E4BEB964B3155 /* share_bg_06_teal_crescent.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = share_bg_06_teal_crescent.png; path = HadithEnglish/ShareBackgrounds/share_bg_06_teal_crescent.png; sourceTree = SOURCE_ROOT; };
+		5BB4AA0BDCC5452ABBC9E434 /* share_bg_07_burgundy_geometric.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = share_bg_07_burgundy_geometric.png; path = HadithEnglish/ShareBackgrounds/share_bg_07_burgundy_geometric.png; sourceTree = SOURCE_ROOT; };
+		52A71CA9B5EE42D3ABE5E371 /* share_bg_08_sage_dome.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = share_bg_08_sage_dome.png; path = HadithEnglish/ShareBackgrounds/share_bg_08_sage_dome.png; sourceTree = SOURCE_ROOT; };
+		F3EC4FC2B21F417A8A98E347 /* share_bg_09_plum_geometric.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = share_bg_09_plum_geometric.png; path = HadithEnglish/ShareBackgrounds/share_bg_09_plum_geometric.png; sourceTree = SOURCE_ROOT; };
+		97B9D14417EC48BAB4F53065 /* share_bg_10_gold_rosette.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = share_bg_10_gold_rosette.png; path = HadithEnglish/ShareBackgrounds/share_bg_10_gold_rosette.png; sourceTree = SOURCE_ROOT; };
 		69CF4B84B97839655797EBC1 /* ThemeStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ThemeStore.swift; path = HadithEnglish/Stores/ThemeStore.swift; sourceTree = SOURCE_ROOT; };
 		F814F1F3A130424F98CC2C88 /* TypographyStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = TypographyStore.swift; path = HadithEnglish/Stores/TypographyStore.swift; sourceTree = SOURCE_ROOT; };
 		064342C5A1701BC6CC28CD52 /* NotificationStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = NotificationStore.swift; path = HadithEnglish/Stores/NotificationStore.swift; sourceTree = SOURCE_ROOT; };
@@ -103,6 +129,19 @@
 				30914AE7B87B28F22DB562D0 /* hadith_tr.json.zlib */,
 				EAF756D9361B470BAAD062B5 /* hadith_id.json.zlib */,
 				A1E659846A13432281DCC6CA /* hadith_ur.json.zlib */,
+				BDDDAEFD97D04E8EB4651EA5 /* share_bg_01_emerald.png */,
+				6A3CA475C5F24C2B83D25DE5 /* share_bg_02_navy_gold.png */,
+				DBB53CAAE0C244A28E29D6D9 /* share_bg_03_charcoal_crescent.png */,
+				1C712F13960C402986EBAF93 /* share_bg_04_sand_dome.png */,
+				D6910BD43D824C0AAB6B26EF /* share_bg_05_rose_rosette.png */,
+				4AD0C949D35E4BEB964B3155 /* share_bg_06_teal_crescent.png */,
+				5BB4AA0BDCC5452ABBC9E434 /* share_bg_07_burgundy_geometric.png */,
+				52A71CA9B5EE42D3ABE5E371 /* share_bg_08_sage_dome.png */,
+				F3EC4FC2B21F417A8A98E347 /* share_bg_09_plum_geometric.png */,
+				97B9D14417EC48BAB4F53065 /* share_bg_10_gold_rosette.png */,
+				D1598FD94C60461AADFCB6A9 /* ShareCardBackground.swift */,
+				E29B4CC09D684E2195AD79C6 /* ShareCardView.swift */,
+				6CE0CF90B2204928913B3FC8 /* ShareOptionsSheet.swift */,
 				69CF4B84B97839655797EBC1,
 				E3944F83AE8B3CC4667D33EC,
 				064342C5A1701BC6CC28CD52,
@@ -195,6 +234,16 @@
 				32C54E69B6544506DF60B567 /* hadith_tr.json.zlib in Resources */,
 				8C7F6FD0FB924F058A1C775B /* hadith_id.json.zlib in Resources */,
 				6DC2E7A9D1FB4F3DB7350A05 /* hadith_ur.json.zlib in Resources */,
+				3DA9418454F346AAB6197C12 /* share_bg_01_emerald.png in Resources */,
+				EE51B933DB5D42D0BF019F19 /* share_bg_02_navy_gold.png in Resources */,
+				80EC3BCBA2B542BD914B020A /* share_bg_03_charcoal_crescent.png in Resources */,
+				8B2002AF52DC4766812532EE /* share_bg_04_sand_dome.png in Resources */,
+				9D7FB1DC24D3474093707AEB /* share_bg_05_rose_rosette.png in Resources */,
+				C18F11E9B6934633BB8695BF /* share_bg_06_teal_crescent.png in Resources */,
+				94024F03F6464E9188C64084 /* share_bg_07_burgundy_geometric.png in Resources */,
+				50EB40B3CDF2432C9469B740 /* share_bg_08_sage_dome.png in Resources */,
+				1F1942B0C7EE46BF9C41EBD5 /* share_bg_09_plum_geometric.png in Resources */,
+				3E4350E54CE648CA946129E8 /* share_bg_10_gold_rosette.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -227,6 +276,9 @@
 				C5B843858C89E884AB751AF5,
 				340D42A8A32486AC68AB30A8,
 				63C1E1AC6FBE40DDBED4DCBD,
+				9F3B761D38314976B291FC22 /* ShareCardBackground.swift in Sources */,
+				9BDC21C2BF9944EC94B39B76 /* ShareCardView.swift in Sources */,
+				B7CC96DBF91F4FB8BF952362 /* ShareOptionsSheet.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -292,7 +344,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -343,7 +395,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";

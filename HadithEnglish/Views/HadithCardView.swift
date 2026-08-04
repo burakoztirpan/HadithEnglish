@@ -42,7 +42,7 @@ struct HadithCardView: View {
                 }
                 .buttonStyle(.plain)
                 .sheet(isPresented: $isSharePresented) {
-                    ActivityShareSheet(items: [entry.trimmedText])
+                    ShareOptionsSheet(text: entry.trimmedText, subtitle: subtitle ?? "#\(entry.id)")
                 }
             }
             Text(displayText)
