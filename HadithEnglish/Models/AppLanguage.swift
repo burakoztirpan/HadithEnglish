@@ -39,6 +39,12 @@ struct Strings {
     let versionLabel: String
     let setupTitle: String
     let languageLabel: String
+    let appearanceLabel: String
+    let appearanceSystem: String
+    let appearanceLight: String
+    let appearanceDark: String
+    let dailyNotificationLabel: String
+    let notificationTimeLabel: String
     let goodMorning: String
     let goodAfternoon: String
     let goodEvening: String
@@ -77,6 +83,12 @@ extension AppLanguage {
                 versionLabel: "Version",
                 setupTitle: "Setup",
                 languageLabel: "Language",
+                appearanceLabel: "Appearance",
+                appearanceSystem: "System",
+                appearanceLight: "Light",
+                appearanceDark: "Dark",
+                dailyNotificationLabel: "Daily Hadith Notification",
+                notificationTimeLabel: "Notification Time",
                 goodMorning: "Good Morning",
                 goodAfternoon: "Good Afternoon",
                 goodEvening: "Good Evening",
@@ -111,6 +123,12 @@ extension AppLanguage {
                 versionLabel: "الإصدار",
                 setupTitle: "الإعدادات",
                 languageLabel: "اللغة",
+                appearanceLabel: "المظهر",
+                appearanceSystem: "النظام",
+                appearanceLight: "فاتح",
+                appearanceDark: "داكن",
+                dailyNotificationLabel: "إشعار الحديث اليومي",
+                notificationTimeLabel: "وقت الإشعار",
                 goodMorning: "صباح الخير",
                 goodAfternoon: "طاب يومك",
                 goodEvening: "مساء الخير",
@@ -145,6 +163,12 @@ extension AppLanguage {
                 versionLabel: "Sürüm",
                 setupTitle: "Ayarlar",
                 languageLabel: "Dil",
+                appearanceLabel: "Görünüm",
+                appearanceSystem: "Sistem",
+                appearanceLight: "Açık",
+                appearanceDark: "Koyu",
+                dailyNotificationLabel: "Günlük Hadis Bildirimi",
+                notificationTimeLabel: "Bildirim Saati",
                 goodMorning: "Günaydın",
                 goodAfternoon: "İyi Günler",
                 goodEvening: "İyi Akşamlar",

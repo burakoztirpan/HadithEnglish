@@ -8,6 +8,8 @@ struct HadithEnglishApp: App {
     @StateObject private var streak = StreakStore()
     @StateObject private var lastRead = LastReadStore()
     @StateObject private var tabRouter = TabRouter()
+    @StateObject private var themeStore = ThemeStore()
+    @StateObject private var notificationStore = NotificationStore()
     @Environment(\.scenePhase) private var scenePhase
 
     var body: some Scene {
@@ -32,15 +34,23 @@ struct HadithEnglishApp: App {
             .environmentObject(streak)
             .environmentObject(lastRead)
             .environmentObject(tabRouter)
+            .environmentObject(themeStore)
+            .environmentObject(notificationStore)
             .environment(\.layoutDirection, languageStore.language.isRightToLeft ? .rightToLeft : .leftToRight)
+            .preferredColorScheme(themeStore.theme.colorScheme)
             .accentColor(Color("AccentColor"))
-            .onAppear { content.load(languageStore.language) }
+            .onAppear {
+                content.load(languageStore.language)
+                notificationStore.configure(subjects: content.subjects, title: languageStore.strings.hadithOfTheDay)
+            }
             .onChange(of: languageStore.language) { newValue in
                 content.load(newValue)
+                notificationStore.configure(subjects: content.subjects, title: newValue.strings.hadithOfTheDay)
             }
             .onChange(of: scenePhase) { newPhase in
                 if newPhase == .active {
                     streak.evaluate()
+                    notificationStore.configure(subjects: content.subjects, title: languageStore.strings.hadithOfTheDay)
                 }
             }
         }

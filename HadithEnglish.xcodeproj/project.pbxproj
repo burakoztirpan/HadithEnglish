@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		56DF4884958CEF7605851911 /* ThemeStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69CF4B84B97839655797EBC1 /* ThemeStore.swift */; };
 		03544FAAB82DAEF1E2BB32DF /* hadith_ar.json.zlib in Resources */ = {isa = PBXBuildFile; fileRef = D6874971805FB3A33EEE79D7 /* hadith_ar.json.zlib */; };
 		04D247619DF6AD57D2E003AC /* HadithEnglishApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92894C06972F9D5781D1B009 /* HadithEnglishApp.swift */; };
 		084A49238E21465D88182072 /* HadithDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D48B4C6C90D77A3250975149 /* HadithDetailView.swift */; };
@@ -15,6 +16,7 @@
 		26224ABEBF65EEEA83F9804A /* HadithCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5A24BACBBD931BF0F1D2930 /* HadithCardView.swift */; };
 		2EC74679B8F7D7CC3B8A9201 /* hadith_en.json.zlib in Resources */ = {isa = PBXBuildFile; fileRef = FA544C1D875C2199D531E309 /* hadith_en.json.zlib */; };
 		32C54E69B6544506DF60B567 /* hadith_tr.json.zlib in Resources */ = {isa = PBXBuildFile; fileRef = 30914AE7B87B28F22DB562D0 /* hadith_tr.json.zlib */; };
+		340D42A8A32486AC68AB30A8 /* NotificationStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 064342C5A1701BC6CC28CD52 /* NotificationStore.swift */; };
 		459044CAA231236E9BD29CFA /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AE64D878BD16DC86F0051E3 /* HomeView.swift */; };
 		63B2E4D22049A9AD001513AD /* None in Resources */ = {isa = PBXBuildFile; fileRef = 63B2E4D02049A9AD001513AD; };
 		63B2E4D52049A9AD001513AD /* None in Sources */ = {isa = PBXBuildFile; fileRef = 63B2E4D32049A9AD001513AD; };
@@ -28,6 +30,7 @@
 		A2504BC4967E6B90BCE99827 /* ActivityShareSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73A54BD1A91FE5DE664A55AE /* ActivityShareSheet.swift */; };
 		A2584A97B9E5EBFB880A6393 /* SubjectsListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 697942B99F68CD7E35E9CF42 /* SubjectsListView.swift */; };
 		B3054C1D950C07BEC45C5072 /* BookIcons.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6D649A0A55D72648C3FFB8C /* BookIcons.swift */; };
+		C5B843858C89E884AB751AF5 /* HadithOfDay.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3944F83AE8B3CC4667D33EC /* HadithOfDay.swift */; };
 		CF9C4F01885CBF6D198323FD /* HadithContentStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0C94875B3C0108E609A7A7C /* HadithContentStore.swift */; };
 		EFEF44C691469E217CD5AC23 /* PrivacyInfo.xcprivacy in Resources */ = {isa = PBXBuildFile; fileRef = B4DD4830AF0C832A76D4BA37 /* PrivacyInfo.xcprivacy */; };
 		F39D43BEADC4BE937862E774 /* HadithModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4826402AB97B064E886F5A1F /* HadithModels.swift */; };
@@ -35,6 +38,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		69CF4B84B97839655797EBC1 /* ThemeStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ThemeStore.swift; path = HadithEnglish/Stores/ThemeStore.swift; sourceTree = SOURCE_ROOT; };
+		064342C5A1701BC6CC28CD52 /* NotificationStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = NotificationStore.swift; path = HadithEnglish/Stores/NotificationStore.swift; sourceTree = SOURCE_ROOT; };
 		1AE64D878BD16DC86F0051E3 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = HomeView.swift; path = HadithEnglish/Views/HomeView.swift; sourceTree = SOURCE_ROOT; };
 		30914AE7B87B28F22DB562D0 /* hadith_tr.json.zlib */ = {isa = PBXFileReference; lastKnownFileType = None; name = hadith_tr.json.zlib; path = HadithEnglish/hadith_tr.json.zlib; sourceTree = SOURCE_ROOT; };
 		4826402AB97B064E886F5A1F /* HadithModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = HadithModels.swift; path = HadithEnglish/Models/HadithModels.swift; sourceTree = SOURCE_ROOT; };
@@ -57,6 +62,7 @@
 		D5A24BACBBD931BF0F1D2930 /* HadithCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = HadithCardView.swift; path = HadithEnglish/Views/HadithCardView.swift; sourceTree = SOURCE_ROOT; };
 		D6874971805FB3A33EEE79D7 /* hadith_ar.json.zlib */ = {isa = PBXFileReference; lastKnownFileType = None; name = hadith_ar.json.zlib; path = HadithEnglish/hadith_ar.json.zlib; sourceTree = SOURCE_ROOT; };
 		DE714BFA8B5ABD49D30148E3 /* LanguageStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = LanguageStore.swift; path = HadithEnglish/Stores/LanguageStore.swift; sourceTree = SOURCE_ROOT; };
+		E3944F83AE8B3CC4667D33EC /* HadithOfDay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = HadithOfDay.swift; path = HadithEnglish/Models/HadithOfDay.swift; sourceTree = SOURCE_ROOT; };
 		F0C94875B3C0108E609A7A7C /* HadithContentStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = HadithContentStore.swift; path = HadithEnglish/Stores/HadithContentStore.swift; sourceTree = SOURCE_ROOT; };
 		F6D649A0A55D72648C3FFB8C /* BookIcons.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = BookIcons.swift; path = HadithEnglish/Models/BookIcons.swift; sourceTree = SOURCE_ROOT; };
 		FA544C1D875C2199D531E309 /* hadith_en.json.zlib */ = {isa = PBXFileReference; lastKnownFileType = None; name = hadith_en.json.zlib; path = HadithEnglish/hadith_en.json.zlib; sourceTree = SOURCE_ROOT; };
@@ -89,6 +95,9 @@
 				FA544C1D875C2199D531E309 /* hadith_en.json.zlib */,
 				D6874971805FB3A33EEE79D7 /* hadith_ar.json.zlib */,
 				30914AE7B87B28F22DB562D0 /* hadith_tr.json.zlib */,
+				69CF4B84B97839655797EBC1,
+				E3944F83AE8B3CC4667D33EC,
+				064342C5A1701BC6CC28CD52,
 			);
 			sourceTree = "<group>";
 		};
@@ -203,6 +212,9 @@
 				6D4F4BF691AE227F571E98D7 /* TabRouter.swift in Sources */,
 				459044CAA231236E9BD29CFA /* HomeView.swift in Sources */,
 				B3054C1D950C07BEC45C5072 /* BookIcons.swift in Sources */,
+				56DF4884958CEF7605851911,
+				C5B843858C89E884AB751AF5,
+				340D42A8A32486AC68AB30A8,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

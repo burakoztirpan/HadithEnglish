@@ -2,6 +2,16 @@ import SwiftUI
 
 struct SettingsView: View {
     @EnvironmentObject private var languageStore: LanguageStore
+    @EnvironmentObject private var themeStore: ThemeStore
+    @EnvironmentObject private var notificationStore: NotificationStore
+
+    private func appearanceName(_ theme: AppTheme) -> String {
+        switch theme {
+        case .system: return languageStore.strings.appearanceSystem
+        case .light: return languageStore.strings.appearanceLight
+        case .dark: return languageStore.strings.appearanceDark
+        }
+    }
 
     // TODO: replace with the real privacy policy URL before submitting to App Store Connect.
     private let privacyPolicyURL = URL(string: "https://example.com/hadithenglish/privacy")!
@@ -27,6 +37,21 @@ struct SettingsView: View {
                         ForEach(AppLanguage.allCases) { lang in
                             Text(lang.nativeName).tag(lang)
                         }
+                    }
+                    Picker(languageStore.strings.appearanceLabel, selection: $themeStore.theme) {
+                        ForEach(AppTheme.allCases) { theme in
+                            Text(appearanceName(theme)).tag(theme)
+                        }
+                    }
+                }
+                Section {
+                    Toggle(languageStore.strings.dailyNotificationLabel, isOn: $notificationStore.isEnabled)
+                    if notificationStore.isEnabled {
+                        DatePicker(
+                            languageStore.strings.notificationTimeLabel,
+                            selection: $notificationStore.time,
+                            displayedComponents: .hourAndMinute
+                        )
                     }
                 }
                 Section {

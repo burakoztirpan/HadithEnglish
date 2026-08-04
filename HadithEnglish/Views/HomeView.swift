@@ -7,34 +7,29 @@ struct HomeView: View {
     @EnvironmentObject private var lastRead: LastReadStore
     @EnvironmentObject private var tabRouter: TabRouter
 
-    private static let featuredBookNumbers: [Int] = [2, 3, 78, 80] // Belief, Knowledge, Good Manners, Invocations
-
     private var allEntries: [(subject: HadithSubject, entry: HadithEntry)] {
         subjects.flatMap { subject in subject.hadiths.map { (subject, $0) } }
     }
 
-    private var dayOfYear: Int {
-        Calendar.current.ordinality(of: .day, in: .year, for: Date()) ?? 1
+    private var daySeed: Int {
+        HadithOfDay.seed(for: Date(), offset: 0)
     }
 
     private var hadithOfTheDay: (subject: HadithSubject, entry: HadithEntry)? {
-        let all = allEntries
-        guard !all.isEmpty else { return nil }
-        return all[dayOfYear % all.count]
+        HadithOfDay.pick(from: subjects, on: Date())
     }
 
     private var todaysSelection: [(subject: HadithSubject, entry: HadithEntry)] {
         let all = allEntries
         guard all.count > 1 else { return [] }
-        let first = (dayOfYear * 7 + 3) % all.count
-        let second = (dayOfYear * 13 + 11) % all.count
-        return [all[first], all[second]]
+        var rng = DailySeededGenerator(seed: daySeed &+ 2)
+        return Array(all.shuffled(using: &rng).prefix(2))
     }
 
     private var featuredTopics: [HadithSubject] {
-        Self.featuredBookNumbers.compactMap { number in
-            subjects.first { $0.bookNumber == number }
-        }
+        guard !subjects.isEmpty else { return [] }
+        var rng = DailySeededGenerator(seed: daySeed &+ 3)
+        return Array(subjects.shuffled(using: &rng).prefix(4))
     }
 
     private var continueReadingSubject: HadithSubject? {
