@@ -230,6 +230,19 @@ git commit -m "Add HadithSubject/HadithEntry models"
 
 ### Task 3: Favorites store
 
+> **Execution note (discovered during implementation):** adding this file surfaced an ordering
+> bug in the plan — `ObservableObject`/`@Published` need iOS 13+, but the deployment target
+> bump was originally scheduled as Task 8, long after this task. Task 8's Steps 1–2
+> (`IPHONEOS_DEPLOYMENT_TARGET` → 15.0, `SWIFT_VERSION` → 5.0) were pulled forward and run here
+> instead. That in turn broke three still-present 2018-era files that only compiled under
+> Swift 4 rules: `AppDelegate.swift` (`UIApplicationLaunchOptionsKey` →
+> `UIApplication.LaunchOptionsKey`) and `Controller/FavoritesTable.swift` +
+> `Controller/HadithsTable.swift` (`UITableViewAutomaticDimension` →
+> `UITableView.automaticDimension`, one line each). All three are throwaway patches — those
+> files are deleted outright in Task 6 — made only to keep the build green in the meantime.
+> When executing Task 8 later, skip Steps 1–2 (already done) and only run Step 3 (verify) as a
+> confirmation, not a fresh change.
+
 **Files:**
 - Create: `HadithEnglish/Stores/FavoritesStore.swift`
 - Create: `scripts/check_favorites_store.swift`

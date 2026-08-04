@@ -60,7 +60,7 @@ class FavoritesTable: UITableViewController,UIActionSheetDelegate {
         
         self.hadithJson = loadJson(filename:"newHadithJson")!
 
-        favoriteTableDetail.rowHeight = UITableViewAutomaticDimension
+        favoriteTableDetail.rowHeight = UITableView.automaticDimension
         favoriteTableDetail.estimatedRowHeight = 300
 
         

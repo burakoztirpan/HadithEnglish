@@ -25,7 +25,7 @@ class HadithsTable: UITableViewController,UIActionSheetDelegate {
         hadithTableDetail.delegate = self
         hadithTableDetail.dataSource = self
         
-        hadithTableDetail.rowHeight = UITableViewAutomaticDimension
+        hadithTableDetail.rowHeight = UITableView.automaticDimension
         hadithTableDetail.estimatedRowHeight = 300
         
         self.navigationItem.backBarButtonItem = UIBarButtonItem(
