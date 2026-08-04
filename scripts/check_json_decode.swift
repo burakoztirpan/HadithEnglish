@@ -10,10 +10,12 @@ struct HadithSubject: Codable {
     let hadiths: [HadithEntry]
 }
 
-// Entries with zero text (46 in Turkish, 4 each in English/Arabic - genuine
-// gaps in the open-source translations, not something fixable) are excluded
-// during conversion, so expected totals differ slightly per language.
-let expectedTotals = ["en": 7248, "ar": 7248, "tr": 7206]
+// Entries with zero text (46 in Turkish, 4 each in English/Arabic) and, in
+// Turkish only, 11 more whose narration genuinely cuts off mid-thought in
+// the source (e.g. a promised dua/verse that never appears) are excluded
+// during conversion - genuine gaps in the open-source translation, not
+// something fixable - so expected totals differ slightly per language.
+let expectedTotals = ["en": 7248, "ar": 7248, "tr": 7195]
 
 for lang in ["en", "ar", "tr"] {
     let url = URL(fileURLWithPath: "HadithEnglish/hadith_\(lang).json.zlib")

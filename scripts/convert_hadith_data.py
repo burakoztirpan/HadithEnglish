@@ -165,6 +165,16 @@ def strip_scraped_ui_text(text: str) -> str:
             return candidate.rstrip()
     return text  # no safe cut point found; leave untouched rather than guess
 
+# Hadiths whose Turkish translation genuinely cuts off mid-thought in the
+# source itself - a promised quote/verse/dua that never actually appears
+# (e.g. #6306 "İstiğfarların efendisi şöyledir:" then nothing). Confirmed by
+# manual review against the English text: these aren't apparatus/citation
+# notes (which are left alone elsewhere), the narration itself is missing
+# content and there is nothing to reconstruct. Same treatment as the
+# zero-text entries above - an obviously-truncated card is worse than an
+# absent one.
+TURKISH_TRUNCATED_IDS = {3, 5, 247, 831, 2358, 2632, 2966, 3315, 4976, 5083, 6306}
+
 for source_lang, (title_lang, out_path) in OUTPUT_MAP.items():
     data = json.load(open(f"{SOURCE_DIR}/{source_lang}-bukhari.json"))
 
@@ -175,6 +185,8 @@ for source_lang, (title_lang, out_path) in OUTPUT_MAP.items():
             continue  # scattered variant-chain hadiths, no coherent chapter
         if not isinstance(h["hadithnumber"], int):
             continue  # inserted sub-narrations like "402.2", not a whole id
+        if title_lang == "tr" and h["hadithnumber"] in TURKISH_TRUNCATED_IDS:
+            continue  # genuinely cuts off mid-thought in the source, see above
         text = h["text"]
         if title_lang == "tr":
             text = strip_scraped_ui_text(text)
