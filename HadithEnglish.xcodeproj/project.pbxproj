@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		084A49238E21465D88182072 /* HadithDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D48B4C6C90D77A3250975149 /* HadithDetailView.swift */; };
 		634FF436204AD52C004E893A /* HadithsTable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 634FF435204AD52C004E893A /* HadithsTable.swift */; };
 		634FF438204AE99F004E893A /* hadithDetailCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 634FF437204AE99F004E893A /* hadithDetailCell.swift */; };
 		635343CE204EBBF6004AB35D /* newHadithJson.json in Resources */ = {isa = PBXBuildFile; fileRef = 635343CD204EBBF6004AB35D /* newHadithJson.json */; };
@@ -21,8 +22,12 @@
 		63B2E4DA2049A9AD001513AD /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 63B2E4D82049A9AD001513AD /* LaunchScreen.storyboard */; };
 		63B2E4E52049AF23001513AD /* hadithSubject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63B2E4E42049AF23001513AD /* hadithSubject.swift */; };
 		63B2E4E72049B649001513AD /* HadithCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63B2E4E62049B649001513AD /* HadithCell.swift */; };
+		768147C58234655F1DC71A2B /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97DC433C9DF9969385760ED8 /* SettingsView.swift */; };
 		998841F19BE79D82D0F5BCB3 /* FavoritesStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68F647BBA0A2884C7ECFB715 /* FavoritesStore.swift */; };
+		A2504BC4967E6B90BCE99827 /* ActivityShareSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73A54BD1A91FE5DE664A55AE /* ActivityShareSheet.swift */; };
+		A2584A97B9E5EBFB880A6393 /* SubjectsListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 697942B99F68CD7E35E9CF42 /* SubjectsListView.swift */; };
 		F39D43BEADC4BE937862E774 /* HadithModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4826402AB97B064E886F5A1F /* HadithModels.swift */; };
+		F4A14676B20780BDCD654575 /* FavoritesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A833438ABC6E36815EFEB928 /* FavoritesView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -44,6 +49,11 @@
 		63B2E4E42049AF23001513AD /* hadithSubject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = hadithSubject.swift; sourceTree = "<group>"; };
 		63B2E4E62049B649001513AD /* HadithCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HadithCell.swift; sourceTree = "<group>"; };
 		68F647BBA0A2884C7ECFB715 /* FavoritesStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = FavoritesStore.swift; path = HadithEnglish/Stores/FavoritesStore.swift; sourceTree = SOURCE_ROOT; };
+		697942B99F68CD7E35E9CF42 /* SubjectsListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SubjectsListView.swift; path = HadithEnglish/Views/SubjectsListView.swift; sourceTree = SOURCE_ROOT; };
+		73A54BD1A91FE5DE664A55AE /* ActivityShareSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ActivityShareSheet.swift; path = HadithEnglish/Views/ActivityShareSheet.swift; sourceTree = SOURCE_ROOT; };
+		97DC433C9DF9969385760ED8 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SettingsView.swift; path = HadithEnglish/Views/SettingsView.swift; sourceTree = SOURCE_ROOT; };
+		A833438ABC6E36815EFEB928 /* FavoritesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = FavoritesView.swift; path = HadithEnglish/Views/FavoritesView.swift; sourceTree = SOURCE_ROOT; };
+		D48B4C6C90D77A3250975149 /* HadithDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = HadithDetailView.swift; path = HadithEnglish/Views/HadithDetailView.swift; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -64,6 +74,11 @@
 				63B2E4CA2049A9AD001513AD /* Products */,
 				4826402AB97B064E886F5A1F /* HadithModels.swift */,
 				68F647BBA0A2884C7ECFB715 /* FavoritesStore.swift */,
+				697942B99F68CD7E35E9CF42 /* SubjectsListView.swift */,
+				D48B4C6C90D77A3250975149 /* HadithDetailView.swift */,
+				A833438ABC6E36815EFEB928 /* FavoritesView.swift */,
+				97DC433C9DF9969385760ED8 /* SettingsView.swift */,
+				73A54BD1A91FE5DE664A55AE /* ActivityShareSheet.swift */,
 			);
 			sourceTree = "<group>";
 		};
@@ -206,6 +221,11 @@
 				63B2E4CD2049A9AD001513AD /* AppDelegate.swift in Sources */,
 				F39D43BEADC4BE937862E774 /* HadithModels.swift in Sources */,
 				998841F19BE79D82D0F5BCB3 /* FavoritesStore.swift in Sources */,
+				A2584A97B9E5EBFB880A6393 /* SubjectsListView.swift in Sources */,
+				084A49238E21465D88182072 /* HadithDetailView.swift in Sources */,
+				F4A14676B20780BDCD654575 /* FavoritesView.swift in Sources */,
+				768147C58234655F1DC71A2B /* SettingsView.swift in Sources */,
+				A2504BC4967E6B90BCE99827 /* ActivityShareSheet.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

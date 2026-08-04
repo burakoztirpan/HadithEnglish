@@ -30,6 +30,8 @@
 - `HadithEnglish/Views/HadithDetailView.swift` — per-subject hadith list with favorite/share.
 - `HadithEnglish/Views/FavoritesView.swift` — Favorites tab.
 - `HadithEnglish/Views/SettingsView.swift` — Setup tab (new content for a previously-empty tab).
+- `HadithEnglish/Views/ActivityShareSheet.swift` — `UIActivityViewController` wrapper used by
+  the two share buttons above (`ShareLink` needs iOS 16+; this project's floor is iOS 15).
 - `HadithEnglish/PrivacyInfo.xcprivacy` — Apple-mandated privacy manifest declaring UserDefaults usage.
 - `HadithEnglish/Assets.xcassets/AccentColor.colorset/Contents.json` — adaptive accent color (deep green).
 - `HadithEnglish/Assets.xcassets/CardBackground.colorset/Contents.json` — adaptive card tint (cream/charcoal-green).
@@ -495,15 +497,23 @@ git commit -m "Add adaptive AccentColor and CardBackground color sets"
 
 ### Task 5: SwiftUI views
 
+> **Execution note (discovered during implementation):** the original `HadithDetailView.swift`
+> and `SettingsView.swift` used `ShareLink`, which needs iOS 16+ — but this project's floor is
+> iOS 15 (Global Constraints). Added `HadithEnglish/Views/ActivityShareSheet.swift`, a small
+> `UIViewControllerRepresentable` wrapping `UIActivityViewController` (the standard iOS
+> 15-compatible share mechanism), and both views present it via `.sheet(isPresented:)` instead
+> of calling `ShareLink` directly. The code below reflects the corrected version.
+
 **Files:**
 - Create: `HadithEnglish/Views/SubjectsListView.swift`
 - Create: `HadithEnglish/Views/HadithDetailView.swift`
 - Create: `HadithEnglish/Views/FavoritesView.swift`
 - Create: `HadithEnglish/Views/SettingsView.swift`
+- Create: `HadithEnglish/Views/ActivityShareSheet.swift`
 
 **Interfaces:**
 - Consumes: `HadithSubject`, `HadithEntry` (Task 2), `FavoritesStore` (Task 3), `Color("AccentColor")`/`Color("CardBackground")` (Task 4).
-- Produces: `SubjectsListView(subjects: [HadithSubject])`, `HadithDetailView(subject: HadithSubject)`, `FavoritesView(subjects: [HadithSubject])`, `SettingsView()` — all expect a `FavoritesStore` in the environment.
+- Produces: `SubjectsListView(subjects: [HadithSubject])`, `HadithDetailView(subject: HadithSubject)`, `FavoritesView(subjects: [HadithSubject])`, `SettingsView()`, `ActivityShareSheet(items: [Any])` — the first four expect a `FavoritesStore` in the environment.
 
 - [ ] **Step 1: Write `HadithEnglish/Views/SubjectsListView.swift`**
 
@@ -560,6 +570,7 @@ struct HadithDetailView: View {
 private struct HadithCardView: View {
     let entry: HadithEntry
     @EnvironmentObject private var favorites: FavoritesStore
+    @State private var isSharePresented = false
 
     var body: some View {
         VStack(alignment: .leading, spacing: 8) {
@@ -575,7 +586,16 @@ private struct HadithCardView: View {
                         .foregroundColor(Color("AccentColor"))
                 }
                 .buttonStyle(.plain)
-                ShareLink(item: entry.trimmedText)
+                Button {
+                    isSharePresented = true
+                } label: {
+                    Image(systemName: "square.and.arrow.up")
+                        .foregroundColor(Color("AccentColor"))
+                }
+                .buttonStyle(.plain)
+                .sheet(isPresented: $isSharePresented) {
+                    ActivityShareSheet(items: [entry.trimmedText])
+                }
             }
             Text(entry.trimmedText)
                 .font(.system(.body, design: .serif))
@@ -662,12 +682,19 @@ struct SettingsView: View {
         Bundle.main.object(forInfoDictionaryKey: "CFBundleVersion") as? String ?? "1"
     }
 
+    @State private var isSharePresented = false
+
     var body: some View {
         NavigationView {
             List {
                 Section {
                     Link("Rate on the App Store", destination: appStoreURL)
-                    ShareLink("Share this app", item: appStoreURL)
+                    Button("Share this app") {
+                        isSharePresented = true
+                    }
+                    .sheet(isPresented: $isSharePresented) {
+                        ActivityShareSheet(items: [appStoreURL])
+                    }
                     Link("Privacy Policy", destination: privacyPolicyURL)
                 }
                 Section("About") {
@@ -686,7 +713,24 @@ struct SettingsView: View {
 }
 ```
 
-- [ ] **Step 5: Add all four files to the Xcode project**
+- [ ] **Step 4b: Write `HadithEnglish/Views/ActivityShareSheet.swift`**
+
+```swift
+import SwiftUI
+import UIKit
+
+struct ActivityShareSheet: UIViewControllerRepresentable {
+    let items: [Any]
+
+    func makeUIViewController(context: Context) -> UIActivityViewController {
+        UIActivityViewController(activityItems: items, applicationActivities: nil)
+    }
+
+    func updateUIViewController(_ uiViewController: UIActivityViewController, context: Context) {}
+}
+```
+
+- [ ] **Step 5: Add all five files to the Xcode project**
 
 ```bash
 cd ~/Desktop/"hadiths app"
@@ -698,6 +742,8 @@ cd ~/Desktop/"hadiths app"
   HadithEnglish/Views/FavoritesView.swift --target HadithEnglish
 .tooling/pbxproj-venv/bin/pbxproj file HadithEnglish.xcodeproj \
   HadithEnglish/Views/SettingsView.swift --target HadithEnglish
+.tooling/pbxproj-venv/bin/pbxproj file HadithEnglish.xcodeproj \
+  HadithEnglish/Views/ActivityShareSheet.swift --target HadithEnglish
 ```
 
 Expected: each command exits silently with no error.
