@@ -9,8 +9,9 @@ final class HadithContentStore: ObservableObject {
             subjects = cached
             return
         }
-        guard let url = Bundle.main.url(forResource: language.hadithResourceName, withExtension: "json"),
-              let data = try? Data(contentsOf: url),
+        guard let url = Bundle.main.url(forResource: "\(language.hadithResourceName).json", withExtension: "zlib"),
+              let compressed = try? Data(contentsOf: url),
+              let data = try? (compressed as NSData).decompressed(using: .zlib) as Data,
               let decoded = try? JSONDecoder().decode([HadithSubject].self, from: data)
         else {
             subjects = []
