@@ -25,6 +25,7 @@ struct HadithEnglishApp: App {
                     .tabItem { Label(languageStore.strings.tabSetup, systemImage: "gearshape") }
                     .tag(AppTab.setup)
             }
+            .id(languageStore.language)
             .environmentObject(favorites)
             .environmentObject(languageStore)
             .environmentObject(streak)
