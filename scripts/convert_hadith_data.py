@@ -2,18 +2,20 @@ import json
 
 SOURCE_DIR = "/private/tmp/claude-501/-Users-burakmacminim4-Desktop-habiproof-property-inspection/15a8c5d6-4ff9-485d-99f8-306bfd61eba9/scratchpad/hadith-source"
 OUTPUT_MAP = {
-    "eng": "HadithEnglish/hadith_en.json",
-    "ara": "HadithEnglish/hadith_ar.json",
-    "tur": "HadithEnglish/hadith_tr.json",
+    "eng": ("en", "HadithEnglish/hadith_en.json"),
+    "ara": ("ar", "HadithEnglish/hadith_ar.json"),
+    "tur": ("tr", "HadithEnglish/hadith_tr.json"),
 }
 
-# Book titles are only translated in the English edition's metadata; every
-# edition uses the same English titles as a stable reference (matches how
-# sunnah.com and similar apps present chapter names regardless of the
-# hadith translation language).
-titles = json.load(open(f"{SOURCE_DIR}/eng-bukhari.json"))["metadata"]["sections"]
+# Per-language book titles, verified against both fawazahmed0/hadith-api's own
+# English section names (exact match, all 97) and Ikhan/sahih-bukhari-english
+# for Arabic (exact match, all 97). Turkish titles are original translations
+# using standard Turkish Islamic terminology, following the same style as the
+# English titles (short term, with a parenthetical Arabic/Turkish loanword
+# where the English does the same).
+book_titles = json.load(open("scripts/book_titles.json"))
 
-for source_lang, out_path in OUTPUT_MAP.items():
+for source_lang, (title_lang, out_path) in OUTPUT_MAP.items():
     data = json.load(open(f"{SOURCE_DIR}/{source_lang}-bukhari.json"))
 
     books = {}
@@ -28,7 +30,7 @@ for source_lang, out_path in OUTPUT_MAP.items():
         )
 
     subjects = [
-        {"name": titles[str(book_num)], "hadiths": entries}
+        {"name": book_titles[str(book_num)][title_lang], "hadiths": entries}
         for book_num, entries in sorted(books.items())
     ]
 
