@@ -75,14 +75,18 @@ DANGLING_APPARATUS_PHRASES = [
 
 def strip_dangling_apparatus(text: str) -> str:
     original = text.rstrip()
-    if not original.endswith(":"):
-        return text  # only ever touch text that dangles on a bare colon
+    if not original.endswith(":") and not original.endswith(";"):
+        return text  # only ever touch text that dangles on a bare colon/semicolon
+    # Source uses ":" and ";" interchangeably as the "Tekrar" apparatus
+    # delimiter (a scraping/typo inconsistency, not a meaningful distinction -
+    # e.g. "...azap görür. Tekrar;" is the exact same dangling marker as
+    # "...azap görür. Tekrar:").
     t = original
     found_phrase = False
     changed = True
     while changed:
         changed = False
-        if t.endswith(":"):
+        if t.endswith(":") or t.endswith(";"):
             t = t[:-1].rstrip()
             changed = True
         number_match = NUMBER_TAIL.search(t)
