@@ -7,21 +7,13 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		04D247619DF6AD57D2E003AC /* HadithEnglishApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92894C06972F9D5781D1B009 /* HadithEnglishApp.swift */; };
 		084A49238E21465D88182072 /* HadithDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D48B4C6C90D77A3250975149 /* HadithDetailView.swift */; };
-		634FF436204AD52C004E893A /* HadithsTable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 634FF435204AD52C004E893A /* HadithsTable.swift */; };
-		634FF438204AE99F004E893A /* hadithDetailCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 634FF437204AE99F004E893A /* hadithDetailCell.swift */; };
 		635343CE204EBBF6004AB35D /* newHadithJson.json in Resources */ = {isa = PBXBuildFile; fileRef = 635343CD204EBBF6004AB35D /* newHadithJson.json */; };
-		637A0AA3204B2D7400675217 /* hadithJson.json in Resources */ = {isa = PBXBuildFile; fileRef = 637A0AA2204B2D7400675217 /* hadithJson.json */; };
-		637A0AA5204C197200675217 /* FavoritesTable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 637A0AA4204C197200675217 /* FavoritesTable.swift */; };
-		637A0AA7204C1EFA00675217 /* FavoriteCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 637A0AA6204C1EFA00675217 /* FavoriteCell.swift */; };
-		63B2E4CD2049A9AD001513AD /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63B2E4CC2049A9AD001513AD /* AppDelegate.swift */; };
-		63B2E4CF2049A9AD001513AD /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63B2E4CE2049A9AD001513AD /* ViewController.swift */; };
-		63B2E4D22049A9AD001513AD /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 63B2E4D02049A9AD001513AD /* Main.storyboard */; };
-		63B2E4D52049A9AD001513AD /* HadithEnglish.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 63B2E4D32049A9AD001513AD /* HadithEnglish.xcdatamodeld */; };
+		63B2E4D22049A9AD001513AD /* None in Resources */ = {isa = PBXBuildFile; fileRef = 63B2E4D02049A9AD001513AD; };
+		63B2E4D52049A9AD001513AD /* None in Sources */ = {isa = PBXBuildFile; fileRef = 63B2E4D32049A9AD001513AD; };
 		63B2E4D72049A9AD001513AD /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 63B2E4D62049A9AD001513AD /* Assets.xcassets */; };
 		63B2E4DA2049A9AD001513AD /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 63B2E4D82049A9AD001513AD /* LaunchScreen.storyboard */; };
-		63B2E4E52049AF23001513AD /* hadithSubject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63B2E4E42049AF23001513AD /* hadithSubject.swift */; };
-		63B2E4E72049B649001513AD /* HadithCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63B2E4E62049B649001513AD /* HadithCell.swift */; };
 		768147C58234655F1DC71A2B /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97DC433C9DF9969385760ED8 /* SettingsView.swift */; };
 		998841F19BE79D82D0F5BCB3 /* FavoritesStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68F647BBA0A2884C7ECFB715 /* FavoritesStore.swift */; };
 		A2504BC4967E6B90BCE99827 /* ActivityShareSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73A54BD1A91FE5DE664A55AE /* ActivityShareSheet.swift */; };
@@ -32,39 +24,19 @@
 
 /* Begin PBXFileReference section */
 		4826402AB97B064E886F5A1F /* HadithModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = HadithModels.swift; path = HadithEnglish/Models/HadithModels.swift; sourceTree = SOURCE_ROOT; };
-		634FF435204AD52C004E893A /* HadithsTable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HadithsTable.swift; sourceTree = "<group>"; };
-		634FF437204AE99F004E893A /* hadithDetailCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = hadithDetailCell.swift; sourceTree = "<group>"; };
 		635343CD204EBBF6004AB35D /* newHadithJson.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = newHadithJson.json; sourceTree = "<group>"; };
-		637A0AA2204B2D7400675217 /* hadithJson.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = hadithJson.json; sourceTree = "<group>"; };
-		637A0AA4204C197200675217 /* FavoritesTable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesTable.swift; sourceTree = "<group>"; };
-		637A0AA6204C1EFA00675217 /* FavoriteCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteCell.swift; sourceTree = "<group>"; };
 		63B2E4C92049A9AD001513AD /* HadithEnglish.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HadithEnglish.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		63B2E4CC2049A9AD001513AD /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		63B2E4CE2049A9AD001513AD /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		63B2E4D12049A9AD001513AD /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		63B2E4D42049A9AD001513AD /* HadithEnglish.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = HadithEnglish.xcdatamodel; sourceTree = "<group>"; };
 		63B2E4D62049A9AD001513AD /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		63B2E4D92049A9AD001513AD /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		63B2E4DB2049A9AD001513AD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		63B2E4E42049AF23001513AD /* hadithSubject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = hadithSubject.swift; sourceTree = "<group>"; };
-		63B2E4E62049B649001513AD /* HadithCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HadithCell.swift; sourceTree = "<group>"; };
 		68F647BBA0A2884C7ECFB715 /* FavoritesStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = FavoritesStore.swift; path = HadithEnglish/Stores/FavoritesStore.swift; sourceTree = SOURCE_ROOT; };
 		697942B99F68CD7E35E9CF42 /* SubjectsListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SubjectsListView.swift; path = HadithEnglish/Views/SubjectsListView.swift; sourceTree = SOURCE_ROOT; };
 		73A54BD1A91FE5DE664A55AE /* ActivityShareSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ActivityShareSheet.swift; path = HadithEnglish/Views/ActivityShareSheet.swift; sourceTree = SOURCE_ROOT; };
+		92894C06972F9D5781D1B009 /* HadithEnglishApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = HadithEnglishApp.swift; path = HadithEnglish/HadithEnglishApp.swift; sourceTree = SOURCE_ROOT; };
 		97DC433C9DF9969385760ED8 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SettingsView.swift; path = HadithEnglish/Views/SettingsView.swift; sourceTree = SOURCE_ROOT; };
 		A833438ABC6E36815EFEB928 /* FavoritesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = FavoritesView.swift; path = HadithEnglish/Views/FavoritesView.swift; sourceTree = SOURCE_ROOT; };
 		D48B4C6C90D77A3250975149 /* HadithDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = HadithDetailView.swift; path = HadithEnglish/Views/HadithDetailView.swift; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
-
-/* Begin PBXFrameworksBuildPhase section */
-		63B2E4C62049A9AD001513AD /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-/* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
 		63B2E4C02049A9AD001513AD = {
@@ -79,6 +51,7 @@
 				A833438ABC6E36815EFEB928 /* FavoritesView.swift */,
 				97DC433C9DF9969385760ED8 /* SettingsView.swift */,
 				73A54BD1A91FE5DE664A55AE /* ActivityShareSheet.swift */,
+				92894C06972F9D5781D1B009 /* HadithEnglishApp.swift */,
 			);
 			sourceTree = "<group>";
 		};
@@ -93,47 +66,12 @@
 		63B2E4CB2049A9AD001513AD /* HadithEnglish */ = {
 			isa = PBXGroup;
 			children = (
-				63B2E4E22049AED0001513AD /* View */,
-				63B2E4E12049AEC3001513AD /* Model */,
-				63B2E4E32049AEDB001513AD /* Controller */,
 				63B2E4DB2049A9AD001513AD /* Info.plist */,
-				637A0AA2204B2D7400675217 /* hadithJson.json */,
 				635343CD204EBBF6004AB35D /* newHadithJson.json */,
-				63B2E4CC2049A9AD001513AD /* AppDelegate.swift */,
 				63B2E4D62049A9AD001513AD /* Assets.xcassets */,
-				63B2E4D32049A9AD001513AD /* HadithEnglish.xcdatamodeld */,
 				63B2E4D82049A9AD001513AD /* LaunchScreen.storyboard */,
-				63B2E4D02049A9AD001513AD /* Main.storyboard */,
 			);
 			path = HadithEnglish;
-			sourceTree = "<group>";
-		};
-		63B2E4E12049AEC3001513AD /* Model */ = {
-			isa = PBXGroup;
-			children = (
-				63B2E4E42049AF23001513AD /* hadithSubject.swift */,
-			);
-			path = Model;
-			sourceTree = "<group>";
-		};
-		63B2E4E22049AED0001513AD /* View */ = {
-			isa = PBXGroup;
-			children = (
-				63B2E4E62049B649001513AD /* HadithCell.swift */,
-				634FF437204AE99F004E893A /* hadithDetailCell.swift */,
-				637A0AA6204C1EFA00675217 /* FavoriteCell.swift */,
-			);
-			path = View;
-			sourceTree = "<group>";
-		};
-		63B2E4E32049AEDB001513AD /* Controller */ = {
-			isa = PBXGroup;
-			children = (
-				63B2E4CE2049A9AD001513AD /* ViewController.swift */,
-				634FF435204AD52C004E893A /* HadithsTable.swift */,
-				637A0AA4204C197200675217 /* FavoritesTable.swift */,
-			);
-			path = Controller;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -144,7 +82,6 @@
 			buildConfigurationList = 63B2E4DE2049A9AD001513AD /* Build configuration list for PBXNativeTarget "HadithEnglish" */;
 			buildPhases = (
 				63B2E4C52049A9AD001513AD /* Sources */,
-				63B2E4C62049A9AD001513AD /* Frameworks */,
 				63B2E4C72049A9AD001513AD /* Resources */,
 			);
 			buildRules = (
@@ -197,8 +134,7 @@
 			files = (
 				63B2E4DA2049A9AD001513AD /* LaunchScreen.storyboard in Resources */,
 				63B2E4D72049A9AD001513AD /* Assets.xcassets in Resources */,
-				63B2E4D22049A9AD001513AD /* Main.storyboard in Resources */,
-				637A0AA3204B2D7400675217 /* hadithJson.json in Resources */,
+				63B2E4D22049A9AD001513AD /* None in Resources */,
 				635343CE204EBBF6004AB35D /* newHadithJson.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -210,15 +146,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				63B2E4D52049A9AD001513AD /* HadithEnglish.xcdatamodeld in Sources */,
-				63B2E4E52049AF23001513AD /* hadithSubject.swift in Sources */,
-				637A0AA5204C197200675217 /* FavoritesTable.swift in Sources */,
-				63B2E4CF2049A9AD001513AD /* ViewController.swift in Sources */,
-				63B2E4E72049B649001513AD /* HadithCell.swift in Sources */,
-				634FF438204AE99F004E893A /* hadithDetailCell.swift in Sources */,
-				637A0AA7204C1EFA00675217 /* FavoriteCell.swift in Sources */,
-				634FF436204AD52C004E893A /* HadithsTable.swift in Sources */,
-				63B2E4CD2049A9AD001513AD /* AppDelegate.swift in Sources */,
+				63B2E4D52049A9AD001513AD /* None in Sources */,
 				F39D43BEADC4BE937862E774 /* HadithModels.swift in Sources */,
 				998841F19BE79D82D0F5BCB3 /* FavoritesStore.swift in Sources */,
 				A2584A97B9E5EBFB880A6393 /* SubjectsListView.swift in Sources */,
@@ -226,20 +154,13 @@
 				F4A14676B20780BDCD654575 /* FavoritesView.swift in Sources */,
 				768147C58234655F1DC71A2B /* SettingsView.swift in Sources */,
 				A2504BC4967E6B90BCE99827 /* ActivityShareSheet.swift in Sources */,
+				04D247619DF6AD57D2E003AC /* HadithEnglishApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
-		63B2E4D02049A9AD001513AD /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				63B2E4D12049A9AD001513AD /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
 		63B2E4D82049A9AD001513AD /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -410,19 +331,6 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
-
-/* Begin XCVersionGroup section */
-		63B2E4D32049A9AD001513AD /* HadithEnglish.xcdatamodeld */ = {
-			isa = XCVersionGroup;
-			children = (
-				63B2E4D42049A9AD001513AD /* HadithEnglish.xcdatamodel */,
-			);
-			currentVersion = 63B2E4D42049A9AD001513AD /* HadithEnglish.xcdatamodel */;
-			path = HadithEnglish.xcdatamodeld;
-			sourceTree = "<group>";
-			versionGroupType = wrapper.xcdatamodel;
-		};
-/* End XCVersionGroup section */
 	};
 	rootObject = 63B2E4C12049A9AD001513AD /* Project object */;
 }

@@ -776,6 +776,29 @@ This is the one task that can't stay buildable mid-way through: a project can't 
 old `@UIApplicationMain` `AppDelegate` and a new `@main` App struct at once. Everything in this
 task lands together, then gets verified as a whole.
 
+> **Execution note (discovered during implementation):** the plan's Step 4 (below) originally
+> called `.tooling/pbxproj-venv/bin/pbxproj file --delete <project> <path>` per file, mirroring
+> how files were *added* in earlier tasks. That command silently failed for every file that
+> Xcode's GUI had originally created with `sourceTree = "<group>"` and a bare filename (i.e.
+> everything from the 2018 project except the handful this plan itself added) — it printed "An
+> error occurred removing one of the files" but left the `PBXBuildFile`/`PBXFileReference`
+> entries and group-children listings in place, which only surfaced once `xcodebuild` started
+> failing on stale references (first on the Core Data model, since that's processed earliest).
+> `pbxproj`'s own `remove_files_by_path` (`SOURCE_ROOT` tree) has the same blind spot — it
+> matches by computed path, not by the file's actual `sourceTree`/`path` pair.
+>
+> The fix: use the `pbxproj` **Python API** directly (not the CLI) and remove by exact object
+> ID instead of by path — `XcodeProject.load(...)`, then `remove_file_by_id(file_id)` for plain
+> files, found by grepping the raw `project.pbxproj` for the target filename to get its
+> `PBXFileReference` ID. Two files needed one level up — `remove_group_by_id(container_id)` —
+> because `Main.storyboard` is a `PBXVariantGroup` (localization container) and
+> `HadithEnglish.xcdatamodeld` is an `XCVersionGroup` (Core Data model version container), not
+> plain `PBXFileReference`s; `remove_file_by_id` doesn't unwind those container types.
+> `remove_group_by_name` cleaned up the three now-empty `Controller`/`View`/`Model` groups
+> afterward. Step 4 below reflects this corrected approach; if executing this plan against a
+> different project, expect the same `sourceTree`-mismatch failure mode for any file the CLI
+> didn't itself add, and budget time to fall back to the Python API with explicit IDs.
+
 **Files:**
 - Create: `HadithEnglish/HadithEnglishApp.swift`
 - Delete: `HadithEnglish/AppDelegate.swift`, `HadithEnglish/Controller/ViewController.swift`,
@@ -864,6 +887,10 @@ Task 7).
 
 - [ ] **Step 4: Delete the old files (both the pbxproj reference and the file on disk)**
 
+First delete the files on disk (some pbxproj object IDs are looked up by grepping the project
+file below, so do this after, not before, if you want to double check paths — order doesn't
+actually matter since the two operations are independent):
+
 ```bash
 cd ~/Desktop/"hadiths app"
 for f in \
@@ -881,19 +908,63 @@ for f in \
   HadithEnglish/hadithJson2.json \
   HadithEnglish/File \
 ; do
-  .tooling/pbxproj-venv/bin/pbxproj file --delete HadithEnglish.xcodeproj "$f"
   rm -f "$f"
 done
-
 rm -rf HadithEnglish/HadithEnglish.xcdatamodeld
 rm -rf HadithEnglish/Assets.xcassets/hadithJson.dataset
 rmdir HadithEnglish/Controller HadithEnglish/View HadithEnglish/Model 2>/dev/null
 ```
 
-Expected: no errors from the `pbxproj` calls. `HadithEnglish.xcdatamodeld` and
-`hadithJson.dataset` are removed with plain `rm -rf` because they were never individually
-referenced in `project.pbxproj` (folder-type references cover their own contents), so there's
-no pbxproj entry to delete for them.
+Now remove the pbxproj references. **Do not use `pbxproj file --delete` or
+`remove_files_by_path` for these** — both match by computed path under a given tree, and every
+one of these files was created by Xcode's GUI with `sourceTree = "<group>"` and a bare filename
+(directory nesting expressed via `PBXGroup` hierarchy, not the stored path), so path-based
+lookup silently fails for all of them. Find each file's exact object ID first:
+
+```bash
+cd ~/Desktop/"hadiths app"
+grep -n "AppDelegate.swift\|ViewController.swift\|HadithsTable.swift\|FavoritesTable.swift\|HadithCell.swift\|FavoriteCell.swift\|hadithDetailCell.swift\|hadithSubject.swift\|Main.storyboard\|hadithJson.json\b\|xcdatamodeld" \
+  HadithEnglish.xcodeproj/project.pbxproj
+```
+
+From the `PBXFileReference` lines (`<32-char-hex-id> /* Filename */ = {isa = PBXFileReference; ...`),
+collect the ID for each of: AppDelegate.swift, ViewController.swift, HadithsTable.swift,
+FavoritesTable.swift, HadithCell.swift, FavoriteCell.swift, hadithDetailCell.swift,
+hadithSubject.swift, hadithJson.json. For `Main.storyboard` and `HadithEnglish.xcdatamodeld`,
+use the ID of the *container* object instead (`PBXVariantGroup` for the storyboard,
+`XCVersionGroup` for the Core Data model — both list a `path` matching the name and an `isa`
+line one row below the ID). Then, with the 9 plain-file IDs and 2 container IDs in hand:
+
+```bash
+cd ~/Desktop/"hadiths app"
+.tooling/pbxproj-venv/bin/python3 -c "
+from pbxproj import XcodeProject
+p = XcodeProject.load('HadithEnglish.xcodeproj/project.pbxproj')
+
+plain_file_ids = [
+    # fill in from the grep above, one per: AppDelegate.swift, ViewController.swift,
+    # HadithsTable.swift, FavoritesTable.swift, HadithCell.swift, FavoriteCell.swift,
+    # hadithDetailCell.swift, hadithSubject.swift, hadithJson.json
+]
+container_ids = [
+    # fill in: Main.storyboard's PBXVariantGroup id, HadithEnglish.xcdatamodeld's XCVersionGroup id
+]
+
+for i in plain_file_ids:
+    print(i, '->', p.remove_file_by_id(i))
+for i in container_ids:
+    print(i, '->', p.remove_group_by_id(i))
+for name in ['Model', 'Controller', 'View']:
+    print(name, '->', p.remove_group_by_name(name))
+
+p.save()
+print('SAVED')
+"
+```
+
+Expected: every line prints `-> True`. If any print `-> False`, re-check the ID was copied from
+the correct `PBXFileReference`/container line (not the sibling `PBXBuildFile` line, which has a
+*different* ID for the same filename) and retry just that one.
 
 - [ ] **Step 5: Verify the build succeeds**
 
