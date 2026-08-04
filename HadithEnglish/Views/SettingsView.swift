@@ -1,6 +1,8 @@
 import SwiftUI
 
 struct SettingsView: View {
+    @EnvironmentObject private var languageStore: LanguageStore
+
     // TODO: replace with the real privacy policy URL before submitting to App Store Connect.
     private let privacyPolicyURL = URL(string: "https://example.com/hadithenglish/privacy")!
     // TODO: replace with the real App Store URL once known (this is a re-submission of an
@@ -21,25 +23,32 @@ struct SettingsView: View {
         NavigationView {
             List {
                 Section {
-                    Link("Rate on the App Store", destination: appStoreURL)
-                    Button("Share this app") {
+                    Picker(languageStore.strings.languageLabel, selection: $languageStore.language) {
+                        ForEach(AppLanguage.allCases) { lang in
+                            Text(lang.nativeName).tag(lang)
+                        }
+                    }
+                }
+                Section {
+                    Link(languageStore.strings.rateOnAppStore, destination: appStoreURL)
+                    Button(languageStore.strings.shareThisApp) {
                         isSharePresented = true
                     }
                     .sheet(isPresented: $isSharePresented) {
                         ActivityShareSheet(items: [appStoreURL])
                     }
-                    Link("Privacy Policy", destination: privacyPolicyURL)
+                    Link(languageStore.strings.privacyPolicy, destination: privacyPolicyURL)
                 }
-                Section("About") {
+                Section(languageStore.strings.aboutSection) {
                     HStack {
-                        Text("Version")
+                        Text(languageStore.strings.versionLabel)
                         Spacer()
                         Text("\(appVersion) (\(buildNumber))")
                             .foregroundColor(.secondary)
                     }
                 }
             }
-            .navigationTitle("Setup")
+            .navigationTitle(languageStore.strings.setupTitle)
         }
         .navigationViewStyle(.stack)
     }

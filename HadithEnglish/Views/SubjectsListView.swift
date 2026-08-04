@@ -2,6 +2,7 @@ import SwiftUI
 
 struct SubjectsListView: View {
     let subjects: [HadithSubject]
+    @EnvironmentObject private var languageStore: LanguageStore
     @State private var searchText = ""
 
     private var filteredSubjects: [HadithSubject] {
@@ -21,8 +22,8 @@ struct SubjectsListView: View {
                 }
             }
             .listStyle(.plain)
-            .navigationTitle("Hadith Subjects")
-            .searchable(text: $searchText, prompt: "Search subjects")
+            .navigationTitle(languageStore.strings.hadithSubjectsTitle)
+            .searchable(text: $searchText, prompt: languageStore.strings.searchSubjectsPrompt)
         }
         .navigationViewStyle(.stack)
     }

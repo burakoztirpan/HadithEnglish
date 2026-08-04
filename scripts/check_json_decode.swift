@@ -9,15 +9,21 @@ struct HadithSubject: Codable {
     let hadiths: [HadithEntry]
 }
 
-let url = URL(fileURLWithPath: CommandLine.arguments[1])
-let data = try! Data(contentsOf: url)
-let subjects = try! JSONDecoder().decode([HadithSubject].self, from: data)
+for lang in ["en", "ar", "tr"] {
+    let url = URL(fileURLWithPath: "HadithEnglish/hadith_\(lang).json")
+    let data = try! Data(contentsOf: url)
+    let subjects = try! JSONDecoder().decode([HadithSubject].self, from: data)
 
-assert(subjects.count == 88, "FAIL: expected 88 subjects, got \(subjects.count)")
-assert(
-    subjects[0].name.trimmingCharacters(in: .whitespaces) == "Revelation",
-    "FAIL: first subject should be Revelation, got \(subjects[0].name)"
-)
-assert(subjects[0].hadiths.first?.id == 0, "FAIL: first hadith id should be 0")
+    assert(subjects.count == 97, "FAIL(\(lang)): expected 97 subjects, got \(subjects.count)")
+    assert(
+        subjects[0].name.trimmingCharacters(in: .whitespaces) == "Revelation",
+        "FAIL(\(lang)): first subject should be Revelation, got \(subjects[0].name)"
+    )
+    assert(subjects[0].hadiths.first?.id == 1, "FAIL(\(lang)): first hadith id should be 1")
+    assert(subjects[0].hadiths.count == 7, "FAIL(\(lang)): Revelation should have 7 hadiths")
 
-print("OK: JSON decode checks passed (\(subjects.count) subjects)")
+    let total = subjects.reduce(0) { $0 + $1.hadiths.count }
+    assert(total == 7252, "FAIL(\(lang)): expected 7252 total hadiths, got \(total)")
+
+    print("OK(\(lang)): \(subjects.count) subjects, \(total) hadiths")
+}

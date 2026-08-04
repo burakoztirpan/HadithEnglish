@@ -3,34 +3,27 @@ import SwiftUI
 @main
 struct HadithEnglishApp: App {
     @StateObject private var favorites = FavoritesStore()
-    private let subjects: [HadithSubject]
-
-    init() {
-        subjects = Self.loadSubjects()
-    }
+    @StateObject private var languageStore = LanguageStore()
+    @StateObject private var content = HadithContentStore()
 
     var body: some Scene {
         WindowGroup {
             TabView {
-                SubjectsListView(subjects: subjects)
-                    .tabItem { Label("Hadiths", systemImage: "book") }
-                FavoritesView(subjects: subjects)
-                    .tabItem { Label("Favorites", systemImage: "star") }
+                SubjectsListView(subjects: content.subjects)
+                    .tabItem { Label(languageStore.strings.tabHadiths, systemImage: "book") }
+                FavoritesView(subjects: content.subjects)
+                    .tabItem { Label(languageStore.strings.tabFavorites, systemImage: "star") }
                 SettingsView()
-                    .tabItem { Label("Setup", systemImage: "gearshape") }
+                    .tabItem { Label(languageStore.strings.tabSetup, systemImage: "gearshape") }
             }
             .environmentObject(favorites)
+            .environmentObject(languageStore)
+            .environment(\.layoutDirection, languageStore.language.isRightToLeft ? .rightToLeft : .leftToRight)
             .accentColor(Color("AccentColor"))
+            .onAppear { content.load(languageStore.language) }
+            .onChange(of: languageStore.language) { newValue in
+                content.load(newValue)
+            }
         }
-    }
-
-    private static func loadSubjects() -> [HadithSubject] {
-        guard let url = Bundle.main.url(forResource: "newHadithJson", withExtension: "json"),
-              let data = try? Data(contentsOf: url),
-              let subjects = try? JSONDecoder().decode([HadithSubject].self, from: data)
-        else {
-            return []
-        }
-        return subjects
     }
 }
