@@ -14,22 +14,14 @@ struct FavoritesView: View {
         NavigationView {
             List {
                 ForEach(favoriteEntries) { entry in
-                    VStack(alignment: .leading, spacing: 8) {
-                        Text("#\(entry.id)")
-                            .font(.caption)
-                            .foregroundColor(.secondary)
-                        Text(entry.trimmedText)
-                            .font(.system(.body, design: .serif))
-                    }
-                    .padding(.vertical, 8)
-                    .listRowBackground(Color("CardBackground"))
-                    .swipeActions {
-                        Button(role: .destructive) {
-                            favorites.remove(entry.id)
-                        } label: {
-                            Label("Remove", systemImage: "star.slash")
+                    HadithCardView(entry: entry)
+                        .swipeActions {
+                            Button(role: .destructive) {
+                                favorites.remove(entry.id)
+                            } label: {
+                                Label("Remove", systemImage: "star.slash")
+                            }
                         }
-                    }
                 }
             }
             .listStyle(.plain)
