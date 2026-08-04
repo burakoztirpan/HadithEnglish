@@ -175,6 +175,10 @@ for source_lang, (title_lang, out_path) in OUTPUT_MAP.items():
         if title_lang == "tr":
             text = strip_scraped_ui_text(text)
             text = strip_dangling_apparatus(text)
+        if not text.strip():
+            continue  # source has zero text for this id in this language (46 in
+            # Turkish, 4 each in English/Arabic) - a blank hadith card is worse
+            # than a missing one, and there's nothing to reconstruct
         books.setdefault(book_num, []).append(
             {"id": h["hadithnumber"], "hadith": text}
         )
