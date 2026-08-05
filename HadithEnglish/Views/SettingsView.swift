@@ -27,7 +27,8 @@ struct SettingsView: View {
         }
     }
 
-    private let termsAndConditionsURL = URL(string: "https://burakoztirpan.online/hadiths-vault-terms-and-conditions")!
+    private let termsAndConditionsURL = URL(string: "https://burakoztirpan.online/hadith-vault-terms-and-conditions")!
+    private let privacyPolicyURL = URL(string: "https://burakoztirpan.online/hadith-valut-privacy-policy")!
     // TODO: replace with the real App Store URL once known (this is a re-submission of an
     // existing 2019 listing, so check App Store Connect for the existing app URL).
     private let appStoreURL = URL(string: "https://apps.apple.com/app/id0000000000")!
@@ -98,6 +99,7 @@ struct SettingsView: View {
                         ActivityShareSheet(items: [appStoreURL])
                     }
                     Link(languageStore.strings.termsAndConditions, destination: termsAndConditionsURL)
+                    Link(languageStore.strings.privacyPolicy, destination: privacyPolicyURL)
                 }
                 Section(languageStore.strings.aboutSection) {
                     HStack {

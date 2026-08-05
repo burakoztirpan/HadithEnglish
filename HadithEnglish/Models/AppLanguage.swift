@@ -39,6 +39,7 @@ struct Strings {
     let rateOnAppStore: String
     let shareThisApp: String
     let termsAndConditions: String
+    let privacyPolicy: String
     let aboutSection: String
     let versionLabel: String
     let setupTitle: String
@@ -99,6 +100,7 @@ extension AppLanguage {
                 rateOnAppStore: "Rate on the App Store",
                 shareThisApp: "Share this app",
                 termsAndConditions: "Terms and Conditions",
+                privacyPolicy: "Privacy Policy",
                 aboutSection: "About",
                 versionLabel: "Version",
                 setupTitle: "Setup",
@@ -155,6 +157,7 @@ extension AppLanguage {
                 rateOnAppStore: "قيّم التطبيق في App Store",
                 shareThisApp: "شارك التطبيق",
                 termsAndConditions: "الشروط والأحكام",
+                privacyPolicy: "سياسة الخصوصية",
                 aboutSection: "حول",
                 versionLabel: "الإصدار",
                 setupTitle: "الإعدادات",
@@ -211,6 +214,7 @@ extension AppLanguage {
                 rateOnAppStore: "App Store'da Değerlendir",
                 shareThisApp: "Uygulamayı Paylaş",
                 termsAndConditions: "Kullanım Koşulları",
+                privacyPolicy: "Gizlilik Politikası",
                 aboutSection: "Hakkında",
                 versionLabel: "Sürüm",
                 setupTitle: "Ayarlar",
@@ -267,6 +271,7 @@ extension AppLanguage {
                 rateOnAppStore: "Beri Nilai di App Store",
                 shareThisApp: "Bagikan Aplikasi Ini",
                 termsAndConditions: "Syarat dan Ketentuan",
+                privacyPolicy: "Kebijakan Privasi",
                 aboutSection: "Tentang",
                 versionLabel: "Versi",
                 setupTitle: "Pengaturan",
@@ -323,6 +328,7 @@ extension AppLanguage {
                 rateOnAppStore: "App Store پر درجہ دیں",
                 shareThisApp: "ایپ شیئر کریں",
                 termsAndConditions: "شرائط و ضوابط",
+                privacyPolicy: "پرائیویسی پالیسی",
                 aboutSection: "کے بارے میں",
                 versionLabel: "ورژن",
                 setupTitle: "ترتیبات",
