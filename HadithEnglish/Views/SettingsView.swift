@@ -29,9 +29,6 @@ struct SettingsView: View {
 
     private let termsAndConditionsURL = URL(string: "https://burakoztirpan.online/hadith-vault-terms-and-conditions")!
     private let privacyPolicyURL = URL(string: "https://burakoztirpan.online/hadith-valut-privacy-policy")!
-    // TODO: replace with the real App Store URL once known (this is a re-submission of an
-    // existing 2019 listing, so check App Store Connect for the existing app URL).
-    private let appStoreURL = URL(string: "https://apps.apple.com/app/id0000000000")!
 
     private var appVersion: String {
         Bundle.main.object(forInfoDictionaryKey: "CFBundleShortVersionString") as? String ?? "1.0"
@@ -40,8 +37,6 @@ struct SettingsView: View {
     private var buildNumber: String {
         Bundle.main.object(forInfoDictionaryKey: "CFBundleVersion") as? String ?? "1"
     }
-
-    @State private var isSharePresented = false
 
     var body: some View {
         NavigationView {
@@ -91,13 +86,8 @@ struct SettingsView: View {
                     }
                 }
                 Section {
-                    Link(languageStore.strings.rateOnAppStore, destination: appStoreURL)
-                    Button(languageStore.strings.shareThisApp) {
-                        isSharePresented = true
-                    }
-                    .sheet(isPresented: $isSharePresented) {
-                        ActivityShareSheet(items: [appStoreURL])
-                    }
+                    // Rate/Share rows removed for now - both need a real App Store Connect
+                    // app ID, which doesn't exist yet. Re-add once that ID is known.
                     Link(languageStore.strings.termsAndConditions, destination: termsAndConditionsURL)
                     Link(languageStore.strings.privacyPolicy, destination: privacyPolicyURL)
                 }
