@@ -1,16 +1,18 @@
 import SwiftUI
 
 /// Presented from the share button: pick plain text, or one of the 10
-/// postcard backgrounds to render the hadith onto before handing off to the
-/// system share sheet.
+/// postcard backgrounds. The fit check runs once (all backgrounds share the
+/// same panel geometry) - if the hadith is too long to fit even at the
+/// smallest font size, the background grid is replaced with a short
+/// explanation instead of silently hiding the feature.
 struct ShareOptionsSheet: View {
     let text: String
     let subtitle: String
     @EnvironmentObject private var languageStore: LanguageStore
-    @State private var shareItems: [Any]?
+    @State private var isTextSharePresented = false
 
-    private var appName: String {
-        Bundle.main.object(forInfoDictionaryKey: "CFBundleDisplayName") as? String ?? "Hadith Vault"
+    private var fittingFontSize: CGFloat? {
+        ShareCardFit.fittingFontSize(for: text, subtitle: subtitle)
     }
 
     var body: some View {
@@ -18,7 +20,7 @@ struct ShareOptionsSheet: View {
             ScrollView {
                 VStack(alignment: .leading, spacing: 16) {
                     Button {
-                        shareItems = [text]
+                        isTextSharePresented = true
                     } label: {
                         HStack {
                             Image(systemName: "text.alignleft")
@@ -32,27 +34,31 @@ struct ShareOptionsSheet: View {
                     .buttonStyle(.plain)
                     .padding(.horizontal, 16)
 
-                    LazyVGrid(columns: [GridItem(.adaptive(minimum: 130), spacing: 12)], spacing: 12) {
-                        ForEach(ShareCardBackground.allCases) { background in
-                            Button {
-                                shareItems = renderedImage(for: background)
-                            } label: {
-                                Group {
-                                    if let uiImage = background.uiImage {
-                                        Image(uiImage: uiImage)
-                                            .resizable()
-                                            .aspectRatio(9.0 / 16.0, contentMode: .fill)
-                                    } else {
-                                        Color.black
-                                    }
+                    if let fontSize = fittingFontSize {
+                        LazyVGrid(columns: [GridItem(.adaptive(minimum: 130), spacing: 12)], spacing: 12) {
+                            ForEach(ShareCardBackground.allCases) { background in
+                                NavigationLink(
+                                    destination: ShareCardPreviewView(
+                                        text: text, subtitle: subtitle, background: background, fontSize: fontSize
+                                    )
+                                ) {
+                                    thumbnail(for: background)
                                 }
-                                .frame(height: 180)
-                                .clipShape(RoundedRectangle(cornerRadius: 14))
                             }
-                            .buttonStyle(.plain)
                         }
+                        .padding(.horizontal, 16)
+                    } else {
+                        VStack(spacing: 8) {
+                            Image(systemName: "text.badge.xmark")
+                                .font(.largeTitle)
+                                .foregroundColor(.secondary)
+                            Text(languageStore.strings.hadithTooLongForCard)
+                                .multilineTextAlignment(.center)
+                                .foregroundColor(.secondary)
+                        }
+                        .frame(maxWidth: .infinity)
+                        .padding(32)
                     }
-                    .padding(.horizontal, 16)
                 }
                 .padding(.vertical, 16)
             }
@@ -60,18 +66,22 @@ struct ShareOptionsSheet: View {
             .navigationBarTitleDisplayMode(.inline)
         }
         .navigationViewStyle(.stack)
-        .sheet(isPresented: Binding(get: { shareItems != nil }, set: { if !$0 { shareItems = nil } })) {
-            ActivityShareSheet(items: shareItems ?? [])
+        .sheet(isPresented: $isTextSharePresented) {
+            ActivityShareSheet(items: [text])
         }
     }
 
-    private func renderedImage(for background: ShareCardBackground) -> [Any] {
-        guard let image = ShareCardRenderer.render(
-            text: text,
-            subtitle: subtitle,
-            background: background,
-            appName: appName
-        ) else { return [text] }
-        return [image]
+    private func thumbnail(for background: ShareCardBackground) -> some View {
+        Group {
+            if let uiImage = background.uiImage {
+                Image(uiImage: uiImage)
+                    .resizable()
+                    .aspectRatio(9.0 / 16.0, contentMode: .fill)
+            } else {
+                Color.black
+            }
+        }
+        .frame(height: 180)
+        .clipShape(RoundedRectangle(cornerRadius: 14))
     }
 }

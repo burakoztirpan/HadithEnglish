@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		01C9A64CB2A14CE2BA31EF3C /* ShareCardFit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84C067CF47FE4EF98156D63B /* ShareCardFit.swift */; };
+		2D8537801D524F92AD0DC0E1 /* ShareCardPreviewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F3557121F0B41B58127F66C /* ShareCardPreviewView.swift */; };
 		9F3B761D38314976B291FC22 /* ShareCardBackground.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1598FD94C60461AADFCB6A9 /* ShareCardBackground.swift */; };
 		9BDC21C2BF9944EC94B39B76 /* ShareCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E29B4CC09D684E2195AD79C6 /* ShareCardView.swift */; };
 		B7CC96DBF91F4FB8BF952362 /* ShareOptionsSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CE0CF90B2204928913B3FC8 /* ShareOptionsSheet.swift */; };
@@ -54,6 +56,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		84C067CF47FE4EF98156D63B /* ShareCardFit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ShareCardFit.swift; path = HadithEnglish/Models/ShareCardFit.swift; sourceTree = SOURCE_ROOT; };
+		2F3557121F0B41B58127F66C /* ShareCardPreviewView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ShareCardPreviewView.swift; path = HadithEnglish/Views/ShareCardPreviewView.swift; sourceTree = SOURCE_ROOT; };
 		D1598FD94C60461AADFCB6A9 /* ShareCardBackground.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ShareCardBackground.swift; path = HadithEnglish/Models/ShareCardBackground.swift; sourceTree = SOURCE_ROOT; };
 		E29B4CC09D684E2195AD79C6 /* ShareCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ShareCardView.swift; path = HadithEnglish/Views/ShareCardView.swift; sourceTree = SOURCE_ROOT; };
 		6CE0CF90B2204928913B3FC8 /* ShareOptionsSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ShareOptionsSheet.swift; path = HadithEnglish/Views/ShareOptionsSheet.swift; sourceTree = SOURCE_ROOT; };
@@ -142,6 +146,8 @@
 				D1598FD94C60461AADFCB6A9 /* ShareCardBackground.swift */,
 				E29B4CC09D684E2195AD79C6 /* ShareCardView.swift */,
 				6CE0CF90B2204928913B3FC8 /* ShareOptionsSheet.swift */,
+				84C067CF47FE4EF98156D63B /* ShareCardFit.swift */,
+				2F3557121F0B41B58127F66C /* ShareCardPreviewView.swift */,
 				69CF4B84B97839655797EBC1,
 				E3944F83AE8B3CC4667D33EC,
 				064342C5A1701BC6CC28CD52,
@@ -279,6 +285,8 @@
 				9F3B761D38314976B291FC22 /* ShareCardBackground.swift in Sources */,
 				9BDC21C2BF9944EC94B39B76 /* ShareCardView.swift in Sources */,
 				B7CC96DBF91F4FB8BF952362 /* ShareOptionsSheet.swift in Sources */,
+				01C9A64CB2A14CE2BA31EF3C /* ShareCardFit.swift in Sources */,
+				2D8537801D524F92AD0DC0E1 /* ShareCardPreviewView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
