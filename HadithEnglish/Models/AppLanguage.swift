@@ -38,7 +38,7 @@ struct Strings {
     let removeAction: String
     let rateOnAppStore: String
     let shareThisApp: String
-    let privacyPolicy: String
+    let termsAndConditions: String
     let aboutSection: String
     let versionLabel: String
     let setupTitle: String
@@ -98,7 +98,7 @@ extension AppLanguage {
                 removeAction: "Remove",
                 rateOnAppStore: "Rate on the App Store",
                 shareThisApp: "Share this app",
-                privacyPolicy: "Privacy Policy",
+                termsAndConditions: "Terms and Conditions",
                 aboutSection: "About",
                 versionLabel: "Version",
                 setupTitle: "Setup",
@@ -154,7 +154,7 @@ extension AppLanguage {
                 removeAction: "إزالة",
                 rateOnAppStore: "قيّم التطبيق في App Store",
                 shareThisApp: "شارك التطبيق",
-                privacyPolicy: "سياسة الخصوصية",
+                termsAndConditions: "الشروط والأحكام",
                 aboutSection: "حول",
                 versionLabel: "الإصدار",
                 setupTitle: "الإعدادات",
@@ -210,7 +210,7 @@ extension AppLanguage {
                 removeAction: "Kaldır",
                 rateOnAppStore: "App Store'da Değerlendir",
                 shareThisApp: "Uygulamayı Paylaş",
-                privacyPolicy: "Gizlilik Politikası",
+                termsAndConditions: "Kullanım Koşulları",
                 aboutSection: "Hakkında",
                 versionLabel: "Sürüm",
                 setupTitle: "Ayarlar",
@@ -266,7 +266,7 @@ extension AppLanguage {
                 removeAction: "Hapus",
                 rateOnAppStore: "Beri Nilai di App Store",
                 shareThisApp: "Bagikan Aplikasi Ini",
-                privacyPolicy: "Kebijakan Privasi",
+                termsAndConditions: "Syarat dan Ketentuan",
                 aboutSection: "Tentang",
                 versionLabel: "Versi",
                 setupTitle: "Pengaturan",
@@ -322,7 +322,7 @@ extension AppLanguage {
                 removeAction: "ہٹائیں",
                 rateOnAppStore: "App Store پر درجہ دیں",
                 shareThisApp: "ایپ شیئر کریں",
-                privacyPolicy: "پرائیویسی پالیسی",
+                termsAndConditions: "شرائط و ضوابط",
                 aboutSection: "کے بارے میں",
                 versionLabel: "ورژن",
                 setupTitle: "ترتیبات",

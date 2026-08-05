@@ -27,8 +27,7 @@ struct SettingsView: View {
         }
     }
 
-    // TODO: replace with the real privacy policy URL before submitting to App Store Connect.
-    private let privacyPolicyURL = URL(string: "https://example.com/hadithenglish/privacy")!
+    private let termsAndConditionsURL = URL(string: "https://burakoztirpan.online/hadiths-vault-terms-and-conditions")!
     // TODO: replace with the real App Store URL once known (this is a re-submission of an
     // existing 2019 listing, so check App Store Connect for the existing app URL).
     private let appStoreURL = URL(string: "https://apps.apple.com/app/id0000000000")!
@@ -98,7 +97,7 @@ struct SettingsView: View {
                     .sheet(isPresented: $isSharePresented) {
                         ActivityShareSheet(items: [appStoreURL])
                     }
-                    Link(languageStore.strings.privacyPolicy, destination: privacyPolicyURL)
+                    Link(languageStore.strings.termsAndConditions, destination: termsAndConditionsURL)
                 }
                 Section(languageStore.strings.aboutSection) {
                     HStack {
