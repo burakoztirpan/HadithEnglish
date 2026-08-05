@@ -7,7 +7,11 @@ import UIKit
 /// panel has a hard height budget it must not overflow.
 enum ShareCardFit {
     static let minFontSize: CGFloat = 24
-    static let maxFontSize: CGFloat = 42
+    // Was capped at 42, which left short hadiths using only a fraction of
+    // the panel's available height - readability (particularly for older
+    // users) matters more than restraint here, so this uses whatever room
+    // the card actually has.
+    static let maxFontSize: CGFloat = 72
     static let subtitleFontSize: CGFloat = 26
     static let panelPadding: CGFloat = 52
     static let panelSpacing: CGFloat = 22
