@@ -18,16 +18,21 @@ enum ShareCardFit {
     static let lineSpacing: CGFloat = 8
     static let outerHorizontalPadding: CGFloat = 64
 
+    /// The top 42% of the card is reserved for the background's motif and
+    /// the panel must never cover it.
+    static var motifBoundary: CGFloat {
+        ShareCardView.size.height * 0.42
+    }
+
     /// Vertical budget for the text panel: card height minus the top motif
-    /// area (ShareCardView reserves the top 42% for it), the bottom spacer,
-    /// the watermark line, and a safety margin for measurement differences
-    /// between UIKit's boundingRect and SwiftUI's actual text layout.
+    /// area, the bottom spacer, the watermark line, and a safety margin for
+    /// measurement differences between UIKit's boundingRect and SwiftUI's
+    /// actual text layout.
     static var maxPanelHeight: CGFloat {
         let cardHeight = ShareCardView.size.height
-        let topReserved = cardHeight * 0.42
         let bottomReserved: CGFloat = 56 + 30 + 48
         let safetyMargin: CGFloat = 40
-        return cardHeight - topReserved - bottomReserved - safetyMargin
+        return cardHeight - motifBoundary - bottomReserved - safetyMargin
     }
 
     static var textWidth: CGFloat {
@@ -48,7 +53,10 @@ enum ShareCardFit {
         return nil
     }
 
-    private static func panelHeight(text: String, subtitle: String, fontSize: CGFloat) -> CGFloat {
+    /// Exposed (not just used internally by fittingFontSize) so
+    /// ShareCardView can position the panel using its exact height instead
+    /// of guessing via flexible-space layout tricks.
+    static func panelHeight(text: String, subtitle: String, fontSize: CGFloat) -> CGFloat {
         let paragraphStyle = NSMutableParagraphStyle()
         paragraphStyle.lineSpacing = lineSpacing
         paragraphStyle.alignment = .center

@@ -19,6 +19,18 @@ struct ShareCardView: View {
 
     static let size = CGSize(width: 1080, height: 1920)
 
+    /// Vertically centers the panel in the whole card - unless that would
+    /// put its top edge above the motif-safe boundary (ShareCardFit.
+    /// motifBoundary), in which case it's pinned right below the motif
+    /// instead. True whole-card centering alone isn't safe: for a panel
+    /// near ShareCardFit.maxPanelHeight, the center point sits well above
+    /// the boundary and would overlap the background's artwork.
+    private var panelTop: CGFloat {
+        let panelHeight = ShareCardFit.panelHeight(text: text, subtitle: subtitle, fontSize: fontSize)
+        let trueCenterTop = (Self.size.height - panelHeight) / 2
+        return max(trueCenterTop, ShareCardFit.motifBoundary)
+    }
+
     var body: some View {
         ZStack {
             if let uiImage = background.uiImage {
@@ -32,7 +44,7 @@ struct ShareCardView: View {
             }
 
             VStack(spacing: 0) {
-                Spacer(minLength: Self.size.height * 0.42)
+                Color.clear.frame(height: panelTop)
                 VStack(spacing: ShareCardFit.panelSpacing) {
                     Text(text)
                         .font(.system(size: fontSize, weight: .medium, design: .serif))
@@ -46,7 +58,7 @@ struct ShareCardView: View {
                 .padding(ShareCardFit.panelPadding)
                 .background(RoundedRectangle(cornerRadius: 28).fill(Color.black.opacity(0.45)))
                 .padding(.horizontal, ShareCardFit.outerHorizontalPadding)
-                Spacer(minLength: 56)
+                Spacer(minLength: 0)
                 Text(appName)
                     .font(.system(size: 22, weight: .semibold))
                     .foregroundColor(.white.opacity(0.85))
