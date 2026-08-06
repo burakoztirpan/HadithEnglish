@@ -6,6 +6,7 @@ struct HadithCardView: View {
     @EnvironmentObject private var favorites: FavoritesStore
     @EnvironmentObject private var languageStore: LanguageStore
     @EnvironmentObject private var typography: TypographyStore
+    @EnvironmentObject private var toastCenter: ToastCenter
     @State private var isSharePresented = false
     @State private var isExpanded = false
 
@@ -42,7 +43,10 @@ struct HadithCardView: View {
                 }
                 .buttonStyle(.plain)
                 .sheet(isPresented: $isSharePresented) {
-                    ShareOptionsSheet(text: entry.trimmedText, subtitle: subtitle ?? "#\(entry.id)")
+                    ShareOptionsSheet(text: entry.trimmedText, subtitle: subtitle ?? "#\(entry.id)") {
+                        isSharePresented = false
+                        toastCenter.show(languageStore.strings.sharedConfirmation)
+                    }
                 }
             }
             Text(displayText)

@@ -11,6 +11,7 @@ struct HadithEnglishApp: App {
     @StateObject private var themeStore = ThemeStore()
     @StateObject private var notificationStore = NotificationStore()
     @StateObject private var typographyStore = TypographyStore()
+    @StateObject private var toastCenter = ToastCenter()
     @Environment(\.scenePhase) private var scenePhase
 
     var body: some Scene {
@@ -29,6 +30,7 @@ struct HadithEnglishApp: App {
                     .tabItem { Label(languageStore.strings.tabSetup, systemImage: "gearshape") }
                     .tag(AppTab.setup)
             }
+            .toastOverlay()
             .id(languageStore.language)
             .environmentObject(favorites)
             .environmentObject(languageStore)
@@ -38,6 +40,7 @@ struct HadithEnglishApp: App {
             .environmentObject(themeStore)
             .environmentObject(notificationStore)
             .environmentObject(typographyStore)
+            .environmentObject(toastCenter)
             .environment(\.layoutDirection, languageStore.language.isRightToLeft ? .rightToLeft : .leftToRight)
             .preferredColorScheme(themeStore.theme.colorScheme)
             .accentColor(Color("AccentColor"))

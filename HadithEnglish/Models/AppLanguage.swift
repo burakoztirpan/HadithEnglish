@@ -81,6 +81,7 @@ struct Strings {
     let shareAsTextOption: String
     let shareAction: String
     let hadithTooLongForCard: String
+    let sharedConfirmation: String
 }
 
 extension AppLanguage {
@@ -141,7 +142,8 @@ extension AppLanguage {
                 shareCardTitle: "Share as Image",
                 shareAsTextOption: "Share as Text",
                 shareAction: "Share",
-                hadithTooLongForCard: "This hadith is too long to fit on an image card. You can still share it as text."
+                hadithTooLongForCard: "This hadith is too long to fit on an image card. You can still share it as text.",
+                sharedConfirmation: "Shared"
             )
         case .ar:
             return Strings(
@@ -198,7 +200,8 @@ extension AppLanguage {
                 shareCardTitle: "مشاركة كصورة",
                 shareAsTextOption: "مشاركة كنص",
                 shareAction: "مشاركة",
-                hadithTooLongForCard: "هذا الحديث طويل جدًا ليتناسب مع بطاقة الصورة. يمكنك مشاركته كنص بدلاً من ذلك."
+                hadithTooLongForCard: "هذا الحديث طويل جدًا ليتناسب مع بطاقة الصورة. يمكنك مشاركته كنص بدلاً من ذلك.",
+                sharedConfirmation: "تمت المشاركة"
             )
         case .tr:
             return Strings(
@@ -255,7 +258,8 @@ extension AppLanguage {
                 shareCardTitle: "Görsel Olarak Paylaş",
                 shareAsTextOption: "Metin Olarak Paylaş",
                 shareAction: "Paylaş",
-                hadithTooLongForCard: "Bu hadis görsel bir karta sığmayacak kadar uzun. Bunun yerine metin olarak paylaşabilirsiniz."
+                hadithTooLongForCard: "Bu hadis görsel bir karta sığmayacak kadar uzun. Bunun yerine metin olarak paylaşabilirsiniz.",
+                sharedConfirmation: "Paylaşıldı"
             )
         case .ind:
             return Strings(
@@ -312,7 +316,8 @@ extension AppLanguage {
                 shareCardTitle: "Bagikan sebagai Gambar",
                 shareAsTextOption: "Bagikan sebagai Teks",
                 shareAction: "Bagikan",
-                hadithTooLongForCard: "Hadis ini terlalu panjang untuk kartu gambar. Anda tetap bisa membagikannya sebagai teks."
+                hadithTooLongForCard: "Hadis ini terlalu panjang untuk kartu gambar. Anda tetap bisa membagikannya sebagai teks.",
+                sharedConfirmation: "Berhasil dibagikan"
             )
         case .urd:
             return Strings(
@@ -369,7 +374,8 @@ extension AppLanguage {
                 shareCardTitle: "تصویر کے طور پر شیئر کریں",
                 shareAsTextOption: "متن کے طور پر شیئر کریں",
                 shareAction: "شیئر کریں",
-                hadithTooLongForCard: "یہ حدیث تصویری کارڈ میں سمانے کے لیے بہت طویل ہے۔ آپ اسے متن کے طور پر شیئر کر سکتے ہیں۔"
+                hadithTooLongForCard: "یہ حدیث تصویری کارڈ میں سمانے کے لیے بہت طویل ہے۔ آپ اسے متن کے طور پر شیئر کر سکتے ہیں۔",
+                sharedConfirmation: "شیئر ہو گیا"
             )
         }
     }

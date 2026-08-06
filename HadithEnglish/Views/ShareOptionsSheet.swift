@@ -8,6 +8,7 @@ import SwiftUI
 struct ShareOptionsSheet: View {
     let text: String
     let subtitle: String
+    let onShared: () -> Void
     @EnvironmentObject private var languageStore: LanguageStore
     @State private var isTextSharePresented = false
 
@@ -39,7 +40,8 @@ struct ShareOptionsSheet: View {
                             ForEach(ShareCardBackground.allCases) { background in
                                 NavigationLink(
                                     destination: ShareCardPreviewView(
-                                        text: text, subtitle: subtitle, background: background, fontSize: fontSize
+                                        text: text, subtitle: subtitle, background: background, fontSize: fontSize,
+                                        onShared: onShared
                                     )
                                 ) {
                                     thumbnail(for: background)
@@ -67,7 +69,11 @@ struct ShareOptionsSheet: View {
         }
         .navigationViewStyle(.stack)
         .sheet(isPresented: $isTextSharePresented) {
-            ActivityShareSheet(items: [text])
+            ActivityShareSheet(items: [text]) { completed in
+                if completed {
+                    onShared()
+                }
+            }
         }
     }
 

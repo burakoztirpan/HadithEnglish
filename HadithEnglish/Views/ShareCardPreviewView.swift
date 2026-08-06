@@ -8,6 +8,7 @@ struct ShareCardPreviewView: View {
     let subtitle: String
     let background: ShareCardBackground
     let fontSize: CGFloat
+    let onShared: () -> Void
     @EnvironmentObject private var languageStore: LanguageStore
     @State private var isActivityPresented = false
 
@@ -42,7 +43,11 @@ struct ShareCardPreviewView: View {
                 .padding(.horizontal, 24)
                 .padding(.bottom, 24)
                 .sheet(isPresented: $isActivityPresented) {
-                    ActivityShareSheet(items: [image])
+                    ActivityShareSheet(items: [image]) { completed in
+                        if completed {
+                            onShared()
+                        }
+                    }
                 }
             } else {
                 Spacer()
