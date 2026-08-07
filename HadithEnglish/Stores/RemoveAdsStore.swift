@@ -25,10 +25,13 @@ final class RemoveAdsStore: ObservableObject {
                 await self?.handle(update)
             }
         }
-        Task { [weak self] in
-            await self?.loadProduct()
-            await self?.refreshEntitlements()
-        }
+        // Independent: refreshEntitlements() reads local, on-device
+        // Transaction.currentEntitlements and doesn't need loadProduct()'s
+        // network fetch to complete first - matching on productID is
+        // enough. Keeping them as separate tasks means a slow/no network
+        // doesn't delay the local purchase check.
+        Task { [weak self] in await self?.loadProduct() }
+        Task { [weak self] in await self?.refreshEntitlements() }
     }
 
     deinit {
