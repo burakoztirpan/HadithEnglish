@@ -15,6 +15,7 @@ struct HadithEnglishApp: App {
     @StateObject private var typographyStore = TypographyStore()
     @StateObject private var toastCenter = ToastCenter()
     @StateObject private var adManager = AdManager()
+    @StateObject private var removeAdsStore = RemoveAdsStore()
     @Environment(\.scenePhase) private var scenePhase
 
     var body: some Scene {
@@ -45,6 +46,7 @@ struct HadithEnglishApp: App {
             .environmentObject(typographyStore)
             .environmentObject(toastCenter)
             .environmentObject(adManager)
+            .environmentObject(removeAdsStore)
             .environment(\.layoutDirection, languageStore.language.isRightToLeft ? .rightToLeft : .leftToRight)
             .preferredColorScheme(themeStore.theme.colorScheme)
             .accentColor(Color("AccentColor"))

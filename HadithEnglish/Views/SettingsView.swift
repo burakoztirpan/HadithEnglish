@@ -5,6 +5,8 @@ struct SettingsView: View {
     @EnvironmentObject private var themeStore: ThemeStore
     @EnvironmentObject private var notificationStore: NotificationStore
     @EnvironmentObject private var typographyStore: TypographyStore
+    @EnvironmentObject private var removeAdsStore: RemoveAdsStore
+    @EnvironmentObject private var toastCenter: ToastCenter
 
     private func appearanceName(_ theme: AppTheme) -> String {
         switch theme {
@@ -38,6 +40,33 @@ struct SettingsView: View {
         Bundle.main.object(forInfoDictionaryKey: "CFBundleVersion") as? String ?? "1"
     }
 
+    private var removeAdsButtonLabel: String {
+        if let price = removeAdsStore.product?.displayPrice {
+            return "\(languageStore.strings.removeAdsButtonTitle) – \(price)"
+        }
+        return languageStore.strings.removeAdsButtonTitle
+    }
+
+    private func purchaseRemoveAds() async {
+        removeAdsStore.errorMessage = nil
+        await removeAdsStore.purchase()
+        if removeAdsStore.isPurchased {
+            toastCenter.show(languageStore.strings.removeAdsToastMessage)
+        } else if let error = removeAdsStore.errorMessage {
+            toastCenter.show(error)
+        }
+    }
+
+    private func restorePurchases() async {
+        removeAdsStore.errorMessage = nil
+        await removeAdsStore.restore()
+        if removeAdsStore.isPurchased {
+            toastCenter.show(languageStore.strings.removeAdsToastMessage)
+        } else if let error = removeAdsStore.errorMessage {
+            toastCenter.show(error)
+        }
+    }
+
     var body: some View {
         NavigationView {
             List {
@@ -62,6 +91,44 @@ struct SettingsView: View {
                             displayedComponents: .hourAndMinute
                         )
                     }
+                }
+                Section {
+                    if removeAdsStore.isPurchased {
+                        HStack {
+                            Image(systemName: "checkmark.circle.fill")
+                                .foregroundColor(Color("AccentColor"))
+                            Text(languageStore.strings.removeAdsPurchasedLabel)
+                        }
+                    } else {
+                        VStack(alignment: .leading, spacing: 8) {
+                            Text(languageStore.strings.removeAdsDescription)
+                                .font(.subheadline)
+                                .foregroundColor(.secondary)
+                            Button {
+                                Task { await purchaseRemoveAds() }
+                            } label: {
+                                if removeAdsStore.isPurchasing {
+                                    ProgressView()
+                                        .frame(maxWidth: .infinity)
+                                } else {
+                                    Text(removeAdsButtonLabel)
+                                        .frame(maxWidth: .infinity)
+                                }
+                            }
+                            .buttonStyle(.borderedProminent)
+                            .disabled(removeAdsStore.product == nil || removeAdsStore.isPurchasing)
+                        }
+                        .padding(.vertical, 4)
+                    }
+                    // Always visible regardless of purchase state - App Store
+                    // Review Guideline 3.1.1 requires a discoverable restore
+                    // mechanism; hiding it once "purchased" is a documented,
+                    // common rejection reason.
+                    Button(languageStore.strings.restorePurchasesButtonTitle) {
+                        Task { await restorePurchases() }
+                    }
+                } header: {
+                    Text(languageStore.strings.removeAdsTitle)
                 }
                 Section(languageStore.strings.typographyLabel) {
                     Text(languageStore.strings.typographyPreviewText)
