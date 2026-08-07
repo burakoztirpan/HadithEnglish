@@ -14,7 +14,7 @@ struct NativeAdCard: View {
         Group {
             if let nativeAd = loader.nativeAd {
                 NativeAdContainerView(nativeAd: nativeAd)
-                    .frame(minHeight: 96)
+                    .frame(height: Self.cardHeight(for: nativeAd))
                     .padding(.vertical, 8)
             } else {
                 // ponytail: EmptyView() here collapses this List row to a
@@ -26,6 +26,24 @@ struct NativeAdCard: View {
             }
         }
         .onAppear { loader.load() }
+    }
+
+    /// A List row's UIViewRepresentable content doesn't self-size from its
+    /// UIKit content's real Auto Layout needs - it's capped to whatever
+    /// SwiftUI frame it's given, full stop. A too-small `minHeight` here
+    /// (96pt, measured on-device) squeezed GADMediaView down to ~56pt
+    /// tall - both "the banner looks tiny" and AdMob's own "MediaView too
+    /// small for video" validator warning were the same root cause. This
+    /// computes real room for the loaded ad's actual aspect ratio instead
+    /// of guessing a fixed height, clamped so one unusually tall/wide ad
+    /// can't blow out the list's rhythm.
+    private static func cardHeight(for nativeAd: GADNativeAd) -> CGFloat {
+        let ratio = nativeAd.mediaContent.aspectRatio > 0 ? CGFloat(nativeAd.mediaContent.aspectRatio) : 16.0 / 9.0
+        let rowWidth = UIScreen.main.bounds.width - 32 // matches the 16pt List-row insets on each side
+        let mediaWidth = rowWidth - 32 // stack's own 16pt leading/trailing margins
+        let mediaHeight = min(max(mediaWidth / ratio, 120), 220)
+        let chromeHeight: CGFloat = 150 // sponsored label + headline + body + CTA + spacing + top/bottom margins
+        return mediaHeight + chromeHeight
     }
 }
 
@@ -41,10 +59,17 @@ private struct NativeAdContainerView: UIViewRepresentable {
         let adView = GADNativeAdView()
         adView.backgroundColor = UIColor(named: "CardBackground")
 
+        // AdMob's own native ad policy requires a clearly visible, high-
+        // contrast "Ad" attribution badge - not just a plain caption in
+        // the same muted secondary color as everything else on the card.
         let sponsoredLabel = UILabel()
-        sponsoredLabel.font = .preferredFont(forTextStyle: .caption1)
-        sponsoredLabel.textColor = .secondaryLabel
-        sponsoredLabel.text = "Ad"
+        sponsoredLabel.font = .boldSystemFont(ofSize: UIFont.preferredFont(forTextStyle: .caption2).pointSize)
+        sponsoredLabel.textColor = .white
+        sponsoredLabel.backgroundColor = UIColor(named: "AccentColor") ?? .systemGreen
+        sponsoredLabel.text = "  Ad  "
+        sponsoredLabel.layer.cornerRadius = 3
+        sponsoredLabel.layer.masksToBounds = true
+        sponsoredLabel.setContentHuggingPriority(.required, for: .horizontal)
 
         let headlineLabel = UILabel()
         headlineLabel.font = .preferredFont(forTextStyle: .body)
@@ -88,7 +113,16 @@ private struct NativeAdContainerView: UIViewRepresentable {
         ctaButton.tintColor = UIColor(named: "AccentColor")
         adView.callToActionView = ctaButton
 
-        let stack = UIStackView(arrangedSubviews: [sponsoredLabel, headlineLabel, mediaContainer, bodyLabel, ctaButton])
+        // sponsoredLabel needs to hug its own text width (a compact chip),
+        // not stretch to the full row width like the vertical stack's
+        // .fill alignment would otherwise force on every arranged
+        // subview - wrapping it with a flexible spacer in its own
+        // horizontal row is the reliable way to left-align just this one
+        // item without fighting the outer stack's alignment.
+        let badgeRow = UIStackView(arrangedSubviews: [sponsoredLabel, UIView()])
+        badgeRow.axis = .horizontal
+
+        let stack = UIStackView(arrangedSubviews: [badgeRow, headlineLabel, mediaContainer, bodyLabel, ctaButton])
         stack.axis = .vertical
         stack.spacing = 6
         stack.translatesAutoresizingMaskIntoConstraints = false
