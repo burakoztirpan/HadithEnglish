@@ -61,7 +61,16 @@ final class AdManager: NSObject, ObservableObject {
             return
         }
 
-        presentInterstitialIfLoaded(now: now)
+        guard presentInterstitialIfLoaded() else {
+            // A trigger qualified and cooldown was clear, but no ad was
+            // actually ready to show (still loading, or a prior load
+            // failed) - same as the cooldown-blocked case above, keep the
+            // count so the next qualifying exit retries. Do NOT start the
+            // cooldown or reset the count for an ad the user never saw.
+            defaults.set(newCount, forKey: Self.categoryChangeCountKey)
+            return
+        }
+
         defaults.set(0, forKey: Self.categoryChangeCountKey)
         defaults.set(Self.rollThreshold(), forKey: Self.nextThresholdKey)
         defaults.set(now, forKey: Self.lastShownAtKey)
@@ -95,14 +104,16 @@ final class AdManager: NSObject, ObservableObject {
         }
     }
 
-    private func presentInterstitialIfLoaded(now: Date) {
+    @discardableResult
+    private func presentInterstitialIfLoaded() -> Bool {
         guard let ad = preloadedInterstitial, let rootVC = Self.topViewController() else {
             print("AdManager: interstitial not ready, skipping this trigger")
-            return
+            return false
         }
         ad.present(fromRootViewController: rootVC)
         preloadedInterstitial = nil
         preloadInterstitialIfNeeded()
+        return true
     }
 
     private static func topViewController() -> UIViewController? {
