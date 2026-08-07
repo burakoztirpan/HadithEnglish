@@ -63,23 +63,23 @@ private struct NativeAdContainerView: UIViewRepresentable {
         // implementation issue.
         //
         // GADMediaView manages its own internal layout once `mediaContent`
-        // is assigned (in updateUIView) and clears constraints it owns on
-        // itself in the process, silently dropping a height constraint
-        // added directly to it. A separate fixed-height container that
-        // GADMediaView is merely pinned inside of isn't touched by that,
-        // so the row keeps a real, compliant (non-zero) media slot.
+        // is assigned (in updateUIView) and clears EVERY Auto Layout
+        // constraint referencing itself in the process - not just a height
+        // constraint applied directly to it, but also leading/trailing/
+        // top/bottom constraints pinning it inside a wrapper, confirmed by
+        // the validator still reporting "too small for video" even with
+        // those pins in place (mediaView silently reverts to zero size the
+        // moment mediaContent is set). The fix is to never let Auto Layout
+        // own mediaView's frame at all: use autoresizing (frame-based) to
+        // fill the fixed-height container instead, set explicitly in
+        // updateUIView right before mediaContent is assigned.
         let mediaView = GADMediaView()
         mediaView.contentMode = .scaleAspectFit
-        mediaView.translatesAutoresizingMaskIntoConstraints = false
+        mediaView.translatesAutoresizingMaskIntoConstraints = true
+        mediaView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         let mediaContainer = UIView()
         mediaContainer.heightAnchor.constraint(equalToConstant: 160).isActive = true
         mediaContainer.addSubview(mediaView)
-        NSLayoutConstraint.activate([
-            mediaView.topAnchor.constraint(equalTo: mediaContainer.topAnchor),
-            mediaView.bottomAnchor.constraint(equalTo: mediaContainer.bottomAnchor),
-            mediaView.leadingAnchor.constraint(equalTo: mediaContainer.leadingAnchor),
-            mediaView.trailingAnchor.constraint(equalTo: mediaContainer.trailingAnchor),
-        ])
         adView.mediaView = mediaView
 
         let ctaButton = UIButton(type: .system)
@@ -107,7 +107,15 @@ private struct NativeAdContainerView: UIViewRepresentable {
         (adView.headlineView as? UILabel)?.text = nativeAd.headline
         (adView.bodyView as? UILabel)?.text = nativeAd.body
         (adView.callToActionView as? UIButton)?.setTitle(nativeAd.callToAction, for: .normal)
-        adView.mediaView?.mediaContent = nativeAd.mediaContent
+        if let mediaView = adView.mediaView, let container = mediaView.superview {
+            // Force the container's Auto-Layout-driven bounds to be final
+            // before handing mediaView a frame - mediaContent assignment
+            // below is what triggers GADMediaView's internal layout, which
+            // needs a real, non-zero starting frame to lay out into.
+            container.layoutIfNeeded()
+            mediaView.frame = container.bounds
+            mediaView.mediaContent = nativeAd.mediaContent
+        }
         // Must be set last, after every asset view above is assigned -
         // this is what actually activates AdMob's click/impression
         // tracking on the views just registered.
