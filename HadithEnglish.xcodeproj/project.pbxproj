@@ -11,6 +11,7 @@
 		2D8537801D524F92AD0DC0E1 /* ShareCardPreviewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F3557121F0B41B58127F66C /* ShareCardPreviewView.swift */; };
 		C7797AB83FA868F309A3C6E4 /* ToastCenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1DF5EBF25D412D9AF42022A /* ToastCenter.swift */; };
 		B6C117FD8B2821FAC8048A9E /* ToastView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3AF9ED2E1D7DC8013E32223 /* ToastView.swift */; };
+		0D2668A4B66298DE5DE21DB3 /* GoogleMobileAds in Frameworks */ = {isa = PBXBuildFile; productRef = 9F5B0ED11955BDD9A78FDC90 /* GoogleMobileAds */; };
 		9F3B761D38314976B291FC22 /* ShareCardBackground.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1598FD94C60461AADFCB6A9 /* ShareCardBackground.swift */; };
 		9BDC21C2BF9944EC94B39B76 /* ShareCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E29B4CC09D684E2195AD79C6 /* ShareCardView.swift */; };
 		B7CC96DBF91F4FB8BF952362 /* ShareOptionsSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CE0CF90B2204928913B3FC8 /* ShareOptionsSheet.swift */; };
@@ -108,6 +109,17 @@
 		FA544C1D875C2199D531E309 /* hadith_en.json.zlib */ = {isa = PBXFileReference; lastKnownFileType = None; name = hadith_en.json.zlib; path = HadithEnglish/hadith_en.json.zlib; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
+/* Begin PBXFrameworksBuildPhase section */
+		9B47905DE29CEF79FFF0593C /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				0D2668A4B66298DE5DE21DB3 /* GoogleMobileAds in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
 /* Begin PBXGroup section */
 		63B2E4C02049A9AD001513AD = {
 			isa = PBXGroup;
@@ -188,12 +200,16 @@
 			buildPhases = (
 				63B2E4C52049A9AD001513AD /* Sources */,
 				63B2E4C72049A9AD001513AD /* Resources */,
+				9B47905DE29CEF79FFF0593C /* Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 			);
 			name = HadithEnglish;
+			packageProductDependencies = (
+				9F5B0ED11955BDD9A78FDC90 /* GoogleMobileAds */,
+			);
 			productName = HadithEnglish;
 			productReference = 63B2E4C92049A9AD001513AD /* HadithEnglish.app */;
 			productType = "com.apple.product-type.application";
@@ -223,6 +239,9 @@
 				Base,
 			);
 			mainGroup = 63B2E4C02049A9AD001513AD;
+			packageReferences = (
+				0A5C3D0D4B62075004EDD573 /* XCRemoteSwiftPackageReference "swift-package-manager-google-mobile-ads" */,
+			);
 			productRefGroup = 63B2E4CA2049A9AD001513AD /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -310,6 +329,25 @@
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		0A5C3D0D4B62075004EDD573 /* XCRemoteSwiftPackageReference "swift-package-manager-google-mobile-ads" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/googleads/swift-package-manager-google-mobile-ads";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 11.0.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		9F5B0ED11955BDD9A78FDC90 /* GoogleMobileAds */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 0A5C3D0D4B62075004EDD573 /* XCRemoteSwiftPackageReference "swift-package-manager-google-mobile-ads" */;
+			productName = GoogleMobileAds;
+		};
+/* End XCSwiftPackageProductDependency section */
 
 /* Begin XCBuildConfiguration section */
 		63B2E4DC2049A9AD001513AD /* Debug */ = {
