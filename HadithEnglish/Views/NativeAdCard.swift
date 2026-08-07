@@ -17,7 +17,12 @@ struct NativeAdCard: View {
                     .frame(minHeight: 96)
                     .padding(.vertical, 8)
             } else {
-                EmptyView()
+                // ponytail: EmptyView() here collapses this List row to a
+                // zero-size cell, and List never instantiates (or calls
+                // onAppear on) a zero-size row - so the ad load never
+                // started. Color.clear with a real, if tiny, frame keeps
+                // this a genuine row so onAppear fires and load() runs.
+                Color.clear.frame(height: 1)
             }
         }
         .onAppear { loader.load() }
@@ -52,13 +57,38 @@ private struct NativeAdContainerView: UIViewRepresentable {
         bodyLabel.numberOfLines = 3
         adView.bodyView = bodyLabel
 
+        // Some inventory (video-enabled native ads) requires a registered
+        // media view to render its required media asset at all - AdMob's
+        // own on-device validator flags a missing mediaView as an
+        // implementation issue.
+        //
+        // GADMediaView manages its own internal layout once `mediaContent`
+        // is assigned (in updateUIView) and clears constraints it owns on
+        // itself in the process, silently dropping a height constraint
+        // added directly to it. A separate fixed-height container that
+        // GADMediaView is merely pinned inside of isn't touched by that,
+        // so the row keeps a real, compliant (non-zero) media slot.
+        let mediaView = GADMediaView()
+        mediaView.contentMode = .scaleAspectFit
+        mediaView.translatesAutoresizingMaskIntoConstraints = false
+        let mediaContainer = UIView()
+        mediaContainer.heightAnchor.constraint(equalToConstant: 160).isActive = true
+        mediaContainer.addSubview(mediaView)
+        NSLayoutConstraint.activate([
+            mediaView.topAnchor.constraint(equalTo: mediaContainer.topAnchor),
+            mediaView.bottomAnchor.constraint(equalTo: mediaContainer.bottomAnchor),
+            mediaView.leadingAnchor.constraint(equalTo: mediaContainer.leadingAnchor),
+            mediaView.trailingAnchor.constraint(equalTo: mediaContainer.trailingAnchor),
+        ])
+        adView.mediaView = mediaView
+
         let ctaButton = UIButton(type: .system)
         ctaButton.titleLabel?.font = .boldSystemFont(ofSize: UIFont.preferredFont(forTextStyle: .caption1).pointSize)
         ctaButton.contentHorizontalAlignment = .leading
         ctaButton.tintColor = UIColor(named: "AccentColor")
         adView.callToActionView = ctaButton
 
-        let stack = UIStackView(arrangedSubviews: [sponsoredLabel, headlineLabel, bodyLabel, ctaButton])
+        let stack = UIStackView(arrangedSubviews: [sponsoredLabel, headlineLabel, mediaContainer, bodyLabel, ctaButton])
         stack.axis = .vertical
         stack.spacing = 6
         stack.translatesAutoresizingMaskIntoConstraints = false
@@ -77,6 +107,7 @@ private struct NativeAdContainerView: UIViewRepresentable {
         (adView.headlineView as? UILabel)?.text = nativeAd.headline
         (adView.bodyView as? UILabel)?.text = nativeAd.body
         (adView.callToActionView as? UIButton)?.setTitle(nativeAd.callToAction, for: .normal)
+        adView.mediaView?.mediaContent = nativeAd.mediaContent
         // Must be set last, after every asset view above is assigned -
         // this is what actually activates AdMob's click/impression
         // tracking on the views just registered.
