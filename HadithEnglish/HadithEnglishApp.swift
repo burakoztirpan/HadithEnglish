@@ -1,4 +1,6 @@
 import SwiftUI
+import GoogleMobileAds
+import AppTrackingTransparency
 
 @main
 struct HadithEnglishApp: App {
@@ -47,6 +49,10 @@ struct HadithEnglishApp: App {
             .onAppear {
                 content.load(languageStore.language)
                 notificationStore.configure(subjects: content.subjects, title: languageStore.strings.hadithOfTheDay)
+                GADMobileAds.sharedInstance().start(completionHandler: nil)
+                DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+                    ATTrackingManager.requestTrackingAuthorization { _ in }
+                }
             }
             .onChange(of: languageStore.language) { newValue in
                 content.load(newValue)

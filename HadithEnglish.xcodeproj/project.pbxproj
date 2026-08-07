@@ -12,6 +12,7 @@
 		C7797AB83FA868F309A3C6E4 /* ToastCenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1DF5EBF25D412D9AF42022A /* ToastCenter.swift */; };
 		B6C117FD8B2821FAC8048A9E /* ToastView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3AF9ED2E1D7DC8013E32223 /* ToastView.swift */; };
 		0D2668A4B66298DE5DE21DB3 /* GoogleMobileAds in Frameworks */ = {isa = PBXBuildFile; productRef = 9F5B0ED11955BDD9A78FDC90 /* GoogleMobileAds */; };
+		B14899FC74F2DBE066D3A4EB /* AdConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAD09F3DE24955F9A184B234 /* AdConfig.swift */; };
 		9F3B761D38314976B291FC22 /* ShareCardBackground.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1598FD94C60461AADFCB6A9 /* ShareCardBackground.swift */; };
 		9BDC21C2BF9944EC94B39B76 /* ShareCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E29B4CC09D684E2195AD79C6 /* ShareCardView.swift */; };
 		B7CC96DBF91F4FB8BF952362 /* ShareOptionsSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CE0CF90B2204928913B3FC8 /* ShareOptionsSheet.swift */; };
@@ -63,6 +64,7 @@
 		2F3557121F0B41B58127F66C /* ShareCardPreviewView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ShareCardPreviewView.swift; path = HadithEnglish/Views/ShareCardPreviewView.swift; sourceTree = SOURCE_ROOT; };
 		D1DF5EBF25D412D9AF42022A /* ToastCenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ToastCenter.swift; path = HadithEnglish/Stores/ToastCenter.swift; sourceTree = SOURCE_ROOT; };
 		C3AF9ED2E1D7DC8013E32223 /* ToastView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ToastView.swift; path = HadithEnglish/Views/ToastView.swift; sourceTree = SOURCE_ROOT; };
+		BAD09F3DE24955F9A184B234 /* AdConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = AdConfig.swift; path = HadithEnglish/Models/AdConfig.swift; sourceTree = SOURCE_ROOT; };
 		D1598FD94C60461AADFCB6A9 /* ShareCardBackground.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ShareCardBackground.swift; path = HadithEnglish/Models/ShareCardBackground.swift; sourceTree = SOURCE_ROOT; };
 		E29B4CC09D684E2195AD79C6 /* ShareCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ShareCardView.swift; path = HadithEnglish/Views/ShareCardView.swift; sourceTree = SOURCE_ROOT; };
 		6CE0CF90B2204928913B3FC8 /* ShareOptionsSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ShareOptionsSheet.swift; path = HadithEnglish/Views/ShareOptionsSheet.swift; sourceTree = SOURCE_ROOT; };
@@ -166,6 +168,7 @@
 				2F3557121F0B41B58127F66C /* ShareCardPreviewView.swift */,
 				D1DF5EBF25D412D9AF42022A /* ToastCenter.swift */,
 				C3AF9ED2E1D7DC8013E32223 /* ToastView.swift */,
+				BAD09F3DE24955F9A184B234 /* AdConfig.swift */,
 				69CF4B84B97839655797EBC1,
 				E3944F83AE8B3CC4667D33EC,
 				064342C5A1701BC6CC28CD52,
@@ -314,6 +317,7 @@
 				2D8537801D524F92AD0DC0E1 /* ShareCardPreviewView.swift in Sources */,
 				C7797AB83FA868F309A3C6E4 /* ToastCenter.swift in Sources */,
 				B6C117FD8B2821FAC8048A9E /* ToastView.swift in Sources */,
+				B14899FC74F2DBE066D3A4EB /* AdConfig.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
