@@ -62,24 +62,24 @@ private struct NativeAdContainerView: UIViewRepresentable {
         // own on-device validator flags a missing mediaView as an
         // implementation issue.
         //
-        // GADMediaView manages its own internal layout once `mediaContent`
-        // is assigned (in updateUIView) and clears EVERY Auto Layout
-        // constraint referencing itself in the process - not just a height
-        // constraint applied directly to it, but also leading/trailing/
-        // top/bottom constraints pinning it inside a wrapper, confirmed by
-        // the validator still reporting "too small for video" even with
-        // those pins in place (mediaView silently reverts to zero size the
-        // moment mediaContent is set). The fix is to never let Auto Layout
-        // own mediaView's frame at all: use autoresizing (frame-based) to
-        // fill the fixed-height container instead, set explicitly in
-        // updateUIView right before mediaContent is assigned.
+        // Google's own sample (developers.google.com/admob/ios/native/advanced)
+        // pins mediaView with real Auto Layout and derives its HEIGHT from
+        // the loaded ad's mediaContent.aspectRatio, added once that's known
+        // (updateUIView) - a fixed guessed height can end up narrower than
+        // the ad's actual video needs, which is what the validator was
+        // flagging here even after mediaView itself was correctly in the
+        // view hierarchy. See updateUIView for the aspect-ratio constraint.
         let mediaView = GADMediaView()
         mediaView.contentMode = .scaleAspectFit
-        mediaView.translatesAutoresizingMaskIntoConstraints = true
-        mediaView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+        mediaView.translatesAutoresizingMaskIntoConstraints = false
         let mediaContainer = UIView()
-        mediaContainer.heightAnchor.constraint(equalToConstant: 160).isActive = true
         mediaContainer.addSubview(mediaView)
+        NSLayoutConstraint.activate([
+            mediaView.topAnchor.constraint(equalTo: mediaContainer.topAnchor),
+            mediaView.bottomAnchor.constraint(equalTo: mediaContainer.bottomAnchor),
+            mediaView.leadingAnchor.constraint(equalTo: mediaContainer.leadingAnchor),
+            mediaView.trailingAnchor.constraint(equalTo: mediaContainer.trailingAnchor),
+        ])
         adView.mediaView = mediaView
 
         let ctaButton = UIButton(type: .system)
@@ -107,19 +107,33 @@ private struct NativeAdContainerView: UIViewRepresentable {
         (adView.headlineView as? UILabel)?.text = nativeAd.headline
         (adView.bodyView as? UILabel)?.text = nativeAd.body
         (adView.callToActionView as? UIButton)?.setTitle(nativeAd.callToAction, for: .normal)
-        if let mediaView = adView.mediaView, let container = mediaView.superview {
-            // Force the container's Auto-Layout-driven bounds to be final
-            // before handing mediaView a frame - mediaContent assignment
-            // below is what triggers GADMediaView's internal layout, which
-            // needs a real, non-zero starting frame to lay out into.
-            container.layoutIfNeeded()
-            mediaView.frame = container.bounds
+        if let mediaView = adView.mediaView {
+            // mediaView's width comes for free from its container filling
+            // the row's width (via the outer stack view). Height is
+            // derived from the real ad's aspect ratio - a guessed fixed
+            // height can be narrower than the actual video needs, which is
+            // what the validator was flagging even with mediaView correctly
+            // in the hierarchy. Only one of these should be active at a
+            // time if this view is ever reused for a different ad.
+            context.coordinator.aspectConstraint?.isActive = false
+            let ratio = nativeAd.mediaContent.aspectRatio > 0 ? CGFloat(nativeAd.mediaContent.aspectRatio) : 16.0 / 9.0
+            let constraint = mediaView.widthAnchor.constraint(equalTo: mediaView.heightAnchor, multiplier: ratio)
+            constraint.isActive = true
+            context.coordinator.aspectConstraint = constraint
             mediaView.mediaContent = nativeAd.mediaContent
         }
         // Must be set last, after every asset view above is assigned -
         // this is what actually activates AdMob's click/impression
         // tracking on the views just registered.
         adView.nativeAd = nativeAd
+    }
+
+    final class Coordinator {
+        var aspectConstraint: NSLayoutConstraint?
+    }
+
+    func makeCoordinator() -> Coordinator {
+        Coordinator()
     }
 }
 
