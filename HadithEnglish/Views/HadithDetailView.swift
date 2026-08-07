@@ -7,6 +7,7 @@ struct HadithDetailView: View {
     @EnvironmentObject private var favorites: FavoritesStore
     @EnvironmentObject private var languageStore: LanguageStore
     @EnvironmentObject private var adManager: AdManager
+    @EnvironmentObject private var removeAdsStore: RemoveAdsStore
 
     /// Live-filtered (not a snapshot) so swiping to remove a favorite here
     /// updates the list immediately, same as the old flat Favorites screen did.
@@ -35,7 +36,7 @@ struct HadithDetailView: View {
                 } else {
                     HadithCardView(entry: entry)
                         .listRowBackground(Color("CardBackground"))
-                    if (index + 1) % 8 == 0 {
+                    if !removeAdsStore.isPurchased && (index + 1) % 8 == 0 {
                         NativeAdCard()
                             .listRowBackground(Color("CardBackground"))
                     }
@@ -48,11 +49,13 @@ struct HadithDetailView: View {
         .onAppear {
             if !favoritesOnly {
                 lastRead.recordVisit(to: subject)
-                adManager.categoryEntered()
+                if !removeAdsStore.isPurchased {
+                    adManager.categoryEntered()
+                }
             }
         }
         .onDisappear {
-            if !favoritesOnly {
+            if !favoritesOnly && !removeAdsStore.isPurchased {
                 adManager.categoryExited()
             }
         }
