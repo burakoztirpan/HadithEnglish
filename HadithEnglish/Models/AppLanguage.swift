@@ -82,6 +82,12 @@ struct Strings {
     let shareAction: String
     let hadithTooLongForCard: String
     let sharedConfirmation: String
+    let removeAdsTitle: String
+    let removeAdsDescription: String
+    let removeAdsButtonTitle: String
+    let removeAdsPurchasedLabel: String
+    let restorePurchasesButtonTitle: String
+    let removeAdsToastMessage: String
 }
 
 extension AppLanguage {
@@ -143,7 +149,13 @@ extension AppLanguage {
                 shareAsTextOption: "Share as Text",
                 shareAction: "Share",
                 hadithTooLongForCard: "This hadith is too long to fit on an image card. You can still share it as text.",
-                sharedConfirmation: "Shared"
+                sharedConfirmation: "Shared",
+                removeAdsTitle: "Remove Ads",
+                removeAdsDescription: "Support the app and enjoy an ad-free reading experience.",
+                removeAdsButtonTitle: "Remove Ads",
+                removeAdsPurchasedLabel: "Ads Removed",
+                restorePurchasesButtonTitle: "Restore Purchases",
+                removeAdsToastMessage: "Ads removed!"
             )
         case .ar:
             return Strings(
@@ -201,7 +213,13 @@ extension AppLanguage {
                 shareAsTextOption: "مشاركة كنص",
                 shareAction: "مشاركة",
                 hadithTooLongForCard: "هذا الحديث طويل جدًا ليتناسب مع بطاقة الصورة. يمكنك مشاركته كنص بدلاً من ذلك.",
-                sharedConfirmation: "تمت المشاركة"
+                sharedConfirmation: "تمت المشاركة",
+                removeAdsTitle: "إزالة الإعلانات",
+                removeAdsDescription: "ادعم التطبيق واستمتع بتجربة قراءة خالية من الإعلانات.",
+                removeAdsButtonTitle: "إزالة الإعلانات",
+                removeAdsPurchasedLabel: "تمت إزالة الإعلانات",
+                restorePurchasesButtonTitle: "استعادة المشتريات",
+                removeAdsToastMessage: "تمت إزالة الإعلانات!"
             )
         case .tr:
             return Strings(
@@ -259,7 +277,13 @@ extension AppLanguage {
                 shareAsTextOption: "Metin Olarak Paylaş",
                 shareAction: "Paylaş",
                 hadithTooLongForCard: "Bu hadis görsel bir karta sığmayacak kadar uzun. Bunun yerine metin olarak paylaşabilirsiniz.",
-                sharedConfirmation: "Paylaşıldı"
+                sharedConfirmation: "Paylaşıldı",
+                removeAdsTitle: "Reklamları Kaldır",
+                removeAdsDescription: "Uygulamayı destekleyin ve reklamsız bir okuma deneyiminin tadını çıkarın.",
+                removeAdsButtonTitle: "Reklamları Kaldır",
+                removeAdsPurchasedLabel: "Reklamlar Kaldırıldı",
+                restorePurchasesButtonTitle: "Satın Alımları Geri Yükle",
+                removeAdsToastMessage: "Reklamlar kaldırıldı!"
             )
         case .ind:
             return Strings(
@@ -317,7 +341,13 @@ extension AppLanguage {
                 shareAsTextOption: "Bagikan sebagai Teks",
                 shareAction: "Bagikan",
                 hadithTooLongForCard: "Hadis ini terlalu panjang untuk kartu gambar. Anda tetap bisa membagikannya sebagai teks.",
-                sharedConfirmation: "Berhasil dibagikan"
+                sharedConfirmation: "Berhasil dibagikan",
+                removeAdsTitle: "Hapus Iklan",
+                removeAdsDescription: "Dukung aplikasi ini dan nikmati pengalaman membaca tanpa iklan.",
+                removeAdsButtonTitle: "Hapus Iklan",
+                removeAdsPurchasedLabel: "Iklan Dihapus",
+                restorePurchasesButtonTitle: "Pulihkan Pembelian",
+                removeAdsToastMessage: "Iklan berhasil dihapus!"
             )
         case .urd:
             return Strings(
@@ -375,7 +405,13 @@ extension AppLanguage {
                 shareAsTextOption: "متن کے طور پر شیئر کریں",
                 shareAction: "شیئر کریں",
                 hadithTooLongForCard: "یہ حدیث تصویری کارڈ میں سمانے کے لیے بہت طویل ہے۔ آپ اسے متن کے طور پر شیئر کر سکتے ہیں۔",
-                sharedConfirmation: "شیئر ہو گیا"
+                sharedConfirmation: "شیئر ہو گیا",
+                removeAdsTitle: "اشتہارات ہٹائیں",
+                removeAdsDescription: "ایپ کو سپورٹ کریں اور اشتہارات کے بغیر پڑھنے کا تجربہ حاصل کریں۔",
+                removeAdsButtonTitle: "اشتہارات ہٹائیں",
+                removeAdsPurchasedLabel: "اشتہارات ہٹا دیے گئے",
+                restorePurchasesButtonTitle: "خریداری بحال کریں",
+                removeAdsToastMessage: "اشتہارات ہٹا دیے گئے!"
             )
         }
     }
