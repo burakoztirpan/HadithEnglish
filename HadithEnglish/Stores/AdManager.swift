@@ -1,6 +1,7 @@
 import Foundation
 import UIKit
 import GoogleMobileAds
+import UserMessagingPlatform
 
 /// Owns the interstitial ad's trigger rules and lifecycle. Everything a
 /// caller needs is two calls: `categoryEntered()` on appear,
@@ -94,7 +95,7 @@ final class AdManager: NSObject, ObservableObject {
     // MARK: - Ad lifecycle
 
     private func preloadInterstitialIfNeeded() {
-        guard preloadedInterstitial == nil else { return }
+        guard preloadedInterstitial == nil, UMPConsentInformation.sharedInstance.canRequestAds else { return }
         GADInterstitialAd.load(withAdUnitID: AdConfig.interstitialAdUnitID, request: GADRequest()) { [weak self] ad, error in
             if let error {
                 print("AdManager: interstitial preload failed: \(error.localizedDescription)")
