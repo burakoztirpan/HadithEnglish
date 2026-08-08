@@ -7,6 +7,7 @@ struct SettingsView: View {
     @EnvironmentObject private var typographyStore: TypographyStore
     @EnvironmentObject private var removeAdsStore: RemoveAdsStore
     @EnvironmentObject private var toastCenter: ToastCenter
+    @EnvironmentObject private var consentManager: ConsentManager
 
     private func appearanceName(_ theme: AppTheme) -> String {
         switch theme {
@@ -157,6 +158,15 @@ struct SettingsView: View {
                     // app ID, which doesn't exist yet. Re-add once that ID is known.
                     Link(languageStore.strings.termsAndConditions, destination: termsAndConditionsURL)
                     Link(languageStore.strings.privacyPolicy, destination: privacyPolicyURL)
+                    if consentManager.isPrivacyOptionsRequired {
+                        Button(languageStore.strings.privacyOptionsButtonTitle) {
+                            consentManager.presentPrivacyOptionsForm { error in
+                                if let error {
+                                    toastCenter.show(error.localizedDescription)
+                                }
+                            }
+                        }
+                    }
                 }
                 Section(languageStore.strings.aboutSection) {
                     HStack {

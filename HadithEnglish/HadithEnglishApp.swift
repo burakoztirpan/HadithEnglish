@@ -1,6 +1,5 @@
 import SwiftUI
 import GoogleMobileAds
-import AppTrackingTransparency
 
 @main
 struct HadithEnglishApp: App {
@@ -16,6 +15,7 @@ struct HadithEnglishApp: App {
     @StateObject private var toastCenter = ToastCenter()
     @StateObject private var adManager = AdManager()
     @StateObject private var removeAdsStore = RemoveAdsStore()
+    @StateObject private var consentManager = ConsentManager.shared
     @Environment(\.scenePhase) private var scenePhase
 
     var body: some Scene {
@@ -47,16 +47,14 @@ struct HadithEnglishApp: App {
             .environmentObject(toastCenter)
             .environmentObject(adManager)
             .environmentObject(removeAdsStore)
+            .environmentObject(consentManager)
             .environment(\.layoutDirection, languageStore.language.isRightToLeft ? .rightToLeft : .leftToRight)
             .preferredColorScheme(themeStore.theme.colorScheme)
             .accentColor(Color("AccentColor"))
             .onAppear {
                 content.load(languageStore.language)
                 notificationStore.configure(subjects: content.subjects, title: languageStore.strings.hadithOfTheDay)
-                GADMobileAds.sharedInstance().start(completionHandler: nil)
-                DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
-                    ATTrackingManager.requestTrackingAuthorization { _ in }
-                }
+                consentManager.requestConsentThenStartAds()
             }
             .onChange(of: languageStore.language) { newValue in
                 content.load(newValue)

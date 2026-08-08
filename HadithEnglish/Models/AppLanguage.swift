@@ -88,6 +88,7 @@ struct Strings {
     let removeAdsPurchasedLabel: String
     let restorePurchasesButtonTitle: String
     let removeAdsToastMessage: String
+    let privacyOptionsButtonTitle: String
 }
 
 extension AppLanguage {
@@ -155,7 +156,8 @@ extension AppLanguage {
                 removeAdsButtonTitle: "Remove Ads",
                 removeAdsPurchasedLabel: "Ads Removed",
                 restorePurchasesButtonTitle: "Restore Purchases",
-                removeAdsToastMessage: "Ads removed!"
+                removeAdsToastMessage: "Ads removed!",
+                privacyOptionsButtonTitle: "Privacy Options"
             )
         case .ar:
             return Strings(
@@ -219,7 +221,8 @@ extension AppLanguage {
                 removeAdsButtonTitle: "إزالة الإعلانات",
                 removeAdsPurchasedLabel: "تمت إزالة الإعلانات",
                 restorePurchasesButtonTitle: "استعادة المشتريات",
-                removeAdsToastMessage: "تمت إزالة الإعلانات!"
+                removeAdsToastMessage: "تمت إزالة الإعلانات!",
+                privacyOptionsButtonTitle: "خيارات الخصوصية"
             )
         case .tr:
             return Strings(
@@ -283,7 +286,8 @@ extension AppLanguage {
                 removeAdsButtonTitle: "Reklamları Kaldır",
                 removeAdsPurchasedLabel: "Reklamlar Kaldırıldı",
                 restorePurchasesButtonTitle: "Satın Alımları Geri Yükle",
-                removeAdsToastMessage: "Reklamlar kaldırıldı!"
+                removeAdsToastMessage: "Reklamlar kaldırıldı!",
+                privacyOptionsButtonTitle: "Gizlilik Seçenekleri"
             )
         case .ind:
             return Strings(
@@ -347,7 +351,8 @@ extension AppLanguage {
                 removeAdsButtonTitle: "Hapus Iklan",
                 removeAdsPurchasedLabel: "Iklan Dihapus",
                 restorePurchasesButtonTitle: "Pulihkan Pembelian",
-                removeAdsToastMessage: "Iklan berhasil dihapus!"
+                removeAdsToastMessage: "Iklan berhasil dihapus!",
+                privacyOptionsButtonTitle: "Opsi Privasi"
             )
         case .urd:
             return Strings(
@@ -411,7 +416,8 @@ extension AppLanguage {
                 removeAdsButtonTitle: "اشتہارات ہٹائیں",
                 removeAdsPurchasedLabel: "اشتہارات ہٹا دیے گئے",
                 restorePurchasesButtonTitle: "خریداری بحال کریں",
-                removeAdsToastMessage: "اشتہارات ہٹا دیے گئے!"
+                removeAdsToastMessage: "اشتہارات ہٹا دیے گئے!",
+                privacyOptionsButtonTitle: "پرائیویسی کے اختیارات"
             )
         }
     }
