@@ -63,27 +63,33 @@ struct HomeView: View {
 
     var body: some View {
         NavigationView {
-            ScrollView {
-                VStack(alignment: .leading, spacing: 28) {
-                    headerSection
-                    if subjects.isEmpty {
-                        ProgressView()
-                            .frame(maxWidth: .infinity)
-                            .padding(.top, 40)
-                    } else {
-                        if let today = hadithOfTheDay {
-                            hadithOfTheDaySection(today)
-                        }
-                        quickAccessSection
-                        if !featuredTopics.isEmpty {
-                            featuredTopicsSection
-                        }
-                        if !todaysSelection.isEmpty {
-                            todaysSelectionSection
+            VStack(alignment: .leading, spacing: 0) {
+                headerSection
+                    .padding(.horizontal, 16)
+                    .padding(.top, 16)
+                    .padding(.bottom, 28)
+                ScrollView {
+                    VStack(alignment: .leading, spacing: 28) {
+                        if subjects.isEmpty {
+                            ProgressView()
+                                .frame(maxWidth: .infinity)
+                                .padding(.top, 40)
+                        } else {
+                            if let today = hadithOfTheDay {
+                                hadithOfTheDaySection(today)
+                            }
+                            quickAccessSection
+                            if !featuredTopics.isEmpty {
+                                featuredTopicsSection
+                            }
+                            if !todaysSelection.isEmpty {
+                                todaysSelectionSection
+                            }
                         }
                     }
+                    .padding(.horizontal, 16)
+                    .padding(.bottom, 16)
                 }
-                .padding(16)
             }
             .navigationTitle(languageStore.strings.tabHome)
             .navigationBarHidden(true)
