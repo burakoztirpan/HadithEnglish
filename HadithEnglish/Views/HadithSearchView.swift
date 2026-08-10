@@ -22,7 +22,7 @@ struct HadithSearchView: View {
 
     var body: some View {
         List(Array(results.enumerated()), id: \.offset) { _, item in
-            NavigationLink(destination: HadithDetailView(subject: item.subject)) {
+            NavigationLink(destination: HadithDetailView(subject: item.subject, scrollToEntryID: item.entry.id)) {
                 VStack(alignment: .leading, spacing: 4) {
                     Text(verbatim: "\(item.subject.trimmedName) · #\(item.entry.id)")
                         .font(.caption)
