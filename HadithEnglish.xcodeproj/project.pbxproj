@@ -55,6 +55,7 @@
 		998841F19BE79D82D0F5BCB3 /* FavoritesStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68F647BBA0A2884C7ECFB715 /* FavoritesStore.swift */; };
 		A2504BC4967E6B90BCE99827 /* ActivityShareSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73A54BD1A91FE5DE664A55AE /* ActivityShareSheet.swift */; };
 		A2584A97B9E5EBFB880A6393 /* SubjectsListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 697942B99F68CD7E35E9CF42 /* SubjectsListView.swift */; };
+		7BC3A27C3F474EDC9822B30F /* HadithSearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B83F1BE0424242F6BA5D4508 /* HadithSearchView.swift */; };
 		B3054C1D950C07BEC45C5072 /* BookIcons.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6D649A0A55D72648C3FFB8C /* BookIcons.swift */; };
 		C5B843858C89E884AB751AF5 /* HadithOfDay.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3944F83AE8B3CC4667D33EC /* HadithOfDay.swift */; };
 		CF9C4F01885CBF6D198323FD /* HadithContentStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0C94875B3C0108E609A7A7C /* HadithContentStore.swift */; };
@@ -101,6 +102,7 @@
 		63B2E4DB2049A9AD001513AD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		68F647BBA0A2884C7ECFB715 /* FavoritesStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = FavoritesStore.swift; path = HadithEnglish/Stores/FavoritesStore.swift; sourceTree = SOURCE_ROOT; };
 		697942B99F68CD7E35E9CF42 /* SubjectsListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SubjectsListView.swift; path = HadithEnglish/Views/SubjectsListView.swift; sourceTree = SOURCE_ROOT; };
+		B83F1BE0424242F6BA5D4508 /* HadithSearchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = HadithSearchView.swift; path = HadithEnglish/Views/HadithSearchView.swift; sourceTree = SOURCE_ROOT; };
 		73A54BD1A91FE5DE664A55AE /* ActivityShareSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ActivityShareSheet.swift; path = HadithEnglish/Views/ActivityShareSheet.swift; sourceTree = SOURCE_ROOT; };
 		73B046FE8CF90E3628204AC6 /* TabRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = TabRouter.swift; path = HadithEnglish/Stores/TabRouter.swift; sourceTree = SOURCE_ROOT; };
 		92894C06972F9D5781D1B009 /* HadithEnglishApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = HadithEnglishApp.swift; path = HadithEnglish/HadithEnglishApp.swift; sourceTree = SOURCE_ROOT; };
@@ -139,6 +141,7 @@
 				4826402AB97B064E886F5A1F /* HadithModels.swift */,
 				68F647BBA0A2884C7ECFB715 /* FavoritesStore.swift */,
 				697942B99F68CD7E35E9CF42 /* SubjectsListView.swift */,
+				B83F1BE0424242F6BA5D4508 /* HadithSearchView.swift */,
 				D48B4C6C90D77A3250975149 /* HadithDetailView.swift */,
 				A833438ABC6E36815EFEB928 /* FavoritesView.swift */,
 				97DC433C9DF9969385760ED8 /* SettingsView.swift */,
@@ -304,6 +307,7 @@
 				F39D43BEADC4BE937862E774 /* HadithModels.swift in Sources */,
 				998841F19BE79D82D0F5BCB3 /* FavoritesStore.swift in Sources */,
 				A2584A97B9E5EBFB880A6393 /* SubjectsListView.swift in Sources */,
+				7BC3A27C3F474EDC9822B30F /* HadithSearchView.swift in Sources */,
 				084A49238E21465D88182072 /* HadithDetailView.swift in Sources */,
 				F4A14676B20780BDCD654575 /* FavoritesView.swift in Sources */,
 				768147C58234655F1DC71A2B /* SettingsView.swift in Sources */,

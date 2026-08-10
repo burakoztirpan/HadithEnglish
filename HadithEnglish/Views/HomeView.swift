@@ -153,9 +153,7 @@ struct HomeView: View {
                 }
                 .disabled(subjects.isEmpty)
 
-                Button {
-                    tabRouter.selectedTab = .hadiths
-                } label: {
+                NavigationLink(destination: HadithSearchView(subjects: subjects)) {
                     quickAccessTile(icon: "magnifyingglass", label: languageStore.strings.searchHadith)
                 }
             }

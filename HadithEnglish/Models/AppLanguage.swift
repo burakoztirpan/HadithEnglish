@@ -72,6 +72,8 @@ struct Strings {
     let myFavorites: String
     let continueReading: String
     let searchHadith: String
+    let searchHadithsPrompt: String
+    let noSearchResults: String
     let featuredTopics: String
     let todaysSelection: String
     let hadithsSuffix: String
@@ -141,6 +143,8 @@ extension AppLanguage {
                 myFavorites: "My Favorites",
                 continueReading: "Continue Reading",
                 searchHadith: "Search Hadith",
+                searchHadithsPrompt: "Search hadith text",
+                noSearchResults: "No results found",
                 featuredTopics: "Featured Topics",
                 todaysSelection: "Today's Selection",
                 hadithsSuffix: "hadiths",
@@ -206,6 +210,8 @@ extension AppLanguage {
                 myFavorites: "مفضلتي",
                 continueReading: "متابعة القراءة",
                 searchHadith: "البحث عن حديث",
+                searchHadithsPrompt: "البحث في نص الحديث",
+                noSearchResults: "لا توجد نتائج",
                 featuredTopics: "مواضيع مميزة",
                 todaysSelection: "مختارات اليوم",
                 hadithsSuffix: "حديثًا",
@@ -271,6 +277,8 @@ extension AppLanguage {
                 myFavorites: "Favorilerim",
                 continueReading: "Kaldığım Yer",
                 searchHadith: "Hadis Ara",
+                searchHadithsPrompt: "Hadis metninde ara",
+                noSearchResults: "Sonuç bulunamadı",
                 featuredTopics: "Öne Çıkan Konular",
                 todaysSelection: "Günün Seçkisi",
                 hadithsSuffix: "hadis",
@@ -336,6 +344,8 @@ extension AppLanguage {
                 myFavorites: "Favorit Saya",
                 continueReading: "Lanjutkan Membaca",
                 searchHadith: "Cari Hadis",
+                searchHadithsPrompt: "Cari teks hadis",
+                noSearchResults: "Tidak ada hasil",
                 featuredTopics: "Topik Pilihan",
                 todaysSelection: "Pilihan Hari Ini",
                 hadithsSuffix: "hadis",
@@ -401,6 +411,8 @@ extension AppLanguage {
                 myFavorites: "میری پسندیدہ",
                 continueReading: "پڑھنا جاری رکھیں",
                 searchHadith: "حدیث تلاش کریں",
+                searchHadithsPrompt: "حدیث کے متن میں تلاش کریں",
+                noSearchResults: "کوئی نتیجہ نہیں ملا",
                 featuredTopics: "نمایاں موضوعات",
                 todaysSelection: "آج کا انتخاب",
                 hadithsSuffix: "احادیث",
