@@ -37,6 +37,13 @@ struct HomeView: View {
         return subjects.first { $0.name == name }
     }
 
+    /// Picked uniformly across every hadith (not subject-then-entry, which
+    /// would over-favor hadiths in small subjects) so "Random Hadith" means
+    /// what it says - a random hadith, not just a random category.
+    private var randomEntry: (subject: HadithSubject, entry: HadithEntry)? {
+        allEntries.randomElement()
+    }
+
     private var greeting: (text: String, icon: String) {
         let hour = Calendar.current.component(.hour, from: Date())
         switch hour {
@@ -143,7 +150,7 @@ struct HomeView: View {
                 .font(.caption).bold()
                 .foregroundColor(.secondary)
             LazyVGrid(columns: [GridItem(.flexible()), GridItem(.flexible())], spacing: 12) {
-                NavigationLink(destination: HadithDetailView(subject: subjects.randomElement() ?? subjects[0])) {
+                NavigationLink(destination: HadithDetailView(subject: randomEntry?.subject ?? subjects[0], scrollToEntryID: randomEntry?.entry.id)) {
                     quickAccessTile(icon: "shuffle", label: languageStore.strings.randomHadith)
                 }
                 .disabled(subjects.isEmpty)
