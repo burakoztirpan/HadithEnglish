@@ -1,15 +1,14 @@
 import Foundation
 import GoogleMobileAds
 import UserMessagingPlatform
+import AppTrackingTransparency
 
-/// Orchestrates the AdMob launch-time permission sequence: UMP consent
-/// (shows the GDPR form to EEA/UK users when required) -> Mobile Ads SDK
-/// start. The app does not request App Tracking Transparency or use IDFA -
-/// AdMob serves non-personalized ads automatically when IDFA access was
-/// never requested, no extra configuration needed. `canRequestAds` mirrors
-/// UMPConsentInformation's own flag so every ad call site (not just the SDK
-/// start call) can gate on it directly - if the UMP round-trip is slow or
-/// errors, GADMobileAds.start() never fires, but nothing else stops
+/// Orchestrates the AdMob launch-time permission sequence in the order
+/// Google recommends: UMP consent (shows the GDPR/IDFA form to EEA/UK users
+/// when required) -> ATT permission -> Mobile Ads SDK start. `canRequestAds`
+/// mirrors UMPConsentInformation's own flag so every ad call site (not just
+/// the SDK start call) can gate on it directly - if the UMP round-trip is
+/// slow or errors, GADMobileAds.start() never fires, but nothing else stops
 /// AdManager/NativeAdCard from calling GADInterstitialAd.load /
 /// GADAdLoader.load on their own, so they need the same guard.
 @MainActor
@@ -34,14 +33,14 @@ final class ConsentManager: NSObject, ObservableObject {
         UMPConsentInformation.sharedInstance.requestConsentInfoUpdate(with: parameters) { [weak self] error in
             guard error == nil else {
                 self?.refreshCanRequestAds()
-                self?.startMobileAdsSDK()
+                self?.requestATTThenStartAds()
                 return
             }
             UMPConsentForm.loadAndPresentIfRequired(from: nil) { _ in
                 self?.isPrivacyOptionsRequired =
                     UMPConsentInformation.sharedInstance.privacyOptionsRequirementStatus == .required
                 self?.refreshCanRequestAds()
-                self?.startMobileAdsSDK()
+                self?.requestATTThenStartAds()
             }
         }
     }
@@ -52,6 +51,14 @@ final class ConsentManager: NSObject, ObservableObject {
 
     func presentPrivacyOptionsForm(completionHandler: @escaping (Error?) -> Void) {
         UMPConsentForm.presentPrivacyOptionsForm(from: nil, completionHandler: completionHandler)
+    }
+
+    private func requestATTThenStartAds() {
+        ATTrackingManager.requestTrackingAuthorization { [weak self] _ in
+            Task { @MainActor in
+                self?.startMobileAdsSDK()
+            }
+        }
     }
 
     private func startMobileAdsSDK() {
