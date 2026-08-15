@@ -54,9 +54,23 @@ final class ConsentManager: NSObject, ObservableObject {
     }
 
     private func requestATTThenStartAds() {
-        ATTrackingManager.requestTrackingAuthorization { [weak self] _ in
-            Task { @MainActor in
-                self?.startMobileAdsSDK()
+        // Only .notDetermined actually shows a prompt - already-decided status
+        // is safe to skip straight past, and skipping the delay below for
+        // that (by far the common) case avoids a pointless wait on every
+        // later launch once the user has already answered once.
+        guard ATTrackingManager.trackingAuthorizationStatus == .notDetermined else {
+            startMobileAdsSDK()
+            return
+        }
+        // A short delay before the ATT prompt gives the window scene time to
+        // finish becoming .active - requesting authorization while the scene
+        // is still mid-activation is a known cause of the system silently
+        // not presenting the dialog at all.
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.75) { [weak self] in
+            ATTrackingManager.requestTrackingAuthorization { _ in
+                Task { @MainActor in
+                    self?.startMobileAdsSDK()
+                }
             }
         }
     }
