@@ -25,15 +25,13 @@
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
 	<key>CFBundleShortVersionString</key>
-	<string>1.5.1</string>
+	<string>1.5.2</string>
 	<key>CFBundleVersion</key>
-	<string>14</string>
+	<string>15</string>
 	<key>ITSAppUsesNonExemptEncryption</key>
 	<false/>
 	<key>GADApplicationIdentifier</key>
 	<string>ca-app-pub-4458416211971859~4811835333</string>
-	<key>NSUserTrackingUsageDescription</key>
-	<string>Hadith Vault shows ads from Google AdMob to keep the app free. With your permission, we use your device's advertising identifier so AdMob can show you ads relevant to your interests instead of repeating the same ad, and to measure how well those ads perform.</string>
 	<key>SKAdNetworkItems</key>
 	<array>
 		<dict><key>SKAdNetworkIdentifier</key><string>cstr6suwn9.skadnetwork</string></dict>
