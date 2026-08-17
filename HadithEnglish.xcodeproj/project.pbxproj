@@ -12,6 +12,7 @@
 		C7797AB83FA868F309A3C6E4 /* ToastCenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1DF5EBF25D412D9AF42022A /* ToastCenter.swift */; };
 		B6C117FD8B2821FAC8048A9E /* ToastView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3AF9ED2E1D7DC8013E32223 /* ToastView.swift */; };
 		01DCBA17072947A3BF88E2BC /* AppBackgroundModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = F30EFBE169DD4CDEA5B3D845 /* AppBackgroundModifier.swift */; };
+		7542417744364A3390572D94 /* CardStyleModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3BC4B9F8AB941319D51CD07 /* CardStyleModifier.swift */; };
 		0D2668A4B66298DE5DE21DB3 /* GoogleMobileAds in Frameworks */ = {isa = PBXBuildFile; productRef = 9F5B0ED11955BDD9A78FDC90 /* GoogleMobileAds */; };
 		B14899FC74F2DBE066D3A4EB /* AdConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAD09F3DE24955F9A184B234 /* AdConfig.swift */; };
 		D8BF15C2C5471CFCB4340807 /* AdManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 044F2884988C01F4FD460A1E /* AdManager.swift */; };
@@ -72,6 +73,7 @@
 		D1DF5EBF25D412D9AF42022A /* ToastCenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ToastCenter.swift; path = HadithEnglish/Stores/ToastCenter.swift; sourceTree = SOURCE_ROOT; };
 		C3AF9ED2E1D7DC8013E32223 /* ToastView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ToastView.swift; path = HadithEnglish/Views/ToastView.swift; sourceTree = SOURCE_ROOT; };
 		F30EFBE169DD4CDEA5B3D845 /* AppBackgroundModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = AppBackgroundModifier.swift; path = HadithEnglish/Views/AppBackgroundModifier.swift; sourceTree = SOURCE_ROOT; };
+		B3BC4B9F8AB941319D51CD07 /* CardStyleModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = CardStyleModifier.swift; path = HadithEnglish/Views/CardStyleModifier.swift; sourceTree = SOURCE_ROOT; };
 		BAD09F3DE24955F9A184B234 /* AdConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = AdConfig.swift; path = HadithEnglish/Models/AdConfig.swift; sourceTree = SOURCE_ROOT; };
 		044F2884988C01F4FD460A1E /* AdManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = AdManager.swift; path = HadithEnglish/Stores/AdManager.swift; sourceTree = SOURCE_ROOT; };
 		C8797FBFC6E2B343F6974BBD /* NativeAdCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = NativeAdCard.swift; path = HadithEnglish/Views/NativeAdCard.swift; sourceTree = SOURCE_ROOT; };
@@ -188,6 +190,7 @@
 				D1DF5EBF25D412D9AF42022A /* ToastCenter.swift */,
 				C3AF9ED2E1D7DC8013E32223 /* ToastView.swift */,
 				F30EFBE169DD4CDEA5B3D845 /* AppBackgroundModifier.swift */,
+				B3BC4B9F8AB941319D51CD07 /* CardStyleModifier.swift */,
 				BAD09F3DE24955F9A184B234 /* AdConfig.swift */,
 				044F2884988C01F4FD460A1E /* AdManager.swift */,
 				C8797FBFC6E2B343F6974BBD /* NativeAdCard.swift */,
@@ -349,6 +352,7 @@
 				C7797AB83FA868F309A3C6E4 /* ToastCenter.swift in Sources */,
 				B6C117FD8B2821FAC8048A9E /* ToastView.swift in Sources */,
 				01DCBA17072947A3BF88E2BC /* AppBackgroundModifier.swift in Sources */,
+				7542417744364A3390572D94 /* CardStyleModifier.swift in Sources */,
 				B14899FC74F2DBE066D3A4EB /* AdConfig.swift in Sources */,
 				D8BF15C2C5471CFCB4340807 /* AdManager.swift in Sources */,
 				7F4D1D7169BE3317664EBF2D /* NativeAdCard.swift in Sources */,

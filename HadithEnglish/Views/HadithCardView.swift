@@ -36,17 +36,17 @@ struct HadithCardView: View {
                 .foregroundColor(.secondary)
             Text(displayText)
                 .font(typography.fontDesign.font(size: typography.fontSize))
-            if isLong {
-                Button {
-                    withAnimation { isExpanded.toggle() }
-                } label: {
-                    Text(isExpanded ? languageStore.strings.showLess : languageStore.strings.showMore)
-                        .font(.caption).bold()
-                        .foregroundColor(Color("AccentColor"))
-                }
-                .buttonStyle(.plain)
-            }
             HStack {
+                if isLong {
+                    Button {
+                        withAnimation { isExpanded.toggle() }
+                    } label: {
+                        Text(isExpanded ? languageStore.strings.showLess : languageStore.strings.showMore)
+                            .font(.caption).bold()
+                            .foregroundColor(Color("AccentColor"))
+                    }
+                    .buttonStyle(.plain)
+                }
                 Spacer()
                 iconButton(
                     systemName: favorites.isFavorite(entry.id) ? "star.fill" : "star",

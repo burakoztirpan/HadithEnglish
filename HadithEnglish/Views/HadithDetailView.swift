@@ -26,9 +26,9 @@ struct HadithDetailView: View {
                 ForEach(Array(displayedHadiths.enumerated()), id: \.element.id) { index, entry in
                     if favoritesOnly {
                         HadithCardView(entry: entry)
-                            .padding(12)
-                            .background(Color("CardBackground"))
-                            .cornerRadius(12)
+                            .padding(16)
+                            .cardStyle(cornerRadius: 16)
+                            .listRowBackground(Color.clear)
                             .listRowInsets(EdgeInsets(top: 6, leading: 16, bottom: 6, trailing: 16))
                             .listRowSeparator(.hidden)
                             .swipeActions {
@@ -40,7 +40,11 @@ struct HadithDetailView: View {
                             }
                     } else {
                         HadithCardView(entry: entry)
-                            .listRowBackground(Color("CardBackground"))
+                            .padding(16)
+                            .cardStyle(cornerRadius: 16)
+                            .listRowBackground(Color.clear)
+                            .listRowInsets(EdgeInsets(top: 6, leading: 16, bottom: 6, trailing: 16))
+                            .listRowSeparator(.hidden)
                             .onAppear {
                                 // Recorded per-row (not once for the whole
                                 // view) so "Continue Reading" returns to the
@@ -50,7 +54,9 @@ struct HadithDetailView: View {
                             }
                         if !removeAdsStore.isPurchased && consentManager.canRequestAds && (index + 1) % 8 == 0 {
                             NativeAdCard()
-                                .listRowBackground(Color("CardBackground"))
+                                .listRowBackground(Color.clear)
+                                .listRowInsets(EdgeInsets(top: 6, leading: 16, bottom: 6, trailing: 16))
+                                .listRowSeparator(.hidden)
                         }
                     }
                 }
@@ -58,6 +64,9 @@ struct HadithDetailView: View {
             .listStyle(.plain)
             .scrollContentBackground(.hidden)
             .appScreenBackground()
+            // So the last card can scroll fully clear of the floating
+            // translucent tab bar instead of ending up stuck under it.
+            .safeAreaInset(edge: .bottom) { Color.clear.frame(height: 96) }
             .navigationTitle(subject.trimmedName)
             .navigationBarTitleDisplayMode(.inline)
             .onAppear {

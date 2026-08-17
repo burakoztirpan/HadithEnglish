@@ -19,7 +19,8 @@ struct SubjectsListView: View {
                     HStack(spacing: 10) {
                         Image(systemName: subject.icon)
                             .foregroundColor(Color("AccentColor"))
-                            .frame(width: 20)
+                            .frame(width: 32, height: 32)
+                            .background(Circle().fill(Color("AccentColor").opacity(0.1)))
                         VStack(alignment: .leading, spacing: 1) {
                             Text(subject.trimmedName)
                                 .font(.body)
@@ -29,7 +30,7 @@ struct SubjectsListView: View {
                         }
                     }
                 }
-                .listRowInsets(EdgeInsets(top: 8, leading: 16, bottom: 8, trailing: 16))
+                .listRowInsets(EdgeInsets(top: 14, leading: 12, bottom: 14, trailing: 12))
             }
             .listStyle(.plain)
             .scrollContentBackground(.hidden)
