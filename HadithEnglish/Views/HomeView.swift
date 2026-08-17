@@ -184,6 +184,8 @@ struct HomeView: View {
             Text(label)
                 .font(.subheadline)
                 .foregroundColor(colorScheme == .light ? .white : .primary)
+                .lineLimit(1)
+                .minimumScaleFactor(0.8)
             Spacer()
         }
         .padding(.horizontal, 16)
@@ -220,6 +222,13 @@ struct HomeView: View {
                             .padding(.vertical, 10)
                             .background(colorScheme == .light ? Color("FeaturedTopicBackground") : Color("CardBackground"))
                             .cornerRadius(12)
+                            .overlay(
+                                RoundedRectangle(cornerRadius: 12)
+                                    .stroke(
+                                        colorScheme == .light ? Color("FeaturedTopicText").opacity(0.15) : Color.clear,
+                                        lineWidth: 1
+                                    )
+                            )
                         }
                     }
                 }

@@ -7,6 +7,7 @@ struct HadithCardView: View {
     @EnvironmentObject private var languageStore: LanguageStore
     @EnvironmentObject private var typography: TypographyStore
     @EnvironmentObject private var toastCenter: ToastCenter
+    @Environment(\.colorScheme) private var colorScheme
     @State private var isSharePresented = false
     @State private var isExpanded = false
 
@@ -21,34 +22,18 @@ struct HadithCardView: View {
         return entry.trimmedText.prefix(Self.previewCharacterLimit) + "…"
     }
 
+    /// A near-invisible tap-target backdrop for the star/share icons -
+    /// visible enough to hint "this is tappable" without competing with
+    /// the card's own background.
+    private var iconBackdrop: Color {
+        colorScheme == .dark ? Color.white.opacity(0.1) : Color.black.opacity(0.05)
+    }
+
     var body: some View {
         VStack(alignment: .leading, spacing: 8) {
-            HStack {
-                Text(verbatim: subtitle ?? "#\(entry.id)")
-                    .font(.caption)
-                    .foregroundColor(.secondary)
-                Spacer()
-                Button {
-                    favorites.toggle(entry.id)
-                } label: {
-                    Image(systemName: favorites.isFavorite(entry.id) ? "star.fill" : "star")
-                        .foregroundColor(Color("AccentColor"))
-                }
-                .buttonStyle(.plain)
-                Button {
-                    isSharePresented = true
-                } label: {
-                    Image(systemName: "square.and.arrow.up")
-                        .foregroundColor(Color("AccentColor"))
-                }
-                .buttonStyle(.plain)
-                .sheet(isPresented: $isSharePresented) {
-                    ShareOptionsSheet(text: entry.trimmedText, subtitle: subtitle ?? "#\(entry.id)") {
-                        isSharePresented = false
-                        toastCenter.show(languageStore.strings.sharedConfirmation)
-                    }
-                }
-            }
+            Text(verbatim: subtitle ?? "#\(entry.id)")
+                .font(.caption)
+                .foregroundColor(.secondary)
             Text(displayText)
                 .font(typography.fontDesign.font(size: typography.fontSize))
             if isLong {
@@ -61,7 +46,33 @@ struct HadithCardView: View {
                 }
                 .buttonStyle(.plain)
             }
+            HStack {
+                Spacer()
+                iconButton(systemName: favorites.isFavorite(entry.id) ? "star.fill" : "star") {
+                    favorites.toggle(entry.id)
+                }
+                iconButton(systemName: "square.and.arrow.up") {
+                    isSharePresented = true
+                }
+                .sheet(isPresented: $isSharePresented) {
+                    ShareOptionsSheet(text: entry.trimmedText, subtitle: subtitle ?? "#\(entry.id)") {
+                        isSharePresented = false
+                        toastCenter.show(languageStore.strings.sharedConfirmation)
+                    }
+                }
+            }
         }
         .padding(.vertical, 8)
+    }
+
+    private func iconButton(systemName: String, action: @escaping () -> Void) -> some View {
+        Button(action: action) {
+            Image(systemName: systemName)
+                .font(.system(size: 16, weight: .semibold))
+                .foregroundColor(Color("AccentColor"))
+                .padding(8)
+                .background(Circle().fill(iconBackdrop))
+        }
+        .buttonStyle(.plain)
     }
 }
