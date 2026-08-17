@@ -48,10 +48,15 @@ struct HadithCardView: View {
             }
             HStack {
                 Spacer()
-                iconButton(systemName: favorites.isFavorite(entry.id) ? "star.fill" : "star") {
+                iconButton(
+                    systemName: favorites.isFavorite(entry.id) ? "star.fill" : "star",
+                    accessibilityLabel: favorites.isFavorite(entry.id)
+                        ? languageStore.strings.removeFromFavoritesLabel
+                        : languageStore.strings.addToFavoritesLabel
+                ) {
                     favorites.toggle(entry.id)
                 }
-                iconButton(systemName: "square.and.arrow.up") {
+                iconButton(systemName: "square.and.arrow.up", accessibilityLabel: languageStore.strings.shareAction) {
                     isSharePresented = true
                 }
                 .sheet(isPresented: $isSharePresented) {
@@ -65,7 +70,7 @@ struct HadithCardView: View {
         .padding(.vertical, 8)
     }
 
-    private func iconButton(systemName: String, action: @escaping () -> Void) -> some View {
+    private func iconButton(systemName: String, accessibilityLabel: String, action: @escaping () -> Void) -> some View {
         Button(action: action) {
             Image(systemName: systemName)
                 .font(.system(size: 16, weight: .semibold))
@@ -74,5 +79,6 @@ struct HadithCardView: View {
                 .background(Circle().fill(iconBackdrop))
         }
         .buttonStyle(.plain)
+        .accessibilityLabel(accessibilityLabel)
     }
 }

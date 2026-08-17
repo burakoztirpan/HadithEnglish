@@ -91,6 +91,9 @@ struct Strings {
     let restorePurchasesButtonTitle: String
     let removeAdsToastMessage: String
     let privacyOptionsButtonTitle: String
+    let loadingHadiths: String
+    let addToFavoritesLabel: String
+    let removeFromFavoritesLabel: String
 }
 
 extension AppLanguage {
@@ -161,7 +164,10 @@ extension AppLanguage {
                 removeAdsPurchasedLabel: "Ads Removed",
                 restorePurchasesButtonTitle: "Restore Purchases",
                 removeAdsToastMessage: "Ads removed!",
-                privacyOptionsButtonTitle: "Privacy Options"
+                privacyOptionsButtonTitle: "Privacy Options",
+                loadingHadiths: "Loading hadiths…",
+                addToFavoritesLabel: "Add to Favorites",
+                removeFromFavoritesLabel: "Remove from Favorites"
             )
         case .ar:
             return Strings(
@@ -228,7 +234,10 @@ extension AppLanguage {
                 removeAdsPurchasedLabel: "تمت إزالة الإعلانات",
                 restorePurchasesButtonTitle: "استعادة المشتريات",
                 removeAdsToastMessage: "تمت إزالة الإعلانات!",
-                privacyOptionsButtonTitle: "خيارات الخصوصية"
+                privacyOptionsButtonTitle: "خيارات الخصوصية",
+                loadingHadiths: "جارٍ تحميل الأحاديث…",
+                addToFavoritesLabel: "إضافة إلى المفضلة",
+                removeFromFavoritesLabel: "إزالة من المفضلة"
             )
         case .tr:
             return Strings(
@@ -295,7 +304,10 @@ extension AppLanguage {
                 removeAdsPurchasedLabel: "Reklamlar Kaldırıldı",
                 restorePurchasesButtonTitle: "Satın Alımları Geri Yükle",
                 removeAdsToastMessage: "Reklamlar kaldırıldı!",
-                privacyOptionsButtonTitle: "Gizlilik Seçenekleri"
+                privacyOptionsButtonTitle: "Gizlilik Seçenekleri",
+                loadingHadiths: "Hadisler yükleniyor…",
+                addToFavoritesLabel: "Favorilere Ekle",
+                removeFromFavoritesLabel: "Favorilerden Kaldır"
             )
         case .ind:
             return Strings(
@@ -362,7 +374,10 @@ extension AppLanguage {
                 removeAdsPurchasedLabel: "Iklan Dihapus",
                 restorePurchasesButtonTitle: "Pulihkan Pembelian",
                 removeAdsToastMessage: "Iklan berhasil dihapus!",
-                privacyOptionsButtonTitle: "Opsi Privasi"
+                privacyOptionsButtonTitle: "Opsi Privasi",
+                loadingHadiths: "Memuat hadis…",
+                addToFavoritesLabel: "Tambahkan ke Favorit",
+                removeFromFavoritesLabel: "Hapus dari Favorit"
             )
         case .urd:
             return Strings(
@@ -429,7 +444,10 @@ extension AppLanguage {
                 removeAdsPurchasedLabel: "اشتہارات ہٹا دیے گئے",
                 restorePurchasesButtonTitle: "خریداری بحال کریں",
                 removeAdsToastMessage: "اشتہارات ہٹا دیے گئے!",
-                privacyOptionsButtonTitle: "پرائیویسی کے اختیارات"
+                privacyOptionsButtonTitle: "پرائیویسی کے اختیارات",
+                loadingHadiths: "احادیث لوڈ ہو رہی ہیں…",
+                addToFavoritesLabel: "پسندیدہ میں شامل کریں",
+                removeFromFavoritesLabel: "پسندیدہ سے ہٹائیں"
             )
         }
     }

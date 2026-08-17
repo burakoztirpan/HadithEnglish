@@ -79,9 +79,14 @@ struct HomeView: View {
                 ScrollView {
                     VStack(alignment: .leading, spacing: 28) {
                         if subjects.isEmpty {
-                            ProgressView()
-                                .frame(maxWidth: .infinity)
-                                .padding(.top, 40)
+                            VStack(spacing: 12) {
+                                ProgressView()
+                                Text(languageStore.strings.loadingHadiths)
+                                    .font(.subheadline)
+                                    .foregroundColor(Color("SubtleText"))
+                            }
+                            .frame(maxWidth: .infinity)
+                            .padding(.top, 40)
                         } else {
                             if let today = hadithOfTheDay {
                                 hadithOfTheDaySection(today)
@@ -96,7 +101,7 @@ struct HomeView: View {
                         }
                     }
                     .padding(.horizontal, 16)
-                    .padding(.bottom, 16)
+                    .padding(.bottom, 100)
                 }
             }
             .appScreenBackground()
@@ -138,8 +143,13 @@ struct HomeView: View {
 
     private func hadithOfTheDaySection(_ item: (subject: HadithSubject, entry: HadithEntry)) -> some View {
         VStack(alignment: .leading, spacing: 8) {
+            // Deliberately one step larger than the other section eyebrows
+            // (Quick Access, Featured Topics, Today's Selection) - this is
+            // the one daily ritual action, not a browse entry point, and it
+            // should read as the primary section at a glance, not equal
+            // weight with the other three.
             Text(languageStore.strings.hadithOfTheDay.uppercased())
-                .font(.caption).bold()
+                .font(.subheadline).bold()
                 .foregroundColor(Color("HeadingText"))
             HadithCardView(entry: item.entry, subtitle: item.subject.trimmedName)
                 .padding(12)
@@ -165,9 +175,21 @@ struct HomeView: View {
                 }
 
                 NavigationLink(destination: HadithDetailView(subject: continueReadingSubject ?? subjects.first ?? subjects[0])) {
-                    quickAccessTile(icon: "bookmark.fill", label: languageStore.strings.continueReading)
+                    quickAccessTile(
+                        icon: "bookmark.fill",
+                        label: languageStore.strings.continueReading,
+                        isEnabled: continueReadingSubject != nil
+                    )
                 }
-                .disabled(subjects.isEmpty)
+                // Only meaningful once there's an actual last-read subject -
+                // otherwise it silently drops a first-time user into an
+                // arbitrary subject that has nothing to do with "continuing."
+                // isEnabled is passed explicitly to quickAccessTile above
+                // rather than relied on via the environment - NavigationLink's
+                // .disabled() does block the tap, but empirically (pixel-
+                // sampled against an enabled tile) it does not reliably
+                // propagate isEnabled to custom label content here.
+                .disabled(continueReadingSubject == nil)
 
                 NavigationLink(destination: HadithSearchView(subjects: subjects)) {
                     quickAccessTile(icon: "magnifyingglass", label: languageStore.strings.searchHadith)
@@ -176,7 +198,7 @@ struct HomeView: View {
         }
     }
 
-    private func quickAccessTile(icon: String, label: String) -> some View {
+    private func quickAccessTile(icon: String, label: String, isEnabled: Bool = true) -> some View {
         let tileForeground: Color = colorScheme == .light ? .white : Color("AccentColor")
         return HStack(spacing: 12) {
             Image(systemName: icon)
@@ -201,6 +223,18 @@ struct HomeView: View {
             }
         }
         .cornerRadius(12)
+        .accessibilityElement(children: .combine)
+        .overlay {
+            // A dimming .opacity() on the whole tile is unreliable here -
+            // .ultraThinMaterial composites its own blur/vibrancy against
+            // the real layer behind it and doesn't reliably fade the same
+            // way a flat color does. A scrim drawn on top always reads as
+            // "disabled" regardless of what's underneath.
+            if !isEnabled {
+                RoundedRectangle(cornerRadius: 12)
+                    .fill(Color.black.opacity(0.35))
+            }
+        }
     }
 
     private var featuredTopicsSection: some View {
@@ -229,6 +263,7 @@ struct HomeView: View {
                                         lineWidth: 1
                                     )
                             )
+                            .accessibilityElement(children: .combine)
                         }
                     }
                 }
