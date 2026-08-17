@@ -1,0 +1,2 @@
+/* App display name - kept as the brand name across all languages */
+CFBundleDisplayName = "Hadith Vault";
