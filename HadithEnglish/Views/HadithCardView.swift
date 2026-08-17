@@ -7,6 +7,8 @@ struct HadithCardView: View {
     @EnvironmentObject private var languageStore: LanguageStore
     @EnvironmentObject private var typography: TypographyStore
     @EnvironmentObject private var toastCenter: ToastCenter
+    @EnvironmentObject private var adManager: AdManager
+    @EnvironmentObject private var reviewPromptManager: ReviewPromptManager
     @Environment(\.colorScheme) private var colorScheme
     @State private var isSharePresented = false
     @State private var isExpanded = false
@@ -54,7 +56,14 @@ struct HadithCardView: View {
                         ? languageStore.strings.removeFromFavoritesLabel
                         : languageStore.strings.addToFavoritesLabel
                 ) {
+                    let wasAdded = !favorites.isFavorite(entry.id)
                     favorites.toggle(entry.id)
+                    if wasAdded {
+                        reviewPromptManager.favoriteAdded(
+                            uniqueFavoritesCount: favorites.favoriteIDs.count,
+                            adManager: adManager
+                        )
+                    }
                 }
                 iconButton(systemName: "square.and.arrow.up", accessibilityLabel: languageStore.strings.shareAction) {
                     isSharePresented = true

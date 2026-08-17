@@ -16,6 +16,7 @@
 		0D2668A4B66298DE5DE21DB3 /* GoogleMobileAds in Frameworks */ = {isa = PBXBuildFile; productRef = 9F5B0ED11955BDD9A78FDC90 /* GoogleMobileAds */; };
 		B14899FC74F2DBE066D3A4EB /* AdConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAD09F3DE24955F9A184B234 /* AdConfig.swift */; };
 		D8BF15C2C5471CFCB4340807 /* AdManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 044F2884988C01F4FD460A1E /* AdManager.swift */; };
+		562A911CB3B74B3F9F4BBA41 /* ReviewPromptManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89D019A63D49494DAF31BA2F /* ReviewPromptManager.swift */; };
 		7F4D1D7169BE3317664EBF2D /* NativeAdCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8797FBFC6E2B343F6974BBD /* NativeAdCard.swift */; };
 		510D4DFC7F4806BDFE4BE3B4 /* RemoveAdsStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = C802E6CE92C7E83E04DBEA81 /* RemoveAdsStore.swift */; };
 		2ED7FF0273944A0995F70D73 /* ConsentManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13AC339D5342402D97D6DCC7 /* ConsentManager.swift */; };
@@ -76,6 +77,7 @@
 		B3BC4B9F8AB941319D51CD07 /* CardStyleModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = CardStyleModifier.swift; path = HadithEnglish/Views/CardStyleModifier.swift; sourceTree = SOURCE_ROOT; };
 		BAD09F3DE24955F9A184B234 /* AdConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = AdConfig.swift; path = HadithEnglish/Models/AdConfig.swift; sourceTree = SOURCE_ROOT; };
 		044F2884988C01F4FD460A1E /* AdManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = AdManager.swift; path = HadithEnglish/Stores/AdManager.swift; sourceTree = SOURCE_ROOT; };
+		89D019A63D49494DAF31BA2F /* ReviewPromptManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ReviewPromptManager.swift; path = HadithEnglish/Stores/ReviewPromptManager.swift; sourceTree = SOURCE_ROOT; };
 		C8797FBFC6E2B343F6974BBD /* NativeAdCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = NativeAdCard.swift; path = HadithEnglish/Views/NativeAdCard.swift; sourceTree = SOURCE_ROOT; };
 		C802E6CE92C7E83E04DBEA81 /* RemoveAdsStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = RemoveAdsStore.swift; path = HadithEnglish/Stores/RemoveAdsStore.swift; sourceTree = SOURCE_ROOT; };
 		13AC339D5342402D97D6DCC7 /* ConsentManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ConsentManager.swift; path = HadithEnglish/Stores/ConsentManager.swift; sourceTree = SOURCE_ROOT; };
@@ -193,6 +195,7 @@
 				B3BC4B9F8AB941319D51CD07 /* CardStyleModifier.swift */,
 				BAD09F3DE24955F9A184B234 /* AdConfig.swift */,
 				044F2884988C01F4FD460A1E /* AdManager.swift */,
+				89D019A63D49494DAF31BA2F /* ReviewPromptManager.swift */,
 				C8797FBFC6E2B343F6974BBD /* NativeAdCard.swift */,
 				C802E6CE92C7E83E04DBEA81 /* RemoveAdsStore.swift */,
 				13AC339D5342402D97D6DCC7 /* ConsentManager.swift */,
@@ -355,6 +358,7 @@
 				7542417744364A3390572D94 /* CardStyleModifier.swift in Sources */,
 				B14899FC74F2DBE066D3A4EB /* AdConfig.swift in Sources */,
 				D8BF15C2C5471CFCB4340807 /* AdManager.swift in Sources */,
+				562A911CB3B74B3F9F4BBA41 /* ReviewPromptManager.swift in Sources */,
 				7F4D1D7169BE3317664EBF2D /* NativeAdCard.swift in Sources */,
 				510D4DFC7F4806BDFE4BE3B4 /* RemoveAdsStore.swift in Sources */,
 				2ED7FF0273944A0995F70D73 /* ConsentManager.swift in Sources */,

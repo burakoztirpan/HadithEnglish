@@ -19,6 +19,7 @@ final class AdManager: NSObject, ObservableObject {
     private let defaults: UserDefaults
     private var currentCategoryEnteredAt: Date?
     private var preloadedInterstitial: GADInterstitialAd?
+    private var suppressInterstitialsUntil: Date?
 
     init(defaults: UserDefaults = .standard) {
         self.defaults = defaults
@@ -33,6 +34,14 @@ final class AdManager: NSObject, ObservableObject {
     func categoryEntered() {
         currentCategoryEnteredAt = Date()
         preloadInterstitialIfNeeded()
+    }
+
+    /// Discards whatever interstitial is preloaded and blocks presenting a
+    /// fresh one for a few seconds - used when another system prompt (the
+    /// App Store review dialog) is about to take the screen instead.
+    func suppressNextInterstitial(for duration: TimeInterval = 5) {
+        preloadedInterstitial = nil
+        suppressInterstitialsUntil = Date().addingTimeInterval(duration)
     }
 
     func categoryExited(now: Date = Date()) {
@@ -107,6 +116,9 @@ final class AdManager: NSObject, ObservableObject {
 
     @discardableResult
     private func presentInterstitialIfLoaded() -> Bool {
+        if let until = suppressInterstitialsUntil, until > Date() {
+            return false
+        }
         guard let ad = preloadedInterstitial, let rootVC = Self.topViewController() else {
             print("AdManager: interstitial not ready, skipping this trigger")
             return false

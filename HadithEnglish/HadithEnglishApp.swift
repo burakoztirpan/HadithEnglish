@@ -36,6 +36,7 @@ struct HadithEnglishApp: App {
     @StateObject private var adManager = AdManager()
     @StateObject private var removeAdsStore = RemoveAdsStore()
     @StateObject private var consentManager = ConsentManager.shared
+    @StateObject private var reviewPromptManager = ReviewPromptManager()
     @Environment(\.scenePhase) private var scenePhase
 
     var body: some Scene {
@@ -68,6 +69,7 @@ struct HadithEnglishApp: App {
             .environmentObject(adManager)
             .environmentObject(removeAdsStore)
             .environmentObject(consentManager)
+            .environmentObject(reviewPromptManager)
             .environment(\.layoutDirection, languageStore.language.isRightToLeft ? .rightToLeft : .leftToRight)
             .preferredColorScheme(themeStore.theme.colorScheme)
             .accentColor(Color("AccentColor"))
