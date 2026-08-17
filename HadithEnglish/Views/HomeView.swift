@@ -1,5 +1,15 @@
 import SwiftUI
 
+/// A frozen navigation target for destinations whose underlying source
+/// value (randomEntry, lastRead.entryID) can change out from under an
+/// already-pushed NavigationLink - see the hidden NavigationLink(isActive:)
+/// usage below for why this is needed instead of a plain
+/// NavigationLink(destination:).
+private struct HadithNavigationTarget {
+    let subject: HadithSubject
+    let entryID: Int?
+}
+
 struct HomeView: View {
     let subjects: [HadithSubject]
     @EnvironmentObject private var languageStore: LanguageStore
@@ -7,6 +17,10 @@ struct HomeView: View {
     @EnvironmentObject private var lastRead: LastReadStore
     @EnvironmentObject private var tabRouter: TabRouter
     @Environment(\.colorScheme) private var colorScheme
+    @State private var randomNavigationTarget: HadithNavigationTarget?
+    @State private var continueReadingNavigationTarget: HadithNavigationTarget?
+    @State private var isRandomNavigationActive = false
+    @State private var isContinueReadingNavigationActive = false
 
     private var allEntries: [(subject: HadithSubject, entry: HadithEntry)] {
         subjects.flatMap { subject in subject.hadiths.map { (subject, $0) } }
@@ -107,6 +121,37 @@ struct HomeView: View {
             .appScreenBackground()
             .navigationTitle(languageStore.strings.tabHome)
             .navigationBarHidden(true)
+            // Hidden NavigationLink(isActive:) instead of a plain
+            // NavigationLink(destination:) for these two specifically -
+            // their target depends on values (randomEntry, lastRead.entryID)
+            // that the pushed HadithDetailView itself mutates via its own
+            // per-row onAppear, which would otherwise re-fire this view's
+            // body and silently swap the already-pushed destination's
+            // scrollToEntryID out from under it. Freezing the target into
+            // @State at tap time makes it immune to that. (This app still
+            // targets iOS 16 with a plain NavigationView, not
+            // NavigationStack, so `.navigationDestination` isn't usable
+            // here - it silently no-ops outside a NavigationStack.)
+            .background(
+                NavigationLink(
+                    destination: Group {
+                        if let target = randomNavigationTarget {
+                            HadithDetailView(subject: target.subject, scrollToEntryID: target.entryID)
+                        }
+                    },
+                    isActive: $isRandomNavigationActive
+                ) { EmptyView() }
+            )
+            .background(
+                NavigationLink(
+                    destination: Group {
+                        if let target = continueReadingNavigationTarget {
+                            HadithDetailView(subject: target.subject, scrollToEntryID: target.entryID)
+                        }
+                    },
+                    isActive: $isContinueReadingNavigationActive
+                ) { EmptyView() }
+            )
         }
         .navigationViewStyle(.stack)
     }
@@ -163,7 +208,12 @@ struct HomeView: View {
                 .font(.caption).bold()
                 .foregroundColor(Color("HeadingText"))
             LazyVGrid(columns: [GridItem(.flexible()), GridItem(.flexible())], spacing: 12) {
-                NavigationLink(destination: HadithDetailView(subject: randomEntry?.subject ?? subjects[0], scrollToEntryID: randomEntry?.entry.id)) {
+                Button {
+                    if let pick = randomEntry {
+                        randomNavigationTarget = HadithNavigationTarget(subject: pick.subject, entryID: pick.entry.id)
+                        isRandomNavigationActive = true
+                    }
+                } label: {
                     quickAccessTile(icon: "shuffle", label: languageStore.strings.randomHadith)
                 }
                 .disabled(subjects.isEmpty)
@@ -174,24 +224,27 @@ struct HomeView: View {
                     quickAccessTile(icon: "heart.fill", label: languageStore.strings.myFavorites)
                 }
 
-                NavigationLink(destination: HadithDetailView(
-                    subject: continueReadingSubject ?? subjects.first ?? subjects[0],
-                    scrollToEntryID: continueReadingSubject != nil ? lastRead.entryID : nil
-                )) {
+                Button {
+                    // Only meaningful once there's an actual last-read
+                    // subject - otherwise it would silently drop a
+                    // first-time user into an arbitrary subject that has
+                    // nothing to do with "continuing."
+                    if let subject = continueReadingSubject {
+                        continueReadingNavigationTarget = HadithNavigationTarget(subject: subject, entryID: lastRead.entryID)
+                        isContinueReadingNavigationActive = true
+                    }
+                } label: {
                     quickAccessTile(
                         icon: "bookmark.fill",
                         label: languageStore.strings.continueReading,
                         isEnabled: continueReadingSubject != nil
                     )
                 }
-                // Only meaningful once there's an actual last-read subject -
-                // otherwise it silently drops a first-time user into an
-                // arbitrary subject that has nothing to do with "continuing."
                 // isEnabled is passed explicitly to quickAccessTile above
-                // rather than relied on via the environment - NavigationLink's
-                // .disabled() does block the tap, but empirically (pixel-
-                // sampled against an enabled tile) it does not reliably
-                // propagate isEnabled to custom label content here.
+                // rather than relied on via the environment - .disabled()
+                // does block the tap, but empirically (pixel-sampled
+                // against an enabled tile) it does not reliably propagate
+                // isEnabled to custom label content here.
                 .disabled(continueReadingSubject == nil)
 
                 NavigationLink(destination: HadithSearchView(subjects: subjects)) {
