@@ -99,7 +99,7 @@ struct HomeView: View {
                     .padding(.bottom, 16)
                 }
             }
-            .background(Color("AppBackground").ignoresSafeArea())
+            .appScreenBackground()
             .navigationTitle(languageStore.strings.tabHome)
             .navigationBarHidden(true)
         }
@@ -188,7 +188,16 @@ struct HomeView: View {
         }
         .padding(.horizontal, 16)
         .padding(.vertical, 12)
-        .background(colorScheme == .light ? Color("AccentColor") : Color("CardBackground"))
+        .background {
+            if colorScheme == .light {
+                ZStack {
+                    Rectangle().fill(.ultraThinMaterial)
+                    Rectangle().fill(Color("AccentColor").opacity(0.85))
+                }
+            } else {
+                Color("CardBackground")
+            }
+        }
         .cornerRadius(12)
     }
 
@@ -258,9 +267,30 @@ private extension View {
     /// Shared card treatment: soft shadow + hairline border, so the
     /// Hadith of the Day and Today's Selection cards read as raised
     /// surfaces against the cream background instead of sitting flush.
+    /// Light mode uses real system Material (frosted-glass blur) tinted
+    /// white, matching the app's other light-mode-only glass surfaces;
+    /// dark mode keeps the flat CardBackground it always had.
     func cardStyle(cornerRadius: CGFloat = 12) -> some View {
-        self
-            .background(Color("CardBackground"))
+        modifier(CardStyle(cornerRadius: cornerRadius))
+    }
+}
+
+private struct CardStyle: ViewModifier {
+    @Environment(\.colorScheme) private var colorScheme
+    var cornerRadius: CGFloat = 12
+
+    func body(content: Content) -> some View {
+        content
+            .background {
+                if colorScheme == .light {
+                    ZStack {
+                        Rectangle().fill(.ultraThinMaterial)
+                        Rectangle().fill(Color.white.opacity(0.35))
+                    }
+                } else {
+                    Color("CardBackground")
+                }
+            }
             .cornerRadius(cornerRadius)
             .overlay(
                 RoundedRectangle(cornerRadius: cornerRadius)

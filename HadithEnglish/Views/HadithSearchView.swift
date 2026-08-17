@@ -37,7 +37,7 @@ struct HadithSearchView: View {
         }
         .listStyle(.plain)
         .scrollContentBackground(.hidden)
-        .background(Color("AppBackground").ignoresSafeArea())
+        .appScreenBackground()
         .overlay {
             if !searchText.isEmpty && results.isEmpty {
                 VStack(spacing: 8) {

@@ -6,8 +6,10 @@ import GoogleMobileAds
 struct HadithEnglishApp: App {
     init() {
         let appearance = UITabBarAppearance()
-        appearance.configureWithOpaqueBackground()
-        appearance.backgroundColor = UIColor(named: "AppBackground")
+        // Default (not opaque) background keeps the system's own translucent
+        // blur/vibrancy material - the standard frosted tab bar look, matching
+        // the rest of the app's glass surfaces instead of a flat cream block.
+        appearance.configureWithDefaultBackground()
         appearance.stackedLayoutAppearance.selected.iconColor = UIColor(named: "AccentColor")
         appearance.stackedLayoutAppearance.selected.titleTextAttributes = [
             .foregroundColor: UIColor(named: "AccentColor") ?? .systemGreen

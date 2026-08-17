@@ -33,7 +33,7 @@ struct SubjectsListView: View {
             }
             .listStyle(.plain)
             .scrollContentBackground(.hidden)
-            .background(Color("AppBackground").ignoresSafeArea())
+            .appScreenBackground()
             .navigationTitle(languageStore.strings.hadithSubjectsTitle)
             .navigationBarTitleDisplayMode(.inline)
             .searchable(text: $searchText, prompt: languageStore.strings.searchSubjectsPrompt)

@@ -178,7 +178,7 @@ struct SettingsView: View {
                 }
             }
             .scrollContentBackground(.hidden)
-            .background(Color("AppBackground").ignoresSafeArea())
+            .appScreenBackground()
             .navigationTitle(languageStore.strings.setupTitle)
             .navigationBarTitleDisplayMode(.inline)
         }

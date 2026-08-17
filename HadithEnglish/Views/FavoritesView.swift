@@ -37,7 +37,7 @@ struct FavoritesView: View {
             }
             .listStyle(.plain)
             .scrollContentBackground(.hidden)
-            .background(Color("AppBackground").ignoresSafeArea())
+            .appScreenBackground()
             .navigationTitle(languageStore.strings.favoritesTitle)
             .navigationBarTitleDisplayMode(.inline)
             .overlay {
