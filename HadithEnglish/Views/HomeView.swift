@@ -143,8 +143,7 @@ struct HomeView: View {
                 .foregroundColor(Color("HeadingText"))
             HadithCardView(entry: item.entry, subtitle: item.subject.trimmedName)
                 .padding(12)
-                .background(Color("CardBackground"))
-                .cornerRadius(12)
+                .cardStyle()
         }
     }
 
@@ -179,7 +178,7 @@ struct HomeView: View {
 
     private func quickAccessTile(icon: String, label: String) -> some View {
         let tileForeground: Color = colorScheme == .light ? .white : Color("AccentColor")
-        return HStack {
+        return HStack(spacing: 12) {
             Image(systemName: icon)
                 .foregroundColor(tileForeground)
             Text(label)
@@ -187,7 +186,8 @@ struct HomeView: View {
                 .foregroundColor(colorScheme == .light ? .white : .primary)
             Spacer()
         }
-        .padding(12)
+        .padding(.horizontal, 16)
+        .padding(.vertical, 12)
         .background(colorScheme == .light ? Color("AccentColor") : Color("CardBackground"))
         .cornerRadius(12)
     }
@@ -206,10 +206,10 @@ struct HomeView: View {
                                 Text(topic.trimmedName)
                             }
                             .font(.subheadline)
-                            .foregroundColor(colorScheme == .light ? .white : .primary)
+                            .foregroundColor(colorScheme == .light ? Color("FeaturedTopicText") : .primary)
                             .padding(.horizontal, 14)
                             .padding(.vertical, 10)
-                            .background(colorScheme == .light ? Color("AccentColor") : Color("CardBackground"))
+                            .background(colorScheme == .light ? Color("FeaturedTopicBackground") : Color("CardBackground"))
                             .cornerRadius(12)
                         }
                     }
@@ -244,13 +244,28 @@ struct HomeView: View {
                                 .font(.caption)
                                 .foregroundColor(.secondary)
                         }
-                        .padding(12)
-                        .background(Color("CardBackground"))
-                        .cornerRadius(12)
+                        .padding(16)
+                        .cardStyle()
                     }
                     .buttonStyle(.plain)
                 }
             }
         }
+    }
+}
+
+private extension View {
+    /// Shared card treatment: soft shadow + hairline border, so the
+    /// Hadith of the Day and Today's Selection cards read as raised
+    /// surfaces against the cream background instead of sitting flush.
+    func cardStyle(cornerRadius: CGFloat = 12) -> some View {
+        self
+            .background(Color("CardBackground"))
+            .cornerRadius(cornerRadius)
+            .overlay(
+                RoundedRectangle(cornerRadius: cornerRadius)
+                    .stroke(Color.black.opacity(0.05), lineWidth: 1)
+            )
+            .shadow(color: .black.opacity(0.04), radius: 4, x: 0, y: 2)
     }
 }
