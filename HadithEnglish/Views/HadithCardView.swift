@@ -9,7 +9,6 @@ struct HadithCardView: View {
     @EnvironmentObject private var toastCenter: ToastCenter
     @EnvironmentObject private var adManager: AdManager
     @EnvironmentObject private var reviewPromptManager: ReviewPromptManager
-    @Environment(\.colorScheme) private var colorScheme
     @State private var isSharePresented = false
     @State private var isExpanded = false
 
@@ -24,31 +23,12 @@ struct HadithCardView: View {
         return entry.trimmedText.prefix(Self.previewCharacterLimit) + "…"
     }
 
-    /// A near-invisible tap-target backdrop for the star/share icons -
-    /// visible enough to hint "this is tappable" without competing with
-    /// the card's own background.
-    private var iconBackdrop: Color {
-        colorScheme == .dark ? Color.white.opacity(0.1) : Color.black.opacity(0.05)
-    }
-
     var body: some View {
         VStack(alignment: .leading, spacing: 8) {
-            Text(verbatim: subtitle ?? "#\(entry.id)")
-                .font(.caption)
-                .foregroundColor(.secondary)
-            Text(displayText)
-                .font(typography.fontDesign.font(size: typography.fontSize))
-            HStack {
-                if isLong {
-                    Button {
-                        withAnimation { isExpanded.toggle() }
-                    } label: {
-                        Text(isExpanded ? languageStore.strings.showLess : languageStore.strings.showMore)
-                            .font(.caption).bold()
-                            .foregroundColor(Color("AccentColor"))
-                    }
-                    .buttonStyle(.plain)
-                }
+            HStack(alignment: .center) {
+                Text(verbatim: subtitle ?? "#\(entry.id)")
+                    .font(.caption)
+                    .foregroundColor(.secondary)
                 Spacer()
                 iconButton(
                     systemName: favorites.isFavorite(entry.id) ? "star.fill" : "star",
@@ -75,17 +55,33 @@ struct HadithCardView: View {
                     }
                 }
             }
+            Text(displayText)
+                .font(typography.fontDesign.font(size: typography.fontSize))
+            if isLong {
+                Button {
+                    withAnimation { isExpanded.toggle() }
+                } label: {
+                    Text(isExpanded ? languageStore.strings.showLess : languageStore.strings.showMore)
+                        .font(.caption).bold()
+                        .foregroundColor(Color("AccentColor"))
+                }
+                .buttonStyle(.plain)
+            }
         }
         .padding(.vertical, 8)
     }
 
+    /// Outline icons with no visible box - the 8pt padding plus a 44x44
+    /// minimum frame gives a full accessible tap target without drawing
+    /// one, matching the header's plain-text look.
     private func iconButton(systemName: String, accessibilityLabel: String, action: @escaping () -> Void) -> some View {
         Button(action: action) {
             Image(systemName: systemName)
                 .font(.system(size: 16, weight: .semibold))
                 .foregroundColor(Color("AccentColor"))
                 .padding(8)
-                .background(Circle().fill(iconBackdrop))
+                .frame(minWidth: 44, minHeight: 44)
+                .contentShape(Rectangle())
         }
         .buttonStyle(.plain)
         .accessibilityLabel(accessibilityLabel)
