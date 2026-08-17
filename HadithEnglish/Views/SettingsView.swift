@@ -177,6 +177,8 @@ struct SettingsView: View {
                     }
                 }
             }
+            .scrollContentBackground(.hidden)
+            .background(Color("AppBackground").ignoresSafeArea())
             .navigationTitle(languageStore.strings.setupTitle)
             .navigationBarTitleDisplayMode(.inline)
         }

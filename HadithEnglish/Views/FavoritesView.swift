@@ -36,6 +36,8 @@ struct FavoritesView: View {
                 .listRowInsets(EdgeInsets(top: 8, leading: 16, bottom: 8, trailing: 16))
             }
             .listStyle(.plain)
+            .scrollContentBackground(.hidden)
+            .background(Color("AppBackground").ignoresSafeArea())
             .navigationTitle(languageStore.strings.favoritesTitle)
             .navigationBarTitleDisplayMode(.inline)
             .overlay {

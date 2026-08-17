@@ -32,6 +32,8 @@ struct SubjectsListView: View {
                 .listRowInsets(EdgeInsets(top: 8, leading: 16, bottom: 8, trailing: 16))
             }
             .listStyle(.plain)
+            .scrollContentBackground(.hidden)
+            .background(Color("AppBackground").ignoresSafeArea())
             .navigationTitle(languageStore.strings.hadithSubjectsTitle)
             .navigationBarTitleDisplayMode(.inline)
             .searchable(text: $searchText, prompt: languageStore.strings.searchSubjectsPrompt)

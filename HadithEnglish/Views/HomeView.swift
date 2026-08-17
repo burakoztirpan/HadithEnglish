@@ -6,6 +6,7 @@ struct HomeView: View {
     @EnvironmentObject private var streak: StreakStore
     @EnvironmentObject private var lastRead: LastReadStore
     @EnvironmentObject private var tabRouter: TabRouter
+    @Environment(\.colorScheme) private var colorScheme
 
     private var allEntries: [(subject: HadithSubject, entry: HadithEntry)] {
         subjects.flatMap { subject in subject.hadiths.map { (subject, $0) } }
@@ -98,6 +99,7 @@ struct HomeView: View {
                     .padding(.bottom, 16)
                 }
             }
+            .background(Color("AppBackground").ignoresSafeArea())
             .navigationTitle(languageStore.strings.tabHome)
             .navigationBarHidden(true)
         }
@@ -110,6 +112,7 @@ struct HomeView: View {
                 HStack(spacing: 6) {
                     Text(verbatim: greeting.text)
                         .font(.title2).bold()
+                        .foregroundColor(Color("HeadingText"))
                     Image(systemName: greeting.icon)
                         .foregroundColor(Color("AccentColor"))
                 }
@@ -118,16 +121,17 @@ struct HomeView: View {
                         .foregroundColor(Color("AccentColor"))
                     Text(verbatim: "\(streak.count) \(languageStore.strings.dayStreak)")
                         .font(.subheadline)
-                        .foregroundColor(.secondary)
+                        .foregroundColor(Color("SubtleText"))
                 }
             }
             Spacer()
             VStack(alignment: .trailing, spacing: 2) {
                 Text(hijriDateText)
                     .font(.subheadline)
+                    .foregroundColor(Color("HeadingText"))
                 Text(gregorianDateText)
                     .font(.caption)
-                    .foregroundColor(.secondary)
+                    .foregroundColor(Color("SubtleText"))
             }
         }
     }
@@ -136,7 +140,7 @@ struct HomeView: View {
         VStack(alignment: .leading, spacing: 8) {
             Text(languageStore.strings.hadithOfTheDay.uppercased())
                 .font(.caption).bold()
-                .foregroundColor(.secondary)
+                .foregroundColor(Color("HeadingText"))
             HadithCardView(entry: item.entry, subtitle: item.subject.trimmedName)
                 .padding(12)
                 .background(Color("CardBackground"))
@@ -148,7 +152,7 @@ struct HomeView: View {
         VStack(alignment: .leading, spacing: 8) {
             Text(languageStore.strings.quickAccess.uppercased())
                 .font(.caption).bold()
-                .foregroundColor(.secondary)
+                .foregroundColor(Color("HeadingText"))
             LazyVGrid(columns: [GridItem(.flexible()), GridItem(.flexible())], spacing: 12) {
                 NavigationLink(destination: HadithDetailView(subject: randomEntry?.subject ?? subjects[0], scrollToEntryID: randomEntry?.entry.id)) {
                     quickAccessTile(icon: "shuffle", label: languageStore.strings.randomHadith)
@@ -174,16 +178,17 @@ struct HomeView: View {
     }
 
     private func quickAccessTile(icon: String, label: String) -> some View {
-        HStack {
+        let tileForeground: Color = colorScheme == .light ? .white : Color("AccentColor")
+        return HStack {
             Image(systemName: icon)
-                .foregroundColor(Color("AccentColor"))
+                .foregroundColor(tileForeground)
             Text(label)
                 .font(.subheadline)
-                .foregroundColor(.primary)
+                .foregroundColor(colorScheme == .light ? .white : .primary)
             Spacer()
         }
         .padding(12)
-        .background(Color("CardBackground"))
+        .background(colorScheme == .light ? Color("AccentColor") : Color("CardBackground"))
         .cornerRadius(12)
     }
 
@@ -191,7 +196,7 @@ struct HomeView: View {
         VStack(alignment: .leading, spacing: 8) {
             Text(languageStore.strings.featuredTopics.uppercased())
                 .font(.caption).bold()
-                .foregroundColor(.secondary)
+                .foregroundColor(Color("HeadingText"))
             ScrollView(.horizontal, showsIndicators: false) {
                 HStack(spacing: 10) {
                     ForEach(featuredTopics) { topic in
@@ -201,11 +206,11 @@ struct HomeView: View {
                                 Text(topic.trimmedName)
                             }
                             .font(.subheadline)
-                            .foregroundColor(.primary)
+                            .foregroundColor(colorScheme == .light ? .white : .primary)
                             .padding(.horizontal, 14)
                             .padding(.vertical, 10)
-                            .background(Color("CardBackground"))
-                            .cornerRadius(20)
+                            .background(colorScheme == .light ? Color("AccentColor") : Color("CardBackground"))
+                            .cornerRadius(12)
                         }
                     }
                 }
@@ -217,7 +222,7 @@ struct HomeView: View {
         VStack(alignment: .leading, spacing: 8) {
             Text(languageStore.strings.todaysSelection.uppercased())
                 .font(.caption).bold()
-                .foregroundColor(.secondary)
+                .foregroundColor(Color("HeadingText"))
             VStack(spacing: 10) {
                 ForEach(Array(todaysSelection.enumerated()), id: \.offset) { _, item in
                     NavigationLink(destination: HadithDetailView(subject: item.subject)) {
@@ -228,7 +233,7 @@ struct HomeView: View {
                             VStack(alignment: .leading, spacing: 4) {
                                 Text(verbatim: "\(item.subject.trimmedName) · #\(item.entry.id)")
                                     .font(.caption)
-                                    .foregroundColor(.secondary)
+                                    .foregroundColor(Color("SubtleText"))
                                 Text(item.entry.trimmedText)
                                     .font(.subheadline)
                                     .foregroundColor(.primary)

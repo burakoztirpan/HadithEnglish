@@ -49,6 +49,8 @@ struct HadithDetailView: View {
                 }
             }
             .listStyle(.plain)
+            .scrollContentBackground(.hidden)
+            .background(Color("AppBackground").ignoresSafeArea())
             .navigationTitle(subject.trimmedName)
             .navigationBarTitleDisplayMode(.inline)
             .onAppear {

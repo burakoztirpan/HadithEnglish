@@ -1,8 +1,26 @@
 import SwiftUI
+import UIKit
 import GoogleMobileAds
 
 @main
 struct HadithEnglishApp: App {
+    init() {
+        let appearance = UITabBarAppearance()
+        appearance.configureWithOpaqueBackground()
+        appearance.backgroundColor = UIColor(named: "AppBackground")
+        appearance.stackedLayoutAppearance.selected.iconColor = UIColor(named: "AccentColor")
+        appearance.stackedLayoutAppearance.selected.titleTextAttributes = [
+            .foregroundColor: UIColor(named: "AccentColor") ?? .systemGreen
+        ]
+        appearance.stackedLayoutAppearance.normal.iconColor = UIColor(named: "TabBarInactive")
+        appearance.stackedLayoutAppearance.normal.titleTextAttributes = [
+            .foregroundColor: UIColor(named: "TabBarInactive") ?? .darkGray
+        ]
+        appearance.selectionIndicatorTintColor = UIColor(named: "TabBarPill")
+        UITabBar.appearance().standardAppearance = appearance
+        UITabBar.appearance().scrollEdgeAppearance = appearance
+    }
+
     @StateObject private var favorites = FavoritesStore()
     @StateObject private var languageStore = LanguageStore()
     @StateObject private var content = HadithContentStore()
