@@ -41,6 +41,13 @@ struct HadithDetailView: View {
                     } else {
                         HadithCardView(entry: entry)
                             .listRowBackground(Color("CardBackground"))
+                            .onAppear {
+                                // Recorded per-row (not once for the whole
+                                // view) so "Continue Reading" returns to the
+                                // specific hadith the user actually scrolled
+                                // to, not just the top of this subject.
+                                lastRead.recordVisit(to: subject, entry: entry)
+                            }
                         if !removeAdsStore.isPurchased && consentManager.canRequestAds && (index + 1) % 8 == 0 {
                             NativeAdCard()
                                 .listRowBackground(Color("CardBackground"))
@@ -54,14 +61,22 @@ struct HadithDetailView: View {
             .navigationTitle(subject.trimmedName)
             .navigationBarTitleDisplayMode(.inline)
             .onAppear {
-                if !favoritesOnly {
-                    lastRead.recordVisit(to: subject)
-                    if !removeAdsStore.isPurchased {
-                        adManager.categoryEntered()
-                    }
+                if !favoritesOnly, !removeAdsStore.isPurchased {
+                    adManager.categoryEntered()
                 }
                 if let scrollToEntryID {
-                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+                    // A List with 90+ rows (plus the Material-heavy card
+                    // style) doesn't always have the target row laid out
+                    // yet at 0.1s - this is a known ScrollViewReader/List
+                    // race, not a one-off. Two attempts a beat apart covers
+                    // it without a visible double-jump (the first is a
+                    // no-op when it fires too early).
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
+                        withAnimation {
+                            proxy.scrollTo(scrollToEntryID, anchor: .top)
+                        }
+                    }
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.7) {
                         withAnimation {
                             proxy.scrollTo(scrollToEntryID, anchor: .top)
                         }

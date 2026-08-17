@@ -174,7 +174,10 @@ struct HomeView: View {
                     quickAccessTile(icon: "heart.fill", label: languageStore.strings.myFavorites)
                 }
 
-                NavigationLink(destination: HadithDetailView(subject: continueReadingSubject ?? subjects.first ?? subjects[0])) {
+                NavigationLink(destination: HadithDetailView(
+                    subject: continueReadingSubject ?? subjects.first ?? subjects[0],
+                    scrollToEntryID: continueReadingSubject != nil ? lastRead.entryID : nil
+                )) {
                     quickAccessTile(
                         icon: "bookmark.fill",
                         label: languageStore.strings.continueReading,
