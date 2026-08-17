@@ -25,33 +25,33 @@ struct HadithCardView: View {
 
     var body: some View {
         VStack(alignment: .leading, spacing: 8) {
-            HStack(alignment: .center) {
-                Text(verbatim: subtitle ?? "#\(entry.id)")
-                    .font(.caption)
-                    .foregroundColor(.secondary)
-                Spacer()
-                iconButton(
-                    systemName: favorites.isFavorite(entry.id) ? "star.fill" : "star",
-                    accessibilityLabel: favorites.isFavorite(entry.id)
-                        ? languageStore.strings.removeFromFavoritesLabel
-                        : languageStore.strings.addToFavoritesLabel
-                ) {
-                    let wasAdded = !favorites.isFavorite(entry.id)
-                    favorites.toggle(entry.id)
-                    if wasAdded {
-                        reviewPromptManager.favoriteAdded(
-                            uniqueFavoritesCount: favorites.favoriteIDs.count,
-                            adManager: adManager
-                        )
+            HStack(alignment: .center, spacing: 8) {
+                header
+                Spacer(minLength: 8)
+                HStack(spacing: 4) {
+                    iconButton(
+                        systemName: favorites.isFavorite(entry.id) ? "star.fill" : "star",
+                        accessibilityLabel: favorites.isFavorite(entry.id)
+                            ? languageStore.strings.removeFromFavoritesLabel
+                            : languageStore.strings.addToFavoritesLabel
+                    ) {
+                        let wasAdded = !favorites.isFavorite(entry.id)
+                        favorites.toggle(entry.id)
+                        if wasAdded {
+                            reviewPromptManager.favoriteAdded(
+                                uniqueFavoritesCount: favorites.favoriteIDs.count,
+                                adManager: adManager
+                            )
+                        }
                     }
-                }
-                iconButton(systemName: "square.and.arrow.up", accessibilityLabel: languageStore.strings.shareAction) {
-                    isSharePresented = true
-                }
-                .sheet(isPresented: $isSharePresented) {
-                    ShareOptionsSheet(text: entry.trimmedText, subtitle: subtitle ?? "#\(entry.id)") {
-                        isSharePresented = false
-                        toastCenter.show(languageStore.strings.sharedConfirmation)
+                    iconButton(systemName: "square.and.arrow.up", accessibilityLabel: languageStore.strings.shareAction) {
+                        isSharePresented = true
+                    }
+                    .sheet(isPresented: $isSharePresented) {
+                        ShareOptionsSheet(text: entry.trimmedText, subtitle: subtitle ?? "#\(entry.id)") {
+                            isSharePresented = false
+                            toastCenter.show(languageStore.strings.sharedConfirmation)
+                        }
                     }
                 }
             }
@@ -71,19 +71,40 @@ struct HadithCardView: View {
         .padding(.vertical, 8)
     }
 
-    /// Outline icons with no visible box - the 8pt padding plus a 44x44
-    /// minimum frame gives a full accessible tap target without drawing
-    /// one, matching the header's plain-text look.
+    /// A named category reads as the card's identity, so it keeps normal
+    /// caption weight; a bare reference number is a citation mark, not a
+    /// heading, so it drops a size and dims further - the same distinction
+    /// the app already draws for numerals in Today's Selection.
+    @ViewBuilder
+    private var header: some View {
+        if let subtitle {
+            Text(verbatim: subtitle)
+                .font(.caption)
+                .foregroundColor(Color("SubtleText"))
+        } else {
+            Text(verbatim: "#\(entry.id)")
+                .font(.caption2)
+                .foregroundColor(Color("SubtleText").opacity(0.7))
+                .monospacedDigit()
+        }
+    }
+
+    /// Matches the accent-tinted icon capsule already used for category
+    /// icons elsewhere in the app (SubjectsListView), instead of either a
+    /// bare glyph or a neutral-gray smudge. The capsule itself stays a
+    /// compact 32pt; the surrounding 44x44 frame keeps the tap target
+    /// accessible without visually inflating the chip.
     private func iconButton(systemName: String, accessibilityLabel: String, action: @escaping () -> Void) -> some View {
         Button(action: action) {
             Image(systemName: systemName)
-                .font(.system(size: 16, weight: .semibold))
+                .font(.system(size: 14, weight: .semibold))
                 .foregroundColor(Color("AccentColor"))
-                .padding(8)
-                .frame(minWidth: 44, minHeight: 44)
-                .contentShape(Rectangle())
+                .frame(width: 32, height: 32)
+                .background(Circle().fill(Color("AccentColor").opacity(0.1)))
         }
         .buttonStyle(.plain)
+        .frame(minWidth: 44, minHeight: 44)
+        .contentShape(Rectangle())
         .accessibilityLabel(accessibilityLabel)
     }
 }
